@@ -1,1 +1,49 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>FangjieYu‘s Hugo Site</title><link>https://fjyu95.github.io/</link><description>This is my cool site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 02 May 2025 02:42:42 +0800</lastBuildDate><atom:link href="https://fjyu95.github.io/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>FangjieYu‘s Hugo Site</title><link>https://fjyu95.github.io/</link><description>This is my cool site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 02 May 2025 02:42:42 +0800</lastBuildDate><atom:link href="https://fjyu95.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>xxxx</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</guid><description><![CDATA[<p>学习百度的PaddlePaddle框架时，看到第一个线性回归的例子，对其中的fluid.layers.fc()函数使用有点困惑，查看官方API文档，感觉写的也不是特别清晰（可能是我理解的不好），经过一些思考后感觉应该是理解了，这里做一下总结。
+下面是部分代码：</p>
+<pre tabindex="0"><code># 定义X数值
+train_data=numpy.array([[1.0], [2.0], [3.0], [4.0]]).astype(&#39;float32&#39;)
+# 定义期望预测的真实值y_true
+y_true = numpy.array([[2.0], [4.0], [6.0], [8.0]]).astype(&#39;float32&#39;)
+
+# 定义输入数据类型
+x = fluid.data(name=&#34;x&#34;, shape=[None, 1], dtype=&#39;float32&#39;)
+y = fluid.data(name=&#34;y&#34;, shape=[None, 1], dtype=&#39;float32&#39;)
+# 搭建全连接网络
+y_predict = fluid.layers.fc(input=x, size=1, act=None)
+</code></pre><p>fluid.layers.fc接口如下</p>
+<pre tabindex="0"><code>paddle.fluid.layers.fc(input, size, num_flatten_dims=1, param_attr=None, bias_attr=None, act=None, name=None)
+</code></pre><p>参数说明:
+input ：多维Tensor或多个Tensor组成的list，输入Tensor的shape至少是2。
+size： 全连接层输出单元的数目，即输出Tensor的特征维度。
+num_flatten_dims(int)：在计算时，输入首先会被扁平化（flatten）为一个二维矩阵，之后再与权重(weights)相乘。参数 num_flatten_dims 决定了输入Tensor的flatten方式。
+param_attr：指定权重参数属性的对象。默认值为None，表示使用默认的权重参数属性。
+bias_attr：指定偏置参数属性的对象。默认值为None，表示使用默认的偏置参数属性。
+act：应用于输出上的激活函数，如tanh、softmax、sigmoid，relu等。
+name(str，可选)：一般无需设置，默认值为None。</p>
+<p>fluid.layers.fc函数重点是前三个参数，输入Tensor的shape至少是2是理解这个API的核心，具体是<!-- raw HTML omitted --><strong>不管输入Tensor的shape是多少，都会根据num_flatten_dims扁平化为二维矩阵</strong><!-- raw HTML omitted -->，其中第一维是batch_size，第二维是输入Tensor的特征维度，计算时与一个权重矩阵相乘，输出shape为 [batch_size,size]的Tensor。</p>
+<p>例如， 假设X是一个五维的Tensor，其shape为(2, 3, 4, 5, 6), 若 num_flatten_dims=3，则扁平化的矩阵shape为： (2x3x4,5x6)=(24,30) ，最终输出Tensor的shape为 (24,size) 。</p>]]></description></item><item><title/><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>xxxx</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</guid><description><![CDATA[<p>一直想学习一下百度的paddle框架，按照官方教程安装时，感觉步骤写的太繁琐，于是根据之前安装其他框架的经验进行尝试，使用最简单的anaconda方式进行安装，很快成功，记录一下过程。</p>
+<p>一、	安装准备</p>
+<ol>
+<li>anaconda</li>
+<li>CUDA10.0、cudnn</li>
+<li>paddlepaddle-gpu离线包（选择红色框选中的）
+url：<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/Paddle/" target="_blank" rel="noopener noreffer ">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/Paddle/</a>
+
+二、安装步骤
+1.创建虚拟环境
+conda create -n paddle_env python=3.5
+2.激活环境
+activate paddle_env
+3.安装paddle框架
+conda install paddlepaddle-gpu-1.6.2-py35_gpu_cuda10.0_windows.tar.bz2
+
+(注意：使用pip install 命令安装会报错，原因还不清楚)
+4.安装环境验证
+使用python进入python解释器，输入import paddle.fluid，再输入 paddle.fluid.install_check.run_check()。如果出现“Your Paddle Fluid is installed succesfully!”，说明成功安装。
+
+(说明：输入import paddle.fluid可能会报错，提示找不到某些包，pip install 进行安装即可)</li>
+</ol>
+<p>比如提示找不到‘nltk’包
+
+pip 命令安装
+</p>]]></description></item></channel></rss>
