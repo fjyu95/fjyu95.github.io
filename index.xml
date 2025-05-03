@@ -1,4 +1,4 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>FangjieYu‘s Hugo Site</title><link>https://fjyu95.github.io/</link><description>This is my cool site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Fri, 02 May 2025 02:42:42 +0800</lastBuildDate><atom:link href="https://fjyu95.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>xxxx</author><guid>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</guid><description><![CDATA[<h1 id="linux-command">Linux command</h1>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>FangjieYu‘s Hugo Site</title><link>https://fjyu95.github.io/</link><description>This is my cool site</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Fri, 02 May 2025 02:42:42 +0800</lastBuildDate><atom:link href="https://fjyu95.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title/><link>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>xxxx</author><guid>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</guid><description><![CDATA[<h1 id="linux-command">Linux command</h1>
 <h1 id="linux命令大全">Linux命令大全</h1>
 <p><a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener noreffer ">Linux 命令大全</a></p>
 <h1 id="anaconda">Anaconda</h1>
@@ -6,37 +6,37 @@
 <h2 id="常用命令">常用命令</h2>
 <p><a href="https://blog.csdn.net/qq_38929105/article/details/123652248" target="_blank" rel="noopener noreffer ">Anaconda/pip 更换阿里源，助力 conda create -n 虚拟环境搭建_anaconda换阿里源_乄洛尘的博客-CSDN博客</a></p>
 <p><a href="https://blog.csdn.net/menc15/article/details/71477949/" target="_blank" rel="noopener noreffer ">Conda常用命令整理_conda命令_CharlotteMen的博客-CSDN博客</a></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>conda -h <span style="color:#75715e"># 查看帮助</span>
-</span></span><span style="display:flex;"><span>conda info
-</span></span><span style="display:flex;"><span>conda config -h 
-</span></span><span style="display:flex;"><span>conda config --show <span style="color:#75715e"># 查看所有配置</span>
-</span></span><span style="display:flex;"><span>conda config --show-sources <span style="color:#75715e"># 查看镜像源</span>
-</span></span><span style="display:flex;"><span>conda config --show pkgs_dirs <span style="color:#75715e"># envs_dirs</span>
-</span></span><span style="display:flex;"><span>conda config --show solver <span style="color:#75715e"># classic or libmamba</span>
-</span></span><span style="display:flex;"><span>conda config --remove-key channels <span style="color:#75715e"># 恢复默认配置</span>
-</span></span><span style="display:flex;"><span>conda config --set auto_activate_base false <span style="color:#75715e"># 不自动激活base</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>conda create -n env_name -c xxx python<span style="color:#f92672">=</span>version_number <span style="color:#75715e"># 创建环境,使用vpn可能失败</span>
-</span></span><span style="display:flex;"><span>conda remove -n env_name --all <span style="color:#75715e"># 删除环境 (可以暴力删除envs/xxx文件夹)</span>
-</span></span><span style="display:flex;"><span>sudo mv env_name new_name <span style="color:#75715e"># 环境重命名</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>conda search cudnn --info <span style="color:#75715e"># 查看可用版本</span>
-</span></span><span style="display:flex;"><span>conda update -n base -c defaults conda <span style="color:#75715e"># 更新anaconda</span>
-</span></span><span style="display:flex;"><span>conda clean --all <span style="color:#75715e"># 清除缓存</span>
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 修改镜像源</span>
-</span></span><span style="display:flex;"><span>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-</span></span><span style="display:flex;"><span>conda config --add channels conda-forge
-</span></span><span style="display:flex;"><span>conda config --set auto_activate_base false
-</span></span><span style="display:flex;"><span>vim ~/.condarc <span style="color:#75715e"># 直接编辑配置文件，不要放太多（多了反而可能出错）</span>
-</span></span><span style="display:flex;"><span>channels:
-</span></span><span style="display:flex;"><span>  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
-</span></span><span style="display:flex;"><span>  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
-</span></span><span style="display:flex;"><span>  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
-</span></span><span style="display:flex;"><span>  - defaults
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e"># 安装包</span>
-</span></span><span style="display:flex;"><span>pip install pkg_name<span style="color:#f92672">==</span>xxx
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">conda -h <span class="c1"># 查看帮助</span>
+</span></span><span class="line"><span class="cl">conda info
+</span></span><span class="line"><span class="cl">conda config -h 
+</span></span><span class="line"><span class="cl">conda config --show <span class="c1"># 查看所有配置</span>
+</span></span><span class="line"><span class="cl">conda config --show-sources <span class="c1"># 查看镜像源</span>
+</span></span><span class="line"><span class="cl">conda config --show pkgs_dirs <span class="c1"># envs_dirs</span>
+</span></span><span class="line"><span class="cl">conda config --show solver <span class="c1"># classic or libmamba</span>
+</span></span><span class="line"><span class="cl">conda config --remove-key channels <span class="c1"># 恢复默认配置</span>
+</span></span><span class="line"><span class="cl">conda config --set auto_activate_base <span class="nb">false</span> <span class="c1"># 不自动激活base</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">conda create -n env_name -c xxx <span class="nv">python</span><span class="o">=</span>version_number <span class="c1"># 创建环境,使用vpn可能失败</span>
+</span></span><span class="line"><span class="cl">conda remove -n env_name --all <span class="c1"># 删除环境 (可以暴力删除envs/xxx文件夹)</span>
+</span></span><span class="line"><span class="cl">sudo mv env_name new_name <span class="c1"># 环境重命名</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">conda search cudnn --info <span class="c1"># 查看可用版本</span>
+</span></span><span class="line"><span class="cl">conda update -n base -c defaults conda <span class="c1"># 更新anaconda</span>
+</span></span><span class="line"><span class="cl">conda clean --all <span class="c1"># 清除缓存</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 修改镜像源</span>
+</span></span><span class="line"><span class="cl">conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+</span></span><span class="line"><span class="cl">conda config --add channels conda-forge
+</span></span><span class="line"><span class="cl">conda config --set auto_activate_base <span class="nb">false</span>
+</span></span><span class="line"><span class="cl">vim ~/.condarc <span class="c1"># 直接编辑配置文件，不要放太多（多了反而可能出错）</span>
+</span></span><span class="line"><span class="cl">channels:
+</span></span><span class="line"><span class="cl">  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+</span></span><span class="line"><span class="cl">  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+</span></span><span class="line"><span class="cl">  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+</span></span><span class="line"><span class="cl">  - defaults
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装包</span>
+</span></span><span class="line"><span class="cl">pip install <span class="nv">pkg_name</span><span class="o">==</span>xxx
 </span></span></code></pre></div><h2 id="conda-环境迁移">conda 环境迁移</h2>
 <p><a href="https://blog.csdn.net/ft_sunshine/article/details/92215164" target="_blank" rel="noopener noreffer ">conda环境的复制（生成.yaml文件）和pip环境的复制（生成requirements.txt）_当我们想再次创建该环境,或根据别人提供的.yaml文件复现环境时,就可以通过下面的-CSDN博客</a></p>]]></description></item><item><title/><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>xxxx</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</guid><description><![CDATA[<p>学习百度的PaddlePaddle框架时，看到第一个线性回归的例子，对其中的fluid.layers.fc()函数使用有点困惑，查看官方API文档，感觉写的也不是特别清晰（可能是我理解的不好），经过一些思考后感觉应该是理解了，这里做一下总结。
 下面是部分代码：</p>
@@ -62,28 +62,29 @@ act：应用于输出上的激活函数，如tanh、softmax、sigmoid，relu等�
 name(str，可选)：一般无需设置，默认值为None。</p>
 <p>fluid.layers.fc函数重点是前三个参数，输入Tensor的shape至少是2是理解这个API的核心，具体是<!-- raw HTML omitted --><strong>不管输入Tensor的shape是多少，都会根据num_flatten_dims扁平化为二维矩阵</strong><!-- raw HTML omitted -->，其中第一维是batch_size，第二维是输入Tensor的特征维度，计算时与一个权重矩阵相乘，输出shape为 [batch_size,size]的Tensor。</p>
 <p>例如， 假设X是一个五维的Tensor，其shape为(2, 3, 4, 5, 6), 若 num_flatten_dims=3，则扁平化的矩阵shape为： (2x3x4,5x6)=(24,30) ，最终输出Tensor的shape为 (24,size) 。</p>]]></description></item><item><title/><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><author>xxxx</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</guid><description><![CDATA[<p>一直想学习一下百度的paddle框架，按照官方教程安装时，感觉步骤写的太繁琐，于是根据之前安装其他框架的经验进行尝试，使用最简单的anaconda方式进行安装，很快成功，记录一下过程。</p>
-<p>一、	安装准备</p>
+<h1 id="一安装准备">一、安装准备</h1>
 <ol>
 <li>anaconda</li>
 <li>CUDA10.0、cudnn</li>
-<li>paddlepaddle-gpu离线包（选择红色框选中的）
-url：<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/Paddle/" target="_blank" rel="noopener noreffer ">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/Paddle/</a>
-
-二、安装步骤
-1.创建虚拟环境
-conda create -n paddle_env python=3.5
-2.激活环境
-activate paddle_env
-3.安装paddle框架
-conda install paddlepaddle-gpu-1.6.2-py35_gpu_cuda10.0_windows.tar.bz2
-
-(注意：使用pip install 命令安装会报错，原因还不清楚)
-4.安装环境验证
-使用python进入python解释器，输入import paddle.fluid，再输入 paddle.fluid.install_check.run_check()。如果出现“Your Paddle Fluid is installed succesfully!”，说明成功安装。
-
-(说明：输入import paddle.fluid可能会报错，提示找不到某些包，pip install 进行安装即可)</li>
+<li>paddlepaddle-gpu离线包（选择红色框选中的）<br>
+url: <a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/Paddle/" target="_blank" rel="noopener noreffer ">https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/Paddle/</a><br>
+</li>
 </ol>
-<p>比如提示找不到‘nltk’包
-
-pip 命令安装
+<h1 id="二安装步骤">二、安装步骤</h1>
+<h2 id="1创建虚拟环境">1.创建虚拟环境</h2>
+<p><code>conda create -n paddle_env python=3.5</code></p>
+<h2 id="2激活环境">2.激活环境</h2>
+<p><code>activate paddle_env</code></p>
+<h2 id="3安装paddle框架">3.安装paddle框架</h2>
+<p><code>conda install paddlepaddle-gpu-1.6.2-py35_gpu_cuda10.0_windows.tar.bz2</code><br>
+  <br>
+(注意：使用pip install 命令安装会报错，原因还不清楚)</p>
+<h2 id="4安装环境验证">4.安装环境验证</h2>
+<p>使用python进入python解释器，输入import paddle.fluid，再输入 paddle.fluid.install_check.run_check()。<br>
+如果出现“Your Paddle Fluid is installed succesfully!”，说明成功安装。 <br>
+ <br>
+(说明：输入import paddle.fluid可能会报错，提示找不到某些包，pip install 进行安装即可)</p>
+<p>比如提示找不到‘nltk’包<br>
+<br>
+pip 命令安装<br>
 </p>]]></description></item></channel></rss>
