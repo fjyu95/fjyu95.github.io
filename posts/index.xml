@@ -1,8 +1,185 @@
-<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - FangjieYu‘s site</title><link>https://fjyu95.github.io/posts/</link><description>All Posts | FangjieYu‘s site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>907040864@qq.com (fjyu95)</managingEditor><webMaster>907040864@qq.com (fjyu95)</webMaster><lastBuildDate>Fri, 02 May 2025 02:42:42 +0800</lastBuildDate><atom:link href="https://fjyu95.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>Linux command</title><link>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</link><pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</guid><description><![CDATA[<h1 id="linux命令大全">Linux命令大全</h1>
-<p><a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener noreffer ">Linux 命令大全</a></p>
-<h1 id="anaconda">Anaconda</h1>
-<p><a href="https://www.notion.so/Anaconda-1cde4020f06080a58103d396c692c936?pvs=21" target="_blank" rel="noopener noreffer ">Anaconda</a></p>
-<h2 id="常用命令">常用命令</h2>
-<p><a href="https://blog.csdn.net/qq_38929105/article/details/123652248" target="_blank" rel="noopener noreffer ">Anaconda/pip 更换阿里源，助力 conda create -n 虚拟环境搭建_anaconda换阿里源_乄洛尘的博客-CSDN博客</a></p>
-<p><a href="https://blog.csdn.net/menc15/article/details/71477949/" target="_blank" rel="noopener noreffer ">Conda常用命令整理_conda命令_CharlotteMen的博客-CSDN博客</a></p>]]></description></item><item><title>百度Paddle fluid.layers.fc API说明</title><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</link><pubDate>Fri, 03 Jan 2020 09:48:14 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</guid><description>&lt;p>学习百度的PaddlePaddle框架时，看到第一个线性回归的例子，对其中的fluid.layers.fc()函数使用有点困惑，查看官方API文档，感觉写的也不是特别清晰（可能是我理解的不好），经过一些思考后感觉应该是理解了，这里做一下总结。
-下面是部分代码：&lt;/p></description></item><item><title>百度paddlepaddle安装使用</title><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 03 Jan 2020 09:01:25 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>一直想学习一下百度的paddle框架，按照官方教程安装时，感觉步骤写的太繁琐，于是根据之前安装其他框架的经验进行尝试，使用最简单的anaconda方式进行安装，很快成功，记录一下过程。&lt;/p></description></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>All Posts - FangjieYu‘s site</title><link>https://fjyu95.github.io/posts/</link><description>All Posts | FangjieYu‘s site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>907040864@qq.com (fjyu95)</managingEditor><webMaster>907040864@qq.com (fjyu95)</webMaster><lastBuildDate>Fri, 02 May 2025 02:42:42 +0800</lastBuildDate><atom:link href="https://fjyu95.github.io/posts/" rel="self" type="application/rss+xml"/><item><title>Gitea搭建</title><link>https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/</link><pubDate>Fri, 11 Apr 2025 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/</guid><description><![CDATA[<h1 id="文档">文档</h1>
+<p><a href="https://docs.gitea.com/zh-cn/category/installation" target="_blank" rel="noopener noreffer ">https://docs.gitea.com/zh-cn/category/installation</a></p>
+<p><a href="https://dl.gitea.com/gitea/1.23.7/" target="_blank" rel="noopener noreffer ">https://dl.gitea.com/gitea/1.23.7/</a></p>
+<h1 id="安装二进制">安装（二进制）</h1>
+<p><a href="https://docs.gitea.com/zh-cn/installation/install-from-binary" target="_blank" rel="noopener noreffer ">https://docs.gitea.com/zh-cn/installation/install-from-binary</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 环境准备</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install git wget sqlite3 -y
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># gitea下载</span>
+</span></span><span class="line"><span class="cl">wget -O gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64 <span class="c1"># -O write documents to FILE</span>
+</span></span><span class="line"><span class="cl">wget gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64.asc
+</span></span><span class="line"><span class="cl">chmod +x gitea
+</span></span><span class="line"><span class="cl">sudo cp gitea /usr/local/bin/gitea
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 验证GPG签名[可选]</span>
+</span></span><span class="line"><span class="cl">gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2
+</span></span><span class="line"><span class="cl">gpg --verify gitea-1.23.7-linux-amd64.asc gitea
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建工作路径</span>
+</span></span><span class="line"><span class="cl">sudo mkdir -p /var/lib/gitea/<span class="o">{</span>custom,data,log<span class="o">}</span>
+</span></span><span class="line"><span class="cl">sudo chown -R git:git /var/lib/gitea/
+</span></span><span class="line"><span class="cl">sudo chmod -R <span class="m">750</span> /var/lib/gitea/
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo mkdir /etc/gitea
+</span></span><span class="line"><span class="cl">sudo chown root:git /etc/gitea
+</span></span><span class="line"><span class="cl">sudo chmod <span class="m">770</span> /etc/gitea
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 网页配置完成后执行</span>
+</span></span><span class="line"><span class="cl">chmod <span class="m">750</span> /etc/gitea
+</span></span><span class="line"><span class="cl">chmod <span class="m">640</span> /etc/gitea/app.ini
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建 Gitea 用户</span>
+</span></span><span class="line"><span class="cl">sudo adduser <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --system <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --shell /bin/bash <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --gecos <span class="s1">&#39;Git Version Control&#39;</span> <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --group <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --disabled-password <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   --home /home/git <span class="se">\
+</span></span></span><span class="line"><span class="cl"><span class="se"></span>   git
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加 Systemd 服务（开机自启）   </span>
+</span></span><span class="line"><span class="cl">sudo tee /etc/systemd/system/gitea.service &gt; /dev/null <span class="s">&lt;&lt; EOF
+</span></span></span><span class="line"><span class="cl"><span class="s">[Unit]
+</span></span></span><span class="line"><span class="cl"><span class="s">Description=Gitea (Git with a cup of tea)
+</span></span></span><span class="line"><span class="cl"><span class="s">After=syslog.target
+</span></span></span><span class="line"><span class="cl"><span class="s">After=network.target
+</span></span></span><span class="line"><span class="cl"><span class="s">Requires=network.target
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">[Service]
+</span></span></span><span class="line"><span class="cl"><span class="s">RestartSec=2s
+</span></span></span><span class="line"><span class="cl"><span class="s">Type=simple
+</span></span></span><span class="line"><span class="cl"><span class="s">User=git
+</span></span></span><span class="line"><span class="cl"><span class="s">Group=git
+</span></span></span><span class="line"><span class="cl"><span class="s">WorkingDirectory=/var/lib/gitea/
+</span></span></span><span class="line"><span class="cl"><span class="s">ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
+</span></span></span><span class="line"><span class="cl"><span class="s">Restart=always
+</span></span></span><span class="line"><span class="cl"><span class="s">Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
+</span></span></span><span class="line"><span class="cl"><span class="s">
+</span></span></span><span class="line"><span class="cl"><span class="s">[Install]
+</span></span></span><span class="line"><span class="cl"><span class="s">WantedBy=multi-user.target
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动服务</span>
+</span></span><span class="line"><span class="cl">sudo systemctl daemon-reload
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> --now gitea
+</span></span><span class="line"><span class="cl">sudo systemctl status gitea  <span class="c1"># 检查服务状态</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 访问 Web 页面配置</span>
+</span></span><span class="line"><span class="cl">打开浏览器访问：
+</span></span><span class="line"><span class="cl">📎 http://&lt;你的服务器IP&gt;:3000
+</span></span><span class="line"><span class="cl">/etc/gitea/app.ini <span class="c1"># 配置文件默认路径</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 可选：开放防火墙端口</span>
+</span></span><span class="line"><span class="cl">sudo ufw allow <span class="m">3000</span> <span class="c1"># 或放在 Nginx 后面使用 80/443</span>
+</span></span><span class="line"><span class="cl">sudo ufw status
+</span></span><span class="line"><span class="cl">sudo systemctl restart gitea <span class="c1"># 重启 Gitea	</span>
+</span></span></code></pre></div><h2 id="安装指导-gpt">安装指导 gpt</h2>
+<p>下面是在 <strong>Ubuntu 上部署 Gitea（私有 Git 平台）</strong> 的超清晰步骤，轻量好用，适合个人和小团队，几十 MB 就能跑，几分钟搞定！💻🚀</p>]]></description></item><item><title>gogs</title><link>https://fjyu95.github.io/posts/gogs-1cee4020f06080249ec6d53c8d9ef2eb/</link><pubDate>Mon, 07 Apr 2025 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/gogs-1cee4020f06080249ec6d53c8d9ef2eb/</guid><description><![CDATA[<h1 id="简介">简介</h1>
+<p>当然！下面是对 <strong>GitLab</strong> 和 <strong>Gogs</strong> 的简介与对比，帮你快速了解这两个代码托管平台各自的定位、优缺点以及使用场景。</p>
+<hr>
+<h2 id="-什么是-gitlab">🧩 什么是 GitLab？</h2>
+<p><strong>GitLab</strong> 是一个功能非常完整的 <strong>DevOps平台</strong>，提供：</p>]]></description></item><item><title>3D表征</title><link>https://fjyu95.github.io/posts/3d-representation-197e4020f06080dfad15f512e5b03751/</link><pubDate>Tue, 11 Feb 2025 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/3d-representation-197e4020f06080dfad15f512e5b03751/</guid><description><![CDATA[<p>几何模型 CAD CSG</p>
+<p>体素</p>
+<p>点云</p>
+<p>mesh</p>
+<p>隐式表达 SDFs</p>
+<h1 id="pcd">pcd</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1"># python 保存、读取</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">plyfile</span> <span class="kn">import</span> <span class="n">PlyData</span><span class="p">,</span> <span class="n">PlyElement</span>
+</span></span><span class="line"><span class="cl"><span class="n">ply_data</span> <span class="o">=</span> <span class="n">PlyData</span><span class="p">([</span><span class="n">vertex_element</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"><span class="n">ply_data</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 判断格式</span>
+</span></span><span class="line"><span class="cl"><span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">10</span> <span class="n">plyfile</span>
+</span></span><span class="line"><span class="cl"><span class="nb">format</span> <span class="n">binary_little_endian</span> <span class="mf">1.0</span> <span class="c1"># 二进制-小端格式</span>
+</span></span><span class="line"><span class="cl"><span class="nb">format</span> <span class="n">ascii</span> <span class="mf">1.0</span> <span class="c1"># 文本</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;input.ply&#34;</span><span class="p">,</span> <span class="s2">&#34;rb&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">header</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="s2">&#34;format ascii&#34;</span> <span class="ow">in</span> <span class="n">header</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;文件是ASCII格式，建议转换为二进制&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 格式转换</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">trimesh</span>
+</span></span><span class="line"><span class="cl"><span class="n">mesh</span> <span class="o">=</span> <span class="n">trimesh</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&#34;input.ply&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">mesh</span><span class="o">.</span><span class="n">export</span><span class="p">(</span><span class="s2">&#34;output_binary.ply&#34;</span><span class="p">,</span> <span class="n">file_type</span><span class="o">=</span><span class="s2">&#34;ply&#34;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;binary&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 高效读取库</span>
+</span></span><span class="line"><span class="cl"><span class="n">trimesh</span> 
+</span></span><span class="line"><span class="cl"><span class="n">pyply</span>
+</span></span><span class="line"><span class="cl"><span class="n">pyntcloud</span>
+</span></span><span class="line"><span class="cl"><span class="n">pandas</span>
+</span></span><span class="line"><span class="cl"><span class="n">open3d</span>
+</span></span><span class="line"><span class="cl"><span class="n">numpy</span><span class="o">.</span><span class="n">fromfile</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 读取加速</span>
+</span></span><span class="line"><span class="cl"><span class="n">Chunking</span>
+</span></span><span class="line"><span class="cl"><span class="n">二进制</span>
+</span></span><span class="line"><span class="cl"><span class="n">多进程</span><span class="o">/</span><span class="n">并行</span>
+</span></span></code></pre></div><h1 id="sdf">SDF</h1>
+<p>在三维计算机图形学和三维重建领域，<strong>SDF（Signed Distance Function）</strong> 是一种非常重要的表示三维物体的方法。它可以描述一个三维物体的形状，广泛应用于计算机图形学、物理模拟、3D建模、虚拟现实（VR）等领域。SDF 用于描述空间中的每个点与物体表面之间的距离，且每个点的值是一个标量，表示到最近表面的距离，并且带有符号信息（即物体内外的区分）。</p>]]></description></item><item><title>VR/AR</title><link>https://fjyu95.github.io/posts/vr-ar-191e4020f06080099cb5dc09ac716a83/</link><pubDate>Wed, 05 Feb 2025 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/vr-ar-191e4020f06080099cb5dc09ac716a83/</guid><description><![CDATA[<p><a href="https://wearable.ofweek.com/2018-02/ART-11000-5011-30199019.html" target="_blank" rel="noopener noreffer ">https://wearable.ofweek.com/2018-02/ART-11000-5011-30199019.html</a></p>
+<p><a href="https://pdf.dfcfw.com/pdf/H3_AP202203251554968798_1.pdf?1648461781000.pdf" target="_blank" rel="noopener noreffer ">https://pdf.dfcfw.com/pdf/H3_AP202203251554968798_1.pdf?1648461781000.pdf</a></p>
+<p></p>
+<p><strong>虚拟现实 － Virtual Reality</strong></p>
+<p>是利用设备模拟产生一个<strong>虚拟世界</strong>，提供用户关于视觉、听觉等感官的模拟，有十足的“沉浸感”与“临场感”。简单的说就是，你戴上一个VR眼镜（注意：戴上去后你就看不到现实世界了）看<strong>到的所有东西都是计算机生成的，都是虚拟的</strong>。典型的设备就是暴风魔镜。</p>]]></description></item><item><title>ROS</title><link>https://fjyu95.github.io/posts/ros-17ae4020f0608037ab9ce65eddd62e49/</link><pubDate>Mon, 13 Jan 2025 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/ros-17ae4020f0608037ab9ce65eddd62e49/</guid><description><![CDATA[<h1 id="教程文档">教程文档</h1>
+<p><a href="https://fishros.com/d2lros2/#/" target="_blank" rel="noopener noreffer ">https://fishros.com/d2lros2/#/</a></p>
+<p><a href="https://www.ncnynl.com/archives/201801/2251.html" target="_blank" rel="noopener noreffer ">https://www.ncnynl.com/archives/201801/2251.html</a></p>
+<p><a href="https://book.guyuehome.com/ROS2/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2_%E6%A6%82%E5%BF%B5%E6%80%BB%E8%A7%88/" target="_blank" rel="noopener noreffer ">https://book.guyuehome.com/ROS2/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2_%E6%A6%82%E5%BF%B5%E6%80%BB%E8%A7%88/</a></p>
+<p><a href="https://fishros.org/doc/ros2/humble/Concepts/Basic.html#" target="_blank" rel="noopener noreffer ">https://fishros.org/doc/ros2/humble/Concepts/Basic.html#</a></p>
+<p><a href="https://daobook.github.io/ros2-docs/xin/Tutorials/Understanding-ROS2-Nodes.html" target="_blank" rel="noopener noreffer ">https://daobook.github.io/ros2-docs/xin/Tutorials/Understanding-ROS2-Nodes.html</a></p>
+<h1 id="安装">安装</h1>
+<p><a href="https://blog.csdn.net/m0_64346597/article/details/126526791" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/m0_64346597/article/details/126526791</a></p>
+<p><a href="https://d2lros2foxy.fishros.com/#/humble/chapt1/get_started/3.%E5%8A%A8%E6%89%8B%E5%AE%89%E8%A3%85ROS2" target="_blank" rel="noopener noreffer ">https://d2lros2foxy.fishros.com/#/humble/chapt1/get_started/3.%E5%8A%A8%E6%89%8B%E5%AE%89%E8%A3%85ROS2</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://fishros.com/install -O fishros <span class="o">&amp;&amp;</span> . fishros
+</span></span><span class="line"><span class="cl">有代理时不一定要换源，出现error后先n后y经测试可以安装成功
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">printenv <span class="p">|</span> grep -i ROS
+</span></span><span class="line"><span class="cl">ros2 run demo_nodes_cpp talker
+</span></span><span class="line"><span class="cl">ros2 run demo_nodes_py listener
+</span></span><span class="line"><span class="cl">ros2 topic list
+</span></span></code></pre></div><h1 id="核心概念">核心概念</h1>
+<p>在ROS 2（Robot Operating System 2）中，<strong>节点（Nodes）</strong>、<strong>消息（Messages）</strong> 和 <strong>主题（Topics）</strong> 是核心概念，它们共同构成了ROS 2的通信机制。理解这些概念对于开发和调试ROS 2系统至关重要。</p>]]></description></item><item><title>RGB-D相机</title><link>https://fjyu95.github.io/posts/rgb-d-cam-170e4020f06080198bd5cb4e98e89580/</link><pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/rgb-d-cam-170e4020f06080198bd5cb4e98e89580/</guid><description><![CDATA[<h1 id="基本原理">基本原理</h1>
+<p>深度相机生成深度图，深度图是图像中每个像素点的深度值，<strong>通常以毫米为单位</strong>。它通过测量光线从相机到物体表面的距离，再<strong>返回相机的时间或相位差</strong>，计算出每个像素的深度信息。</p>]]></description></item><item><title>DUSt3R系列学习</title><link>https://fjyu95.github.io/posts/dust3r-series-15ee4020f0608006803bfe528b97cab2/</link><pubDate>Mon, 16 Dec 2024 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/dust3r-series-15ee4020f0608006803bfe528b97cab2/</guid><description><![CDATA[<p>密集无约束三维重建</p>
+<p>Dense and Unconstrained Stereo 3D Reconstruction</p>
+<p>通过一种全新的方法简化几何3D视觉任务，特别是在密集3D重建方面</p>
+<p>实质是结合深度学习技术进行多视图<strong>密集三维重建</strong>。基于ViT架构</p>]]></description></item><item><title>DIY装机</title><link>https://fjyu95.github.io/posts/diy%D1%88%D0%B3%D0%B5%D1%86%D1%8C-14fe4020f0608024989ac1aa0736caa5/</link><pubDate>Sun, 01 Dec 2024 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/diy%D1%88%D0%B3%D0%B5%D1%86%D1%8C-14fe4020f0608024989ac1aa0736caa5/</guid><description><![CDATA[<p>微星b660主板 进bios F2</p>
+<p></p>
+<p>主板内置常用接口作用</p>
+<p>[CPU-FAN]cpu散热器供电接口</p>
+<p>[SYS-FAN]机箱风扇供电接口</p>
+<p>[PUMP-FAN]水泵供电接口</p>]]></description></item><item><title>开源3d重建系统</title><link>https://fjyu95.github.io/posts/%D1%85%D0%B0%D1%86%D1%803d%D1%89%D0%B7%D0%BD%D1%85%D1%87%D1%87%D1%8F-139e4020f060802d9629dfad7d7f0b5c/</link><pubDate>Sat, 09 Nov 2024 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/%D1%85%D0%B0%D1%86%D1%803d%D1%89%D0%B7%D0%BD%D1%85%D1%87%D1%87%D1%8F-139e4020f060802d9629dfad7d7f0b5c/</guid><description><![CDATA[<p>OpenSfM 更适合GIS领域</p>
+<p>COLMAP 学术界更流行</p>
+<p><strong>OpenMVG + OpenMVS</strong></p>
+<p>mvs-texturing</p>
+<p></p>
+<p>绿色表示支持，红色表示不支持</p>
+<p></p>
+<h1 id="colmap-install">COLMAP install</h1>
+<p><a href="https://github.com/colmap/colmap" target="_blank" rel="noopener noreffer ">https://github.com/colmap/colmap</a></p>
+<p><a href="https://colmap.github.io/install.html" target="_blank" rel="noopener noreffer ">https://colmap.github.io/install.html</a></p>
+<p><a href="https://repology.org/project/colmap/versions" target="_blank" rel="noopener noreffer ">https://repology.org/project/colmap/versions</a></p>
+<h2 id="pipline">pipline</h2>
+<p><a href="https://blog.csdn.net/m0_56836274/article/details/139245630" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/m0_56836274/article/details/139245630</a></p>
+<h2 id="docker方式安装">docker方式安装</h2>
+<p><a href="https://hub.docker.com/r/colmap/colmap" target="_blank" rel="noopener noreffer ">https://hub.docker.com/r/colmap/colmap</a></p>
+<h2 id="faq">FAQ</h2>
+<h3 id="1dense-stereo-reconstruction-requirescuda-which-is-not-available-on-your-system"><strong>1、Dense stereo reconstruction requires CUDA, which is not available on your system.</strong></h3>
+<p>稠密重建必须安装配置cuda</p>]]></description></item><item><title>3DGS</title><link>https://fjyu95.github.io/posts/3dgs-138e4020f06080e7b9ced1f2074982d5/</link><pubDate>Fri, 08 Nov 2024 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/3dgs-138e4020f06080e7b9ced1f2074982d5/</guid><description><![CDATA[<p><a href="https://github.com/graphdeco-inria/gaussian-splatting?tab=readme-ov-file" target="_blank" rel="noopener noreffer ">GitHub - graphdeco-inria/gaussian-splatting: Original reference implementation of &ldquo;3D Gaussian Splatting for Real-Time Radiance Field Rendering&rdquo;</a></p>
+<p><a href="http://www.yindaheng98.top/%E5%9B%BE%E5%BD%A2%E5%AD%A6/3DGaussianSplatting.html#%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89gaussian%E7%82%B9" target="_blank" rel="noopener noreffer ">http://www.yindaheng98.top/%E5%9B%BE%E5%BD%A2%E5%AD%A6/3DGaussianSplatting.html#%E5%A6%82%E4%BD%95%E5%AE%9A%E4%B9%89gaussian%E7%82%B9</a></p>
+<p><a href="http://www.yindaheng98.top/%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E7%90%83%E8%B0%90%E7%B3%BB%E6%95%B0.html#%E7%90%83%E9%9D%A2%E9%AB%98%E6%96%AF%EF%BC%88spherical-gaussian%EF%BC%89" target="_blank" rel="noopener noreffer ">http://www.yindaheng98.top/%E5%9B%BE%E5%BD%A2%E5%AD%A6/%E7%90%83%E8%B0%90%E7%B3%BB%E6%95%B0.html#%E7%90%83%E9%9D%A2%E9%AB%98%E6%96%AF%EF%BC%88spherical-gaussian%EF%BC%89</a></p>
+<p><a href="http://www.yindaheng98.top/%E5%9B%BE%E5%BD%A2%E5%AD%A6/3D%E9%AB%98%E6%96%AF%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC.html#derivation-of-sampling" target="_blank" rel="noopener noreffer ">http://www.yindaheng98.top/%E5%9B%BE%E5%BD%A2%E5%AD%A6/3D%E9%AB%98%E6%96%AF%E6%95%B0%E5%AD%A6%E6%8E%A8%E5%AF%BC.html#derivation-of-sampling</a></p>
+<p><a href="https://www.find.org.tw/index/tech_obser/browse/7eaa3e8ffc7876e74509befd5ed50b8a/" target="_blank" rel="noopener noreffer ">https://www.find.org.tw/index/tech_obser/browse/7eaa3e8ffc7876e74509befd5ed50b8a/</a></p>
+<p></p>
+<p>3DGS使用隨機梯度下降法進行訓練。步驟如下：</p>
+<ol>
+<li>SfM Points：首先利用運動恢復結構技術（Structure from Motion，SfM），從一組2D相片中找到不同照片中疊合的特徵點，來估計出初步的3D點雲及相機位置，程式碼中是透過調用COLMAP庫來完成。</li>
+<li>Initialization：透過SfM獲得的點雲及<strong>數據進行初始化</strong>，算出各個高斯橢球的位置、形狀、顏色、透明度等參數。</li>
+<li>Projection：將每一顆高斯橢球，根據它們與各個相機位置的距離（深度），由近到遠排序進行投影；程式碼中是將中心點座標去跟變換矩陣、協方差矩陣等數據進行運算，就能<strong>將三維空間中的高斯分布轉換到二維的平面上</strong>。</li>
+<li>Differentiable Tile Rasterizer：透過<strong>可微光柵化渲染</strong>（即前文提及的「Splatting」得到一張張2D圖像（即流程上的「Image」）。多个3d高斯点颜色合成吗？</li>
+<li>Adaptive Density Control：根據步驟4.所獲得之渲染2D圖像（即流程上的「Image」）與Ground Truth圖像（原先上傳的照片）之間的差異，計算出loss值，並將loss值沿藍色箭頭方向回傳。藍色箭頭<strong>向上即更新3D高斯橢球的參數</strong>，向下則送入自<strong>適應密度控制來更新高斯橢球的密度</strong>，如將小顆的高斯克隆成兩顆、將大顆的高斯分裂兩小顆等，以更好地擬合照片中的細節。</li>
+</ol>
+<h1 id="全文翻译">全文翻译</h1>
+<p><a href="https://blog.csdn.net/m0_38068229/article/details/137171860" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/m0_38068229/article/details/137171860</a></p>]]></description></item></channel></rss>

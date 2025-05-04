@@ -1,0 +1,382 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Linux - Tag - FangjieYu‘s site</title><link>https://fjyu95.github.io/tags/linux/</link><description>Linux - Tag - FangjieYu‘s site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>907040864@qq.com (fjyu95)</managingEditor><webMaster>907040864@qq.com (fjyu95)</webMaster><lastBuildDate>Sun, 20 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://fjyu95.github.io/tags/linux/" rel="self" type="application/rss+xml"/><item><title>vim</title><link>https://fjyu95.github.io/posts/vim-03e3126a53f54d23bc4a2bd68d1b11cd/</link><pubDate>Sun, 20 Nov 2022 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/vim-03e3126a53f54d23bc4a2bd68d1b11cd/</guid><description><![CDATA[<h1 id="summary">summary</h1>
+<h3 id="vim-常用快捷键大全"><strong>Vim 常用快捷键大全</strong></h3>
+<p>Vim 是一个强大的文本编辑器，掌握基本快捷键能极大提升编辑效率。以下是常用的 Vim 快捷键，按功能分类整理。</p>
+<hr>
+<h2 id="-1-模式切换"><strong>📌 1. 模式切换</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>i</code></td>
+          <td>进入 <strong>插入模式</strong>（光标前插入）</td>
+      </tr>
+      <tr>
+          <td><code>I</code></td>
+          <td>进入 <strong>插入模式</strong>（光标移到行首再插入）</td>
+      </tr>
+      <tr>
+          <td><code>a</code></td>
+          <td>进入 <strong>插入模式</strong>（光标后插入）</td>
+      </tr>
+      <tr>
+          <td><code>A</code></td>
+          <td>进入 <strong>插入模式</strong>（光标移到行尾再插入）</td>
+      </tr>
+      <tr>
+          <td><code>o</code></td>
+          <td>在当前行下 <strong>新建一行</strong> 并进入插入模式</td>
+      </tr>
+      <tr>
+          <td><code>O</code></td>
+          <td>在当前行上 <strong>新建一行</strong> 并进入插入模式</td>
+      </tr>
+      <tr>
+          <td><code>Esc</code> / <code>Ctrl + [</code></td>
+          <td>退出 <strong>插入模式</strong>，回到普通模式</td>
+      </tr>
+      <tr>
+          <td><code>v</code></td>
+          <td>进入 <strong>可视模式</strong>（选择字符）</td>
+      </tr>
+      <tr>
+          <td><code>V</code></td>
+          <td>进入 <strong>可视模式</strong>（选择整行）</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + v</code></td>
+          <td>进入 <strong>列块可视模式</strong>（选列操作）</td>
+      </tr>
+      <tr>
+          <td><code>:q</code></td>
+          <td>退出 Vim</td>
+      </tr>
+      <tr>
+          <td><code>:q!</code></td>
+          <td>强制退出（不保存）</td>
+      </tr>
+      <tr>
+          <td><code>:w</code></td>
+          <td>保存文件</td>
+      </tr>
+      <tr>
+          <td><code>:wq</code> / <code>ZZ</code></td>
+          <td>保存并退出</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-2-光标移动"><strong>📌 2. 光标移动</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>h</code></td>
+          <td>左移一个字符</td>
+      </tr>
+      <tr>
+          <td><code>l</code></td>
+          <td>右移一个字符</td>
+      </tr>
+      <tr>
+          <td><code>j</code></td>
+          <td>下移一行</td>
+      </tr>
+      <tr>
+          <td><code>k</code></td>
+          <td>上移一行</td>
+      </tr>
+      <tr>
+          <td><code>w</code></td>
+          <td>移动到 <strong>下一个单词首字母</strong></td>
+      </tr>
+      <tr>
+          <td><code>e</code></td>
+          <td>移动到 <strong>当前/下一个单词末尾</strong></td>
+      </tr>
+      <tr>
+          <td><code>b</code></td>
+          <td>移动到 <strong>上一个单词首字母</strong></td>
+      </tr>
+      <tr>
+          <td><code>0</code></td>
+          <td>移动到 <strong>行首</strong></td>
+      </tr>
+      <tr>
+          <td><code>^</code></td>
+          <td>移动到 <strong>行首第一个非空字符</strong></td>
+      </tr>
+      <tr>
+          <td><code>$</code></td>
+          <td>移动到 <strong>行尾</strong></td>
+      </tr>
+      <tr>
+          <td><code>gg</code></td>
+          <td>移动到 <strong>第一行</strong></td>
+      </tr>
+      <tr>
+          <td><code>G</code></td>
+          <td>移动到 <strong>最后一行</strong></td>
+      </tr>
+      <tr>
+          <td><code>:n</code></td>
+          <td>跳转到 <strong>第 n 行</strong>（如 <code>:10</code> 跳转到第 10 行）</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + d</code></td>
+          <td>向下翻半屏</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + u</code></td>
+          <td>向上翻半屏</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + f</code></td>
+          <td>向下翻一整页</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + b</code></td>
+          <td>向上翻一整页</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-3-复制剪切和粘贴"><strong>📌 3. 复制、剪切和粘贴</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>yy</code> (<code>Y</code>)</td>
+          <td><strong>复制</strong> 当前行</td>
+      </tr>
+      <tr>
+          <td><code>dd</code></td>
+          <td><strong>剪切</strong> 当前行</td>
+      </tr>
+      <tr>
+          <td><code>x</code></td>
+          <td><strong>删除</strong> 当前字符（相当于剪切一个字符）</td>
+      </tr>
+      <tr>
+          <td><code>D</code></td>
+          <td><strong>删除</strong> 从光标到行尾的内容</td>
+      </tr>
+      <tr>
+          <td><code>p</code></td>
+          <td><strong>粘贴</strong> 到光标后（或下一行）</td>
+      </tr>
+      <tr>
+          <td><code>P</code></td>
+          <td><strong>粘贴</strong> 到光标前（或上一行）</td>
+      </tr>
+      <tr>
+          <td><code>y{motion}</code></td>
+          <td>复制指定范围（如 <code>y$</code> 复制到行尾，<code>yw</code> 复制一个单词）</td>
+      </tr>
+      <tr>
+          <td><code>d{motion}</code></td>
+          <td>剪切指定范围（如 <code>d$</code> 剪切到行尾，<code>dw</code> 剪切一个单词）</td>
+      </tr>
+      <tr>
+          <td><code>:reg</code></td>
+          <td>查看所有剪贴板内容</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-4-撤销重做"><strong>📌 4. 撤销、重做</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>u</code></td>
+          <td><strong>撤销</strong> 上一步操作</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + r</code></td>
+          <td><strong>重做</strong> 上一步撤销</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-5-查找和替换"><strong>📌 5. 查找和替换</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>/keyword</code></td>
+          <td><strong>向下查找</strong> <code>keyword</code></td>
+      </tr>
+      <tr>
+          <td><code>?keyword</code></td>
+          <td><strong>向上查找</strong> <code>keyword</code></td>
+      </tr>
+      <tr>
+          <td><code>n</code></td>
+          <td><strong>下一个匹配</strong></td>
+      </tr>
+      <tr>
+          <td><code>N</code></td>
+          <td><strong>上一个匹配</strong></td>
+      </tr>
+      <tr>
+          <td><code>:%s/old/new/g</code></td>
+          <td><strong>全局替换</strong> <code>old</code> → <code>new</code></td>
+      </tr>
+      <tr>
+          <td><code>:%s/old/new/gc</code></td>
+          <td><strong>全局替换</strong>（逐个确认）</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-6-代码缩进"><strong>📌 6. 代码缩进</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>&gt;&gt;</code></td>
+          <td><strong>右缩进</strong> 当前行</td>
+      </tr>
+      <tr>
+          <td><code>&lt;&lt;</code></td>
+          <td><strong>左缩进</strong> 当前行</td>
+      </tr>
+      <tr>
+          <td><code>V + &gt;</code></td>
+          <td>选中多行后 <strong>右缩进</strong></td>
+      </tr>
+      <tr>
+          <td><code>V + &lt;</code></td>
+          <td>选中多行后 <strong>左缩进</strong></td>
+      </tr>
+      <tr>
+          <td><code>=</code></td>
+          <td>自动格式化当前行</td>
+      </tr>
+      <tr>
+          <td><code>gg=G</code></td>
+          <td><strong>格式化整个文件</strong></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-7-窗口和标签管理"><strong>📌 7. 窗口和标签管理</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>:sp</code></td>
+          <td><strong>水平分割</strong> 新窗口</td>
+      </tr>
+      <tr>
+          <td><code>:vsp</code></td>
+          <td><strong>垂直分割</strong> 新窗口</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + w + h</code></td>
+          <td><strong>跳到左侧窗口</strong></td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + w + l</code></td>
+          <td><strong>跳到右侧窗口</strong></td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + w + j</code></td>
+          <td><strong>跳到下面窗口</strong></td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + w + k</code></td>
+          <td><strong>跳到上面窗口</strong></td>
+      </tr>
+      <tr>
+          <td><code>:tabnew</code></td>
+          <td><strong>新建标签页</strong></td>
+      </tr>
+      <tr>
+          <td><code>gt</code></td>
+          <td><strong>下一个标签页</strong></td>
+      </tr>
+      <tr>
+          <td><code>gT</code></td>
+          <td><strong>上一个标签页</strong></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-8-其他快捷键"><strong>📌 8. 其他快捷键</strong></h2>
+<table>
+  <thead>
+      <tr>
+          <th>快捷键</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>.</code></td>
+          <td><strong>重复</strong> 上次命令</td>
+      </tr>
+      <tr>
+          <td><code>Ctrl + n</code></td>
+          <td><strong>自动补全</strong></td>
+      </tr>
+      <tr>
+          <td><code>J</code></td>
+          <td><strong>合并</strong> 当前行和下一行</td>
+      </tr>
+      <tr>
+          <td><code>:! command</code></td>
+          <td><strong>执行 shell 命令</strong>（如 <code>:!ls</code>）</td>
+      </tr>
+      <tr>
+          <td><code>:w !sudo tee %</code></td>
+          <td><strong>以 root 权限保存文件</strong></td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-提高-vim-效率的小技巧"><strong>🚀 提高 Vim 效率的小技巧</strong></h2>
+<ol>
+<li>
+<p><strong>启动 Vim 直接进入插入模式</strong></p>]]></description></item><item><title>Linux command</title><link>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</link><pubDate>Thu, 08 Sep 2022 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/linux-command-de039fc517af4e2bb44d03ac1dc38fc3/</guid><description><![CDATA[<h1 id="linux命令大全">Linux命令大全</h1>
+<p><a href="https://www.runoob.com/linux/linux-command-manual.html" target="_blank" rel="noopener noreffer ">Linux 命令大全</a></p>
+<h1 id="anaconda">Anaconda</h1>
+<p><a href="https://www.notion.so/Anaconda-1cde4020f06080a58103d396c692c936?pvs=21" target="_blank" rel="noopener noreffer ">Anaconda</a></p>
+<h2 id="常用命令">常用命令</h2>
+<p><a href="https://blog.csdn.net/qq_38929105/article/details/123652248" target="_blank" rel="noopener noreffer ">Anaconda/pip 更换阿里源，助力 conda create -n 虚拟环境搭建_anaconda换阿里源_乄洛尘的博客-CSDN博客</a></p>
+<p><a href="https://blog.csdn.net/menc15/article/details/71477949/" target="_blank" rel="noopener noreffer ">Conda常用命令整理_conda命令_CharlotteMen的博客-CSDN博客</a></p>]]></description></item></channel></rss>

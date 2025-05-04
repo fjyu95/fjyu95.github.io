@@ -1,0 +1,823 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Gitea搭建 - FangjieYu‘s site</title><meta name=Description content="This is my cool site"><meta property="og:url" content="https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/">
+<meta property="og:site_name" content="FangjieYu‘s site"><meta property="og:title" content="Gitea搭建"><meta property="og:description" content="文档 https://docs.gitea.com/zh-cn/category/installation
+https://dl.gitea.com/gitea/1.23.7/
+安装（二进制） https://docs.gitea.com/zh-cn/installation/install-from-binary
+# 环境准备 sudo apt update sudo apt install git wget sqlite3 -y # gitea下载 wget -O gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64 # -O write documents to FILE wget gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64.asc chmod +x gitea sudo cp gitea /usr/local/bin/gitea # 验证GPG签名[可选] gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2 gpg --verify gitea-1.23.7-linux-amd64.asc gitea # 创建工作路径 sudo mkdir -p /var/lib/gitea/{custom,data,log} sudo chown -R git:git /var/lib/gitea/ sudo chmod -R 750 /var/lib/gitea/ sudo mkdir /etc/gitea sudo chown root:git /etc/gitea sudo chmod 770 /etc/gitea # 网页配置完成后执行 chmod 750 /etc/gitea chmod 640 /etc/gitea/app.ini # 创建 Gitea 用户 sudo adduser \ --system \ --shell /bin/bash \ --gecos 'Git Version Control' \ --group \ --disabled-password \ --home /home/git \ git # 添加 Systemd 服务（开机自启） sudo tee /etc/systemd/system/gitea.service > /dev/null << EOF [Unit] Description=Gitea (Git with a cup of tea) After=syslog.target After=network.target Requires=network.target [Service] RestartSec=2s Type=simple User=git Group=git WorkingDirectory=/var/lib/gitea/ ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini Restart=always Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea [Install] WantedBy=multi-user.target EOF # 启动服务 sudo systemctl daemon-reload sudo systemctl enable --now gitea sudo systemctl status gitea # 检查服务状态 # 访问 Web 页面配置 打开浏览器访问： 📎 http://<你的服务器IP>:3000 /etc/gitea/app.ini # 配置文件默认路径 # 可选：开放防火墙端口 sudo ufw allow 3000 # 或放在 Nginx 后面使用 80/443 sudo ufw status sudo systemctl restart gitea # 重启 Gitea	安装指导 gpt 下面是在 Ubuntu 上部署 Gitea（私有 Git 平台） 的超清晰步骤，轻量好用，适合个人和小团队，几十 MB 就能跑，几分钟搞定！💻🚀"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2025-04-11T00:00:00+00:00"><meta property="article:modified_time" content="2025-04-13T00:00:00+00:00"><meta property="article:tag" content="Git"><meta name=twitter:card content="summary"><meta name=twitter:title content="Gitea搭建"><meta name=twitter:description content="文档 https://docs.gitea.com/zh-cn/category/installation
+https://dl.gitea.com/gitea/1.23.7/
+安装（二进制） https://docs.gitea.com/zh-cn/installation/install-from-binary
+# 环境准备 sudo apt update sudo apt install git wget sqlite3 -y # gitea下载 wget -O gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64 # -O write documents to FILE wget gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64.asc chmod +x gitea sudo cp gitea /usr/local/bin/gitea # 验证GPG签名[可选] gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2 gpg --verify gitea-1.23.7-linux-amd64.asc gitea # 创建工作路径 sudo mkdir -p /var/lib/gitea/{custom,data,log} sudo chown -R git:git /var/lib/gitea/ sudo chmod -R 750 /var/lib/gitea/ sudo mkdir /etc/gitea sudo chown root:git /etc/gitea sudo chmod 770 /etc/gitea # 网页配置完成后执行 chmod 750 /etc/gitea chmod 640 /etc/gitea/app.ini # 创建 Gitea 用户 sudo adduser \ --system \ --shell /bin/bash \ --gecos 'Git Version Control' \ --group \ --disabled-password \ --home /home/git \ git # 添加 Systemd 服务（开机自启） sudo tee /etc/systemd/system/gitea.service > /dev/null << EOF [Unit] Description=Gitea (Git with a cup of tea) After=syslog.target After=network.target Requires=network.target [Service] RestartSec=2s Type=simple User=git Group=git WorkingDirectory=/var/lib/gitea/ ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini Restart=always Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea [Install] WantedBy=multi-user.target EOF # 启动服务 sudo systemctl daemon-reload sudo systemctl enable --now gitea sudo systemctl status gitea # 检查服务状态 # 访问 Web 页面配置 打开浏览器访问： 📎 http://<你的服务器IP>:3000 /etc/gitea/app.ini # 配置文件默认路径 # 可选：开放防火墙端口 sudo ufw allow 3000 # 或放在 Nginx 后面使用 80/443 sudo ufw status sudo systemctl restart gitea # 重启 Gitea	安装指导 gpt 下面是在 Ubuntu 上部署 Gitea（私有 Git 平台） 的超清晰步骤，轻量好用，适合个人和小团队，几十 MB 就能跑，几分钟搞定！💻🚀"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/><link rel=prev href=https://fjyu95.github.io/posts/gogs-1cee4020f06080249ec6d53c8d9ef2eb/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Gitea搭建","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/fjyu95.github.io\/posts\/gitea-1d2e4020f06080ff905ee0ba10dfeafa\/"},"genre":"posts","keywords":"git","wordcount":11523,"url":"https:\/\/fjyu95.github.io\/posts\/gitea-1d2e4020f06080ff905ee0ba10dfeafa\/","datePublished":"2025-04-11T00:00:00+00:00","dateModified":"2025-04-13T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"fjyu95"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>posts </a><a class=menu-item href=/tags/>tags </a><a class=menu-item href=/categories/>category </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>posts</a><a class=menu-item href=/tags/ title>tags</a><a class=menu-item href=/categories/ title>category</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Gitea搭建</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://fjyu95.github.io/ title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>fjyu95</a></span>&nbsp;<span class=post-category>included in <a href=/categories/git%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw" aria-hidden=true></i>Git笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2025-04-11>2025-04-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;11523 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;23 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#文档>文档</a></li><li><a href=#安装二进制>安装（二进制）</a><ul><li><a href=#安装指导-gpt>安装指导 gpt</a></li><li><a href=#-gitea-简介>🧩 Gitea 简介</a></li><li><a href=#-环境准备>🧰 环境准备</a></li><li><a href=#-安装-gitea>🚀 安装 Gitea</a><ul><li><a href=#-第一步创建-gitea-用户>🔧 第一步：创建 Gitea 用户</a></li><li><a href=#-第二步下载-gitea>🔧 第二步：下载 Gitea</a></li><li><a href=#-第三步创建所需目录>🔧 第三步：创建所需目录</a></li><li><a href=#-第四步添加-systemd-服务开机自启>🔧 第四步：添加 Systemd 服务（开机自启）</a></li><li><a href=#-第五步启动服务>🔧 第五步：启动服务</a></li><li><a href=#-第六步访问-web-页面配置>✅ 第六步：访问 Web 页面配置</a></li></ul></li><li><a href=#-可选开放防火墙端口>🌐 可选：开放防火墙端口</a></li><li><a href=#-后续建议>🛡️ 后续建议</a></li><li><a href=#-如果你想>🧠 如果你想：</a></li><li><a href=#验证-gpg-签名><strong>验证 GPG 签名</strong></a><ul><li><a href=#命令解释>命令解释</a></li><li><a href=#-第一步>✅ 第一步：</a></li><li><a href=#-含义解释>🔍 含义解释：</a></li><li><a href=#-第二步>✅ 第二步：</a></li><li><a href=#-含义解释-1>🔍 含义解释：</a></li><li><a href=#-验证成功的样子>🎯 验证成功的样子：</a></li><li><a href=#-附gitea-官方签名者-gpg-指纹完整>🧱 附：Gitea 官方签名者 GPG 指纹（完整）</a></li><li><a href=#验证判断>验证判断</a></li><li><a href=#-验证信息解析>🧾 验证信息解析：</a></li><li><a href=#-关于警告信息>⚠️ 关于警告信息：</a></li><li><a href=#解释>解释：</a></li><li><a href=#-你可以做的事可选>🧠 你可以做的事（可选）：</a></li><li><a href=#-最终结论>✅ 最终结论：</a></li></ul></li></ul></li><li><a href=#faq>FAQ</a><ul><li><a href=#默认配置文件位置>默认配置文件位置</a></li><li><a href=#3000端口禁止访问>3000端口禁止访问</a><ul><li><a href=#方法一修改-gitea-监听地址><strong>方法一：修改 Gitea 监听地址</strong></a></li><li><a href=#方法二使用防火墙规则推荐组合方案><strong>方法二：使用防火墙规则（推荐组合方案）</strong></a></li><li><a href=#1-清除原有3000端口规则>1. 清除原有3000端口规则</a></li><li><a href=#2-设置新规则仅允许本机访问>2. 设置新规则（仅允许本机访问）</a></li><li><a href=#3-生效规则>3. 生效规则</a></li><li><a href=#方法三nginx-反向代理隔离生产环境推荐><strong>方法三：Nginx 反向代理隔离（生产环境推荐）</strong></a></li><li><a href=#验证配置效果><strong>验证配置效果</strong></a></li><li><a href=#补充安全措施><strong>补充安全措施</strong></a></li></ul></li><li><a href=#frp反向代理>frp反向代理</a><ul><li><a href=#基本配置>基本配置</a></li></ul></li><li><a href=#-一gitea-首次-web-页面配置完成后还能修改吗>📌 一、Gitea 首次 Web 页面配置完成后还能修改吗？</a><ul><li><a href=#-默认配置文件位置>📄 默认配置文件位置：</a></li><li><a href=#-你可以手动修改的内容>🔧 你可以手动修改的内容：</a></li></ul></li><li><a href=#-二如何通过-frp-将-gitea-局域网地址-192168xxxxxx3000-暴露到公网通过端口-2222>📌 二、如何通过 frp 将 Gitea 局域网地址 <code>192.168.xxx.xxx:3000</code> 暴露到公网（通过端口 <code>2222</code>）？</a><ul><li><a href=#-方案frp-端口映射tcp-代理>✅ 方案：frp 端口映射（TCP 代理）</a></li><li><a href=#-1-vps公网服务器配置-frpsini服务端>📌 1. VPS（公网服务器）配置 <code>frps.ini</code>（服务端）：</a></li><li><a href=#-2-局域网内运行-gitea-的机器配置-frpcini>📌 2. 局域网内运行 Gitea 的机器配置 <code>frpc.ini</code>：</a></li><li><a href=#-现在你就可以通过公网访问-gitea>🌐 现在，你就可以通过公网访问 Gitea：</a></li><li><a href=#-补充建议>🔐 补充建议：</a></li><li><a href=#阻止frp访问>阻止frp访问</a></li></ul></li><li><a href=#-关键点解释>💡 关键点解释</a></li><li><a href=#-禁用-frp-访问的真正解决方案>✅ 禁用 frp 访问的真正解决方案</a><ul><li><a href=#-方法一直接禁用-frpc-中对-gitea-的配置>✅ 方法一：直接禁用 frpc 中对 Gitea 的配置</a></li><li><a href=#-方法二ufw-屏蔽本机通过-lo-访问-3000-端口很硬核>✅ 方法二：UFW 屏蔽本机通过 <code>lo</code> 访问 3000 端口（很硬核）</a></li><li><a href=#-方法三iptables-精准阻断-frp-用户推荐中高级用户>✅ 方法三：iptables 精准阻断 frp 用户（推荐中高级用户）</a></li><li><a href=#-方法四gitea-配合-tokenip-检查>✅ 方法四：Gitea 配合 token/IP 检查</a></li></ul></li><li><a href=#-总结>✅ 总结</a><ul><li><a href=#frp白名单访问-gpt>frp白名单访问-gpt</a></li></ul></li><li><a href=#-方法一用-nginx-实现-ip-白名单--token-鉴权>✅ 方法一：用 Nginx 实现 IP 白名单 + Token 鉴权</a><ul><li><a href=#-step-1-安装-nginx如果没装>🔧 Step 1: 安装 Nginx（如果没装）</a></li><li><a href=#-step-2-配置-nginx-反向代理--ip-白名单--token-限制>🔧 Step 2: 配置 Nginx 反向代理 + IP 白名单 + Token 限制</a></li><li><a href=#-使用方式>✅ 使用方式：</a></li><li><a href=#-配置激活>🔁 配置激活</a></li></ul></li><li><a href=#-方法二在-gitea-之后nginx-或-frp-加自定义鉴权>✅ 方法二：在 Gitea 之后，Nginx 或 frp 加自定义鉴权</a><ul><li><a href=#-frpsini-支持用户密码认证不是-ip-白名单>💡 frps.ini 支持用户密码认证（不是 IP 白名单）</a></li></ul></li><li><a href=#-总结推荐>🚀 总结推荐</a><ul><li><a href=#frp白名单访问-qwen>frp白名单访问-qwen</a></li><li><a href=#1-frp-服务端配置白名单><strong>1. frp 服务端配置白名单</strong></a></li><li><a href=#11-限制客户端-ip><strong>1.1 限制客户端 IP</strong></a></li><li><a href=#12-限制代理端口><strong>1.2 限制代理端口</strong></a></li><li><a href=#2-gitea-应用层白名单><strong>2. Gitea 应用层白名单</strong></a></li><li><a href=#21-ip-白名单><strong>2.1 IP 白名单</strong></a></li><li><a href=#22-禁用匿名访问><strong>2.2 禁用匿名访问</strong></a></li><li><a href=#3-nginx-反向代理白名单可选><strong>3. Nginx 反向代理白名单（可选）</strong></a></li><li><a href=#4-防火墙规则ufw><strong>4. 防火墙规则（UFW）</strong></a></li><li><a href=#5-动态-ip-白名单高级><strong>5. 动态 IP 白名单（高级）</strong></a></li><li><a href=#51-frp-token-认证><strong>5.1 frp Token 认证</strong></a></li><li><a href=#52-自定义脚本验证><strong>5.2 自定义脚本验证</strong></a></li><li><a href=#6-日志与监控><strong>6. 日志与监控</strong></a></li><li><a href=#61-实时监控-frp-连接><strong>6.1 实时监控 frp 连接</strong></a></li><li><a href=#62-配置-fail2ban-防暴力破解><strong>6.2 配置 Fail2Ban 防暴力破解</strong></a></li><li><a href=#7-总结><strong>7. 总结</strong></a></li></ul></li><li><a href=#nginx反向代理>nginx反向代理</a><ul><li><a href=#ubuntu安装>ubuntu安装</a></li><li><a href=#centos7安装手动>centos7安装(手动)</a></li><li><a href=#配置方式对比>配置方式对比</a></li><li><a href=#方案-1nginx-安装在内网><strong>方案 1：Nginx 安装在内网</strong></a></li><li><a href=#架构描述><strong>架构描述</strong></a></li><li><a href=#适用场景><strong>适用场景</strong></a></li><li><a href=#配置示例><strong>配置示例</strong></a></li><li><a href=#方案-2nginx-安装在公网><strong>方案 2：Nginx 安装在公网</strong></a></li><li><a href=#架构描述-1><strong>架构描述</strong></a></li><li><a href=#适用场景-1><strong>适用场景</strong></a></li><li><a href=#配置示例-1><strong>配置示例</strong></a></li><li><a href=#对比两种方案><strong>对比两种方案</strong></a></li><li><a href=#推荐选择><strong>推荐选择</strong></a></li><li><a href=#总结><strong>总结</strong></a></li><li><a href=#自签名证书>自签名证书</a></li><li><a href=#一nginx-配置核心结论><strong>一、Nginx 配置核心结论</strong></a></li><li><a href=#二纯公网-ip-配置方案><strong>二、纯公网 IP 配置方案</strong></a></li><li><a href=#1-基础-http-配置示例><strong>1. 基础 HTTP 配置示例</strong></a></li><li><a href=#2-验证配置><strong>2. 验证配置</strong></a></li><li><a href=#3-访问方式><strong>3. 访问方式</strong></a></li><li><a href=#三潜在问题与解决方案><strong>三、潜在问题与解决方案</strong></a></li><li><a href=#四推荐改进方案><strong>四、推荐改进方案</strong></a></li><li><a href=#方案-1自签名证书--https><strong>方案 1：自签名证书 + HTTPS</strong></a></li><li><a href=#方案-2免费域名--let><strong>方案 2：免费域名 + Let&rsquo;s Encrypt</strong></a></li><li><a href=#五防火墙配置><strong>五、防火墙配置</strong></a></li><li><a href=#六性能对比><strong>六、性能对比</strong></a></li><li><a href=#七操作建议><strong>七、操作建议</strong></a></li><li><a href=#配置流程-deepseek>配置流程 deepseek</a></li><li><a href=#一架构说明>一、架构说明</a></li><li><a href=#二公网服务器配置centos>二、公网服务器配置（CentOS）</a></li><li><a href=#1-安装依赖>1. 安装依赖</a></li><li><a href=#2-安装配置-frp-服务端>2. 安装配置 frp 服务端</a></li><li><a href=#3-配置-systemd-服务>3. 配置 systemd 服务</a></li><li><a href=#4-防火墙开放端口>4. 防火墙开放端口</a></li><li><a href=#三nginx-配置ssl-反向代理>三、Nginx 配置（SSL 反向代理）</a></li><li><a href=#1-安装-nginx>1. 安装 Nginx</a></li><li><a href=#2-申请-ssl-证书lets-encrypt>2. 申请 SSL 证书（Let&rsquo;s Encrypt）</a></li><li><a href=#3-配置反向代理>3. 配置反向代理</a></li><li><a href=#四内网服务器配置gitea--frp-客户端>四、内网服务器配置（Gitea + frp 客户端）</a></li><li><a href=#1-安装-gitea>1. 安装 Gitea</a></li><li><a href=#2-配置-systemd-服务>2. 配置 systemd 服务</a></li><li><a href=#3-配置-frp-客户端>3. 配置 frp 客户端</a></li><li><a href=#4-配置客户端服务>4. 配置客户端服务</a></li><li><a href=#五gitea-关键配置>五、Gitea 关键配置</a></li><li><a href=#六验证与维护>六、验证与维护</a></li><li><a href=#1-服务状态检查>1. 服务状态检查</a></li><li><a href=#2-日志监控>2. 日志监控</a></li><li><a href=#3-防火墙状态检查>3. 防火墙状态检查</a></li><li><a href=#4-证书自动续签>4. 证书自动续签</a></li><li><a href=#七故障排查指南>七、故障排查指南</a></li><li><a href=#详细配置>详细配置</a></li><li><a href=#域名访问>域名访问</a></li><li><a href=#一核心思路><strong>一、核心思路</strong></a></li><li><a href=#二操作步骤><strong>二、操作步骤</strong></a></li><li><a href=#1-设置本地-dns-解析><strong>1. 设置本地 DNS 解析</strong></a></li><li><a href=#windows-系统>Windows 系统：</a></li><li><a href=#linuxmacos-系统>Linux/macOS 系统：</a></li><li><a href=#2-生成自签名证书><strong>2. 生成自签名证书</strong></a></li><li><a href=#3-配置-nginx><strong>3. 配置 Nginx</strong></a></li><li><a href=#4-调整-gitea-配置><strong>4. 调整 Gitea 配置</strong></a></li><li><a href=#三验证访问><strong>三、验证访问</strong></a></li><li><a href=#四高级配置可选><strong>四、高级配置（可选）</strong></a></li><li><a href=#1-内网-dns-服务器配置><strong>1. 内网 DNS 服务器配置</strong></a></li><li><a href=#2-证书信任配置消除浏览器警告><strong>2. 证书信任配置（消除浏览器警告）</strong></a></li><li><a href=#3-多域名支持><strong>3. 多域名支持</strong></a></li><li><a href=#五常见问题排查><strong>五、常见问题排查</strong></a></li><li><a href=#六生产环境建议><strong>六、生产环境建议</strong></a></li></ul></li><li><a href=#frp-vs-nginx>frp vs. nginx</a><ul><li><a href=#deepseek>deepseek</a></li><li><a href=#核心区别对比表><strong>核心区别对比表</strong></a></li><li><a href=#一功能定位差异><strong>一、功能定位差异</strong></a></li><li><a href=#nginx-反向代理><strong>Nginx 反向代理</strong></a></li><li><a href=#frp-反向代理><strong>frp 反向代理</strong></a></li><li><a href=#二安全模型对比><strong>二、安全模型对比</strong></a></li><li><a href=#nginx-安全增强><strong>Nginx 安全增强</strong></a></li><li><a href=#frp-安全考虑><strong>frp 安全考虑</strong></a></li><li><a href=#三性能表现差异><strong>三、性能表现差异</strong></a></li><li><a href=#四部署架构对比><strong>四、部署架构对比</strong></a></li><li><a href=#nginx-典型架构><strong>Nginx 典型架构</strong></a></li><li><a href=#frp-典型架构><strong>frp 典型架构</strong></a></li><li><a href=#五选型建议><strong>五、选型建议</strong></a></li><li><a href=#选择-nginx-当><strong>选择 Nginx 当</strong>：</a></li><li><a href=#选择-frp-当><strong>选择 frp 当</strong>：</a></li><li><a href=#混合方案最佳实践><strong>混合方案（最佳实践）</strong>：</a></li><li><a href=#六维护成本对比><strong>六、维护成本对比</strong></a></li><li><a href=#qwen>qwen</a></li><li><a href=#前提条件><strong>前提条件</strong></a></li><li><a href=#配置步骤><strong>配置步骤</strong></a></li><li><a href=#场景-1nginx-与-gitea-在同一内网><strong>场景 1：Nginx 与 Gitea 在同一内网</strong></a></li><li><a href=#场景-2nginx-在公网gitea-在内网通过-frp-穿透><strong>场景 2：Nginx 在公网，Gitea 在内网（通过 frp 穿透）</strong></a></li><li><a href=#注意事项><strong>注意事项</strong></a></li><li><a href=#常见问题><strong>常见问题</strong></a></li><li><a href=#q1nginx-报错><strong>Q1：Nginx 报错 <code>502 Bad Gateway</code></strong></a></li><li><a href=#q2gitea-页面资源加载失败><strong>Q2：Gitea 页面资源加载失败</strong></a></li><li><a href=#总结-1><strong>总结</strong></a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h1 id=文档>文档</h1><p><a href=https://docs.gitea.com/zh-cn/category/installation target=_blank rel="noopener noreffer">https://docs.gitea.com/zh-cn/category/installation</a></p><p><a href=https://dl.gitea.com/gitea/1.23.7/ target=_blank rel="noopener noreffer">https://dl.gitea.com/gitea/1.23.7/</a></p><h1 id=安装二进制>安装（二进制）</h1><p><a href=https://docs.gitea.com/zh-cn/installation/install-from-binary target=_blank rel="noopener noreffer">https://docs.gitea.com/zh-cn/installation/install-from-binary</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 环境准备</span>
+</span></span><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install git wget sqlite3 -y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># gitea下载</span>
+</span></span><span class=line><span class=cl>wget -O gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64 <span class=c1># -O write documents to FILE</span>
+</span></span><span class=line><span class=cl>wget gitea https://dl.gitea.com/gitea/1.23.7/gitea-1.23.7-linux-amd64.asc
+</span></span><span class=line><span class=cl>chmod +x gitea
+</span></span><span class=line><span class=cl>sudo cp gitea /usr/local/bin/gitea
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证GPG签名[可选]</span>
+</span></span><span class=line><span class=cl>gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2
+</span></span><span class=line><span class=cl>gpg --verify gitea-1.23.7-linux-amd64.asc gitea
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建工作路径</span>
+</span></span><span class=line><span class=cl>sudo mkdir -p /var/lib/gitea/<span class=o>{</span>custom,data,log<span class=o>}</span>
+</span></span><span class=line><span class=cl>sudo chown -R git:git /var/lib/gitea/
+</span></span><span class=line><span class=cl>sudo chmod -R <span class=m>750</span> /var/lib/gitea/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo mkdir /etc/gitea
+</span></span><span class=line><span class=cl>sudo chown root:git /etc/gitea
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>770</span> /etc/gitea
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 网页配置完成后执行</span>
+</span></span><span class=line><span class=cl>chmod <span class=m>750</span> /etc/gitea
+</span></span><span class=line><span class=cl>chmod <span class=m>640</span> /etc/gitea/app.ini
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建 Gitea 用户</span>
+</span></span><span class=line><span class=cl>sudo adduser <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   --system <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   --shell /bin/bash <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   --gecos <span class=s1>&#39;Git Version Control&#39;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   --group <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   --disabled-password <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   --home /home/git <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>   git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 添加 Systemd 服务（开机自启）   </span>
+</span></span><span class=line><span class=cl>sudo tee /etc/systemd/system/gitea.service &gt; /dev/null <span class=s>&lt;&lt; EOF
+</span></span></span><span class=line><span class=cl><span class=s>[Unit]
+</span></span></span><span class=line><span class=cl><span class=s>Description=Gitea (Git with a cup of tea)
+</span></span></span><span class=line><span class=cl><span class=s>After=syslog.target
+</span></span></span><span class=line><span class=cl><span class=s>After=network.target
+</span></span></span><span class=line><span class=cl><span class=s>Requires=network.target
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Service]
+</span></span></span><span class=line><span class=cl><span class=s>RestartSec=2s
+</span></span></span><span class=line><span class=cl><span class=s>Type=simple
+</span></span></span><span class=line><span class=cl><span class=s>User=git
+</span></span></span><span class=line><span class=cl><span class=s>Group=git
+</span></span></span><span class=line><span class=cl><span class=s>WorkingDirectory=/var/lib/gitea/
+</span></span></span><span class=line><span class=cl><span class=s>ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
+</span></span></span><span class=line><span class=cl><span class=s>Restart=always
+</span></span></span><span class=line><span class=cl><span class=s>Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Install]
+</span></span></span><span class=line><span class=cl><span class=s>WantedBy=multi-user.target
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动服务</span>
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now gitea
+</span></span><span class=line><span class=cl>sudo systemctl status gitea  <span class=c1># 检查服务状态</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 访问 Web 页面配置</span>
+</span></span><span class=line><span class=cl>打开浏览器访问：
+</span></span><span class=line><span class=cl>📎 http://&lt;你的服务器IP&gt;:3000
+</span></span><span class=line><span class=cl>/etc/gitea/app.ini <span class=c1># 配置文件默认路径</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 可选：开放防火墙端口</span>
+</span></span><span class=line><span class=cl>sudo ufw allow <span class=m>3000</span> <span class=c1># 或放在 Nginx 后面使用 80/443</span>
+</span></span><span class=line><span class=cl>sudo ufw status
+</span></span><span class=line><span class=cl>sudo systemctl restart gitea <span class=c1># 重启 Gitea	</span>
+</span></span></code></pre></div><h2 id=安装指导-gpt>安装指导 gpt</h2><p>下面是在 <strong>Ubuntu 上部署 Gitea（私有 Git 平台）</strong> 的超清晰步骤，轻量好用，适合个人和小团队，几十 MB 就能跑，几分钟搞定！💻🚀</p><hr><h2 id=-gitea-简介>🧩 Gitea 简介</h2><ul><li>类似 GitHub，支持私有仓库、Web 界面、SSH/HTTP 访问、权限控制</li><li>极轻量（一个二进制文件），超适合自用</li><li>官网：<a href=https://gitea.io/ target=_blank rel="noopener noreffer">https://gitea.io</a></li></ul><hr><h2 id=-环境准备>🧰 环境准备</h2><p>建议系统：Ubuntu 20.04+</p><p>你只需要安装以下：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install git wget sqlite3 -y
+</span></span></code></pre></div><blockquote><p>默认用 SQLite 存数据库（轻量），也支持 MySQL / PostgreSQL。</p></blockquote><hr><h2 id=-安装-gitea>🚀 安装 Gitea</h2><h3 id=-第一步创建-gitea-用户>🔧 第一步：创建 Gitea 用户</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo adduser <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --system <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --shell /bin/bash <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --gecos <span class=s1>&#39;Git Version Control&#39;</span> <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --group <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --disabled-password <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --home /home/git <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  git
+</span></span></code></pre></div><hr><h3 id=-第二步下载-gitea>🔧 第二步：下载 Gitea</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget -O gitea https://dl.gitea.io/gitea/latest/gitea-linux-amd64
+</span></span><span class=line><span class=cl>chmod +x gitea
+</span></span><span class=line><span class=cl>sudo mv gitea /usr/local/bin/gitea
+</span></span></code></pre></div><hr><h3 id=-第三步创建所需目录>🔧 第三步：创建所需目录</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mkdir -p /var/lib/gitea/<span class=o>{</span>custom,data,log<span class=o>}</span>
+</span></span><span class=line><span class=cl>sudo chown -R git:git /var/lib/gitea/
+</span></span><span class=line><span class=cl>sudo chmod -R <span class=m>750</span> /var/lib/gitea/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo mkdir /etc/gitea
+</span></span><span class=line><span class=cl>sudo chown root:git /etc/gitea
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>770</span> /etc/gitea
+</span></span></code></pre></div><hr><h3 id=-第四步添加-systemd-服务开机自启>🔧 第四步：添加 Systemd 服务（开机自启）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo tee /etc/systemd/system/gitea.service &gt; /dev/null <span class=s>&lt;&lt; EOF
+</span></span></span><span class=line><span class=cl><span class=s>[Unit]
+</span></span></span><span class=line><span class=cl><span class=s>Description=Gitea (Git with a cup of tea)
+</span></span></span><span class=line><span class=cl><span class=s>After=syslog.target
+</span></span></span><span class=line><span class=cl><span class=s>After=network.target
+</span></span></span><span class=line><span class=cl><span class=s>Requires=network.target
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Service]
+</span></span></span><span class=line><span class=cl><span class=s>RestartSec=2s
+</span></span></span><span class=line><span class=cl><span class=s>Type=simple
+</span></span></span><span class=line><span class=cl><span class=s>User=git
+</span></span></span><span class=line><span class=cl><span class=s>Group=git
+</span></span></span><span class=line><span class=cl><span class=s>WorkingDirectory=/var/lib/gitea/
+</span></span></span><span class=line><span class=cl><span class=s>ExecStart=/usr/local/bin/gitea web --config /etc/gitea/app.ini
+</span></span></span><span class=line><span class=cl><span class=s>Restart=always
+</span></span></span><span class=line><span class=cl><span class=s>Environment=USER=git HOME=/home/git GITEA_WORK_DIR=/var/lib/gitea
+</span></span></span><span class=line><span class=cl><span class=s>
+</span></span></span><span class=line><span class=cl><span class=s>[Install]
+</span></span></span><span class=line><span class=cl><span class=s>WantedBy=multi-user.target
+</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
+</span></span></code></pre></div><hr><h3 id=-第五步启动服务>🔧 第五步：启动服务</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl daemon-reexec
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now gitea
+</span></span></code></pre></div><hr><h3 id=-第六步访问-web-页面配置>✅ 第六步：访问 Web 页面配置</h3><p>打开浏览器访问：</p><p>📎 <code>http://&lt;你的服务器IP>:3000</code></p><p>首次进入安装界面，填写：</p><ul><li>数据库：SQLite（默认）</li><li>仓库路径：<code>/var/lib/gitea/data/gitea-repositories</code></li><li>应用路径：<code>/usr/local/bin/gitea</code></li><li>配置文件：<code>/etc/gitea/app.ini</code></li><li>管理员账户：设置你自己的用户名和密码</li></ul><hr><h2 id=-可选开放防火墙端口>🌐 可选：开放防火墙端口</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo ufw allow <span class=m>3000</span>
+</span></span></code></pre></div><p>或放在 Nginx 后面使用 80/443</p><hr><h2 id=-后续建议>🛡️ 后续建议</h2><table><thead><tr><th>操作</th><th>命令</th></tr></thead><tbody><tr><td>重启 Gitea</td><td><code>sudo systemctl restart gitea</code></td></tr><tr><td>查看日志</td><td><code>journalctl -u gitea -f</code></td></tr><tr><td>Gitea 配置文件</td><td><code>/etc/gitea/app.ini</code></td></tr><tr><td>仓库存储路径</td><td><code>/var/lib/gitea/data/gitea-repositories</code></td></tr></tbody></table><hr><h2 id=-如果你想>🧠 如果你想：</h2><ul><li>用 HTTPS → 可用 Nginx 反代 + Let&rsquo;s Encrypt</li><li>数据库持久化 → 换成 MySQL/PostgreSQL</li><li>多人协作 → 管理用户、组织、权限分组</li></ul><p>我可以继续帮你一步步配置。</p><hr><p>需要我给你配一份 <strong>Nginx + 域名 + SSL 的完整配置脚本</strong> 吗？或者直接封装为 Docker 方案？也可以！</p><h2 id=验证-gpg-签名><strong>验证 GPG 签名</strong></h2><h3 id=命令解释>命令解释</h3><p>这两条命令是用来 <strong>验证 Gitea 安装文件 GPG 签名</strong> 的关键步骤。下面来一条一条地详细解释：</p><hr><h3 id=-第一步>✅ 第一步：</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>gpg --keyserver keys.openpgp.org --recv 7C9E68152594688862D62AF62D9AE806EC1592E2
+</span></span></code></pre></div><h3 id=-含义解释>🔍 含义解释：</h3><table><thead><tr><th>部分</th><th>说明</th></tr></thead><tbody><tr><td><code>gpg</code></td><td>GnuPG（GNU Privacy Guard）命令行工具，用于加密、解密、签名、验证等</td></tr><tr><td><code>--keyserver keys.openpgp.org</code></td><td>指定要从哪个 GPG 公钥服务器拉取密钥，这里是 <code>keys.openpgp.org</code></td></tr><tr><td><code>--recv</code></td><td>表示从服务器接收（导入）公钥</td></tr><tr><td><code>7C9E68152594688862D62AF62D9AE806EC1592E2</code></td><td>Gitea 官方发布签名所用的 GPG 公钥的 Key ID（或者称 fingerprint）</td></tr></tbody></table><blockquote><p>📌 简单说，这条命令就是：从 GPG 公钥服务器下载 Gitea 发布者的签名公钥，以便之后能验证签名是否合法。</p></blockquote><hr><h3 id=-第二步>✅ 第二步：</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>gpg --verify gitea-1.23.7-linux-amd64.asc gitea-1.23.7-linux-amd64
+</span></span></code></pre></div><h3 id=-含义解释-1>🔍 含义解释：</h3><table><thead><tr><th>部分</th><th>说明</th></tr></thead><tbody><tr><td><code>gpg</code></td><td>调用 GnuPG 工具</td></tr><tr><td><code>--verify</code></td><td>表示“验证签名”</td></tr><tr><td><code>gitea-1.23.7-linux-amd64.asc</code></td><td>这是 Gitea 二进制的签名文件</td></tr><tr><td><code>gitea-1.23.7-linux-amd64</code></td><td>这是被签名的主程序（二进制文件）</td></tr></tbody></table><blockquote><p>📌 这条命令是：用刚导入的 GPG 公钥去验证 .asc 文件中的签名是否与下载的 Gitea 主程序一致、未被篡改。</p></blockquote><hr><h3 id=-验证成功的样子>🎯 验证成功的样子：</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>gpg: Signature made ... using RSA key ...
+</span></span><span class=line><span class=cl>gpg: Good signature from <span class=s2>&#34;Gitea &lt;gitea@...&gt;&#34;</span> <span class=o>[</span>unknown<span class=o>]</span>
+</span></span></code></pre></div><p>✅ 表示签名合法、文件没被篡改。</p><hr><h3 id=-附gitea-官方签名者-gpg-指纹完整>🧱 附：Gitea 官方签名者 GPG 指纹（完整）</h3><pre tabindex=0><code>7C9E 6815 2594 6888 62D6 2AF6 2D9A E806 EC15 92E2
+</code></pre><p>来自 Gitea 官方的发布者：<a href=https://gitea.com/gitea/gitea/releases target=_blank rel="noopener noreffer">https://gitea.com/gitea/gitea/releases</a></p><hr><p>如果你还想：</p><ul><li>验证 GPG 公钥的安全性（比如从多个渠道比对指纹）</li><li>把这套流程写入自动脚本</li><li>用 Docker 镜像签名验证方式</li></ul><p>我也可以继续帮你整理 ✅</p><h3 id=验证判断>验证判断</h3><p>是的 ✅，你这次 GPG 验证是 <strong>成功的</strong>，下面来详细拆解一下输出：</p><hr><h3 id=-验证信息解析>🧾 验证信息解析：</h3><pre tabindex=0><code>gpg: Signature made 2025年04月08日 星期二 03时26分24秒 CST
+gpg:                using RSA key CC64B1DB67ABBEECAB24B6455FC346329753F4B0
+gpg: Good signature from &#34;Teabot &lt;teabot@gitea.io&gt;&#34; [unknown]
+</code></pre><ul><li>✅ <strong>“Good signature”</strong> 是关键：表示签名文件确实是用该 GPG 密钥对你下载的文件签名的，并且验证通过。</li><li>🔑 使用的子密钥 <code>CC64...F4B0</code> 正是 Gitea 发布公钥的<strong>子密钥</strong>，用于代码签名。</li></ul><hr><h3 id=-关于警告信息>⚠️ 关于警告信息：</h3><pre tabindex=0><code>gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+</code></pre><h3 id=解释>解释：</h3><p>这段提示的意思是：</p><ul><li>你 <strong>尚未信任（sign）这个公钥</strong>，所以 GPG 无法判断“Teabot <a href=mailto:teabot@gitea.io rel>teabot@gitea.io</a>”这个身份是否可信。</li><li>不影响验证正确性，只是提醒你：<strong>你要自己确认该密钥是不是 Gitea 官方的密钥</strong>。</li></ul><blockquote><p>就像朋友微信发你文件，你可以验证是朋友账号发的，但 GPG 不知道这账号是不是你朋友，除非你自己点“信任”。</p></blockquote><hr><h3 id=-你可以做的事可选>🧠 你可以做的事（可选）：</h3><p>如果你已经确认这个 Key 是 Gitea 官方提供的，可以把这个密钥标记为“信任”：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>gpg --edit-key 7C9E68152594688862D62AF62D9AE806EC1592E2
+</span></span></code></pre></div><p>然后输入：</p><pre tabindex=0><code>trust
+</code></pre><p>根据提示输入 <code>5</code>（完全信任），然后保存退出。</p><p>save保存</p><hr><h3 id=-最终结论>✅ 最终结论：</h3><p>你这次的输出说明：</p><table><thead><tr><th>验证项</th><th>状态</th></tr></thead><tbody><tr><td>签名合法</td><td>✅ 成功</td></tr><tr><td>文件完整性</td><td>✅ 未被篡改</td></tr><tr><td>签名者身份可信</td><td>⚠️ 由你手动确认（推荐从官网/多渠道比对 fingerprint）</td></tr></tbody></table><hr><p>需要我帮你写一个自动化的验证脚本吗？一条命令就能验证 + 提示签名情况那种 🛠️</p><h1 id=faq>FAQ</h1><h2 id=默认配置文件位置>默认配置文件位置</h2><p>/etc/gitea/app.ini</p><h2 id=3000端口禁止访问>3000端口禁止访问</h2><p>以下是限制 Gitea 3000 端口仅允许本地访问的解决方案：</p><hr><h3 id=方法一修改-gitea-监听地址><strong>方法一：修改 Gitea 监听地址</strong></h3><ol><li>编辑配置文件</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/gitea/app.ini
+</span></span></code></pre></div><ol><li>修改服务器配置段</li></ol><pre tabindex=0><code>[server]
+HTTP_ADDR = 127.0.0.1  # 原为 0.0.0.0
+HTTP_PORT = 3000
+</code></pre><ol><li>重启服务生效</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart gitea
+</span></span></code></pre></div><hr><h3 id=方法二使用防火墙规则推荐组合方案><strong>方法二：使用防火墙规则（推荐组合方案）</strong></h3><h3 id=1-清除原有3000端口规则>1. 清除原有3000端口规则</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo ufw delete allow <span class=m>3000</span>
+</span></span></code></pre></div><h3 id=2-设置新规则仅允许本机访问>2. 设置新规则（仅允许本机访问）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo ufw allow from 127.0.0.1 to any port <span class=m>3000</span>
+</span></span><span class=line><span class=cl>sudo ufw deny <span class=m>3000</span>  <span class=c1># 明确拒绝其他访问</span>
+</span></span></code></pre></div><h3 id=3-生效规则>3. 生效规则</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo ufw reload
+</span></span></code></pre></div><hr><h3 id=方法三nginx-反向代理隔离生产环境推荐><strong>方法三：Nginx 反向代理隔离（生产环境推荐）</strong></h3><ol><li>修改 Nginx 配置</li></ol><pre tabindex=0><code>server {
+    listen 80;
+    server_name localhost;  # 仅限本机访问
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:3000&gt;;
+        # 添加IP白名单（可选）
+        allow 192.168.1.100;  # 允许指定IP
+        deny all;
+    }
+}
+</code></pre><ol><li>禁用原3000端口外部访问</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo ufw deny <span class=m>3000</span>
+</span></span></code></pre></div><hr><h3 id=验证配置效果><strong>验证配置效果</strong></h3><ol><li>本地访问测试</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl 127.0.0.1:3000  <span class=c1># 应该正常响应</span>
+</span></span></code></pre></div><ol><li>局域网访问测试（其他机器）</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl 你的服务器内网IP:3000  <span class=c1># 应该返回连接拒绝</span>
+</span></span></code></pre></div><hr><h3 id=补充安全措施><strong>补充安全措施</strong></h3><ol><li>检查监听状态</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ss -tulpn <span class=p>|</span> grep <span class=m>3000</span>
+</span></span><span class=line><span class=cl><span class=c1># 正确应显示：tcp LISTEN 0 128 127.0.0.1:3000</span>
+</span></span></code></pre></div><ol><li>永久关闭 IP 转发（增强隔离）</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo sysctl -w net.ipv4.ip_forward<span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;net.ipv4.ip_forward = 0&#34;</span> <span class=p>|</span> sudo tee -a /etc/sysctl.conf
+</span></span></code></pre></div><hr><p><strong>注意事项</strong>：</p><ol><li>如果使用 SSH 端口转发访问，保持22端口开放</li><li>修改配置前建议备份 <code>app.ini</code> 文件</li><li>组合使用「方法一 + 方法二」能达到最佳隔离效果</li></ol><p>以上方案可使 Gitea 服务仅限本机访问，同时可通过 Nginx 配置选择性开放外部访问权限。</p><h2 id=frp反向代理>frp反向代理</h2><h3 id=基本配置>基本配置</h3><p><code>完成后还需云服务器放行</code></p><p><img class=lazyload src=/svg/loading.min.svg data-src=Gitea%201d2e4020f06080ff905ee0ba10dfeafa/image.png data-srcset="Gitea%201d2e4020f06080ff905ee0ba10dfeafa/image.png, Gitea%201d2e4020f06080ff905ee0ba10dfeafa/image.png 1.5x, Gitea%201d2e4020f06080ff905ee0ba10dfeafa/image.png 2x" data-sizes=auto alt=Gitea%201d2e4020f06080ff905ee0ba10dfeafa/image.png title=image.png></p><p>这两个问题我来一一给你详细讲清楚 👇</p><hr><h2 id=-一gitea-首次-web-页面配置完成后还能修改吗>📌 一、Gitea 首次 Web 页面配置完成后还能修改吗？</h2><ul><li>*可以的！**Gitea 的首次配置其实是写入到了配置文件中，<strong>修改这个配置文件就可以重新设置</strong>。</li></ul><h3 id=-默认配置文件位置>📄 默认配置文件位置：</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>/etc/gitea/app.ini
+</span></span></code></pre></div><blockquote><p>也可能在：/var/lib/gitea/custom/conf/app.ini，看你的运行参数或 systemd 配置。</p></blockquote><h3 id=-你可以手动修改的内容>🔧 你可以手动修改的内容：</h3><table><thead><tr><th>配置项</th><th>说明</th></tr></thead><tbody><tr><td><code>[server]</code></td><td>端口、域名、根URL、静态文件路径等</td></tr><tr><td><code>[database]</code></td><td>数据库类型、用户名、密码、连接方式等</td></tr><tr><td><code>[repository]</code></td><td>仓库根目录</td></tr><tr><td><code>[security]</code></td><td>安全策略、注册方式等</td></tr><tr><td><code>[admin]</code></td><td>默认管理员用户名等</td></tr></tbody></table><p>修改后，<strong>重启 Gitea 服务</strong> 生效：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart gitea
+</span></span></code></pre></div><hr><h2 id=-二如何通过-frp-将-gitea-局域网地址-192168xxxxxx3000-暴露到公网通过端口-2222>📌 二、如何通过 frp 将 Gitea 局域网地址 <code>192.168.xxx.xxx:3000</code> 暴露到公网（通过端口 <code>2222</code>）？</h2><h3 id=-方案frp-端口映射tcp-代理>✅ 方案：frp 端口映射（TCP 代理）</h3><p>假设你已经有公网 VPS（如 cloud server），frp 服务器端运行在 VPS 上，以下是配置流程：</p><hr><h3 id=-1-vps公网服务器配置-frpsini服务端>📌 1. VPS（公网服务器）配置 <code>frps.ini</code>（服务端）：</h3><pre tabindex=0><code>[common]
+bind_port = 7000
+</code></pre><p>启动 frps 服务端：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./frps -c ./frps.ini
+</span></span></code></pre></div><hr><h3 id=-2-局域网内运行-gitea-的机器配置-frpcini>📌 2. 局域网内运行 Gitea 的机器配置 <code>frpc.ini</code>：</h3><pre tabindex=0><code>[common]
+server_addr = &lt;你的公网IP&gt;
+server_port = 7000
+
+[gitea_web]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3000
+remote_port = 2222
+</code></pre><p>然后运行：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./frpc -c ./frpc.ini
+</span></span></code></pre></div><hr><h3 id=-现在你就可以通过公网访问-gitea>🌐 现在，你就可以通过公网访问 Gitea：</h3><pre tabindex=0><code>http://&lt;你的公网IP&gt;:2222
+</code></pre><p>就能访问你内网的 <code>http://192.168.x.x:3000</code> 上运行的 Gitea Web 页面啦 🚀</p><hr><h3 id=-补充建议>🔐 补充建议：</h3><ul><li><strong>不要在公网开放 Gitea 的 3000 端口作为最终入口</strong>，建议搭个反向代理（Nginx） + HTTPS。</li><li>或者加 frp 的 <a href=https://gofrp.org/docs/examples/https/ target=_blank rel="noopener noreffer">http</a> 模式配置，这样可以用域名+TLS。</li><li>配置强密码和注册权限（如禁用匿名注册）。</li></ul><hr><p>需要我帮你生成完整的 <code>frpc.ini</code> + <code>frps.ini</code> 文件模板吗？</p><p>或者配 Nginx 实现 <code>https://gitea.example.com</code> 的方式？✨</p><h3 id=阻止frp访问>阻止frp访问</h3><p>确实，即使你在 Gitea 的配置中设置：</p><pre tabindex=0><code>HTTP_ADDR = localhost
+</code></pre><p><strong>frp 依然可以访问</strong>。这是因为：</p><hr><h2 id=-关键点解释>💡 关键点解释</h2><p>frp 在本地启动 <code>frpc</code> 时，会把公网流量转发到 <code>127.0.0.1:3000</code>（或你设置的任意端口），这本质上就是在 <strong>本地直接访问 Gitea</strong>，和“外部访问”没区别。</p><p><strong><code>HTTP_ADDR = localhost</code></strong> 只是限制 Gitea 监听在本地回环接口（127.0.0.1），但 <strong>frp 就在本地，所以它仍然能访问这个地址</strong>！</p><hr><h2 id=-禁用-frp-访问的真正解决方案>✅ 禁用 frp 访问的真正解决方案</h2><p>要阻止 frp，还需要配合以下至少一种方法：</p><hr><h3 id=-方法一直接禁用-frpc-中对-gitea-的配置>✅ 方法一：直接禁用 frpc 中对 Gitea 的配置</h3><p>在 <code>frpc.ini</code> 中注释掉：</p><pre tabindex=0><code>#[gitea]
+#type = tcp
+#local_ip = 127.0.0.1
+#local_port = 3000
+#remote_port = 2222
+</code></pre><p>或者删除 <code>[gitea]</code> 配置块，重启 frpc 即失效：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./frpc -c ./frpc.ini
+</span></span></code></pre></div><hr><h3 id=-方法二ufw-屏蔽本机通过-lo-访问-3000-端口很硬核>✅ 方法二：UFW 屏蔽本机通过 <code>lo</code> 访问 3000 端口（很硬核）</h3><p>你可以用 <code>UFW</code> 明确禁止来自本地回环接口的访问：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo ufw deny in on lo to any port <span class=m>3000</span>
+</span></span></code></pre></div><p>这会阻止 frp 的转发（它走 lo）</p><blockquote><p>⚠️ 小心：这个设置可能也影响你本机访问 localhost:3000，要权衡使用。</p></blockquote><hr><h3 id=-方法三iptables-精准阻断-frp-用户推荐中高级用户>✅ 方法三：iptables 精准阻断 frp 用户（推荐中高级用户）</h3><p>你可以加一个规则：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo iptables -A INPUT -s 127.0.0.1 -p tcp --dport <span class=m>3000</span> -j DROP
+</span></span></code></pre></div><p>或者更高级的，检测是 <code>frpc</code> 的 PID 然后丢弃对应流量（但麻烦）。</p><hr><h3 id=-方法四gitea-配合-tokenip-检查>✅ 方法四：Gitea 配合 token/IP 检查</h3><p>这个偏曲线救国。你可以用：</p><ul><li><strong>反代限制 IP</strong>（例如用 Nginx 加 allow/deny）</li><li>或 Gitea 增加 middleware 做请求来源检查（较复杂）</li></ul><hr><h2 id=-总结>✅ 总结</h2><table><thead><tr><th>方法</th><th>是否推荐</th><th>说明</th></tr></thead><tbody><tr><td>修改 <code>frpc.ini</code> 禁用转发</td><td>✅ 强烈推荐</td><td>最直接</td></tr><tr><td><code>ufw deny in on lo to port 3000</code></td><td>✅ 小心使用</td><td>局部拦截 frp</td></tr><tr><td><code>iptables</code> 限制 lo 流量</td><td>✅ 精细粒度</td><td>更高级做法</td></tr><tr><td>Gitea IP 白名单或 Token 检查</td><td>⚠️ 可选</td><td>需自行开发或配置</td></tr></tbody></table><hr><p>如果你希望继续使用 frp 但只允许某个特定 IP 或时间段可以访问，也可以告诉我，我来帮你设计个动态方案 🚀</p><h3 id=frp白名单访问-gpt>frp白名单访问-gpt</h3><p>Gitea 本身没有内置“IP 白名单或 Token 检查访问控制”功能（例如：不登录就拦 IP），但你可以通过 <strong>外部 Web 服务器（如 Nginx）</strong> 配合使用，或者通过 <strong>反向代理 Token 验证脚本</strong> 实现你想要的目标。</p><p>我下面给出两种方式：</p><hr><h2 id=-方法一用-nginx-实现-ip-白名单--token-鉴权>✅ 方法一：用 Nginx 实现 IP 白名单 + Token 鉴权</h2><p>这是最实用也最可控的方案，<strong>拦截在 Gitea 之前，不用改动 Gitea 本体</strong>。</p><hr><h3 id=-step-1-安装-nginx如果没装>🔧 Step 1: 安装 Nginx（如果没装）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install nginx
+</span></span></code></pre></div><hr><h3 id=-step-2-配置-nginx-反向代理--ip-白名单--token-限制>🔧 Step 2: 配置 Nginx 反向代理 + IP 白名单 + Token 限制</h3><p>编辑配置文件，例如：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/nginx/sites-available/gitea
+</span></span></code></pre></div><p>填入如下配置（例子仅保留必要部分）：</p><pre tabindex=0><code>server {
+    listen 80;
+    server_name your.domain.com;
+
+    # 允许本地和局域网访问
+    allow 127.0.0.1;
+    allow 192.168.0.0/16;
+
+    # 允许带特定Token的访问
+    if ($http_x_auth_token != &#34;your-secret-token&#34;) {
+        return 403;
+    }
+
+    deny all;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+</code></pre><hr><h3 id=-使用方式>✅ 使用方式：</h3><p>公网访问必须带上请求头：</p><pre tabindex=0><code>X-Auth-Token: your-secret-token
+</code></pre><p>否则直接 403。局域网用户和本地用户默认放行。</p><hr><h3 id=-配置激活>🔁 配置激活</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo ln -s /etc/nginx/sites-available/gitea /etc/nginx/sites-enabled/gitea
+</span></span><span class=line><span class=cl>sudo nginx -t
+</span></span><span class=line><span class=cl>sudo systemctl reload nginx
+</span></span></code></pre></div><hr><h2 id=-方法二在-gitea-之后nginx-或-frp-加自定义鉴权>✅ 方法二：在 Gitea 之后，Nginx 或 frp 加自定义鉴权</h2><p>这种方式你可以用 Nginx 的 <code>auth_request</code> 模块或直接在 frps 上加 Token 认证（但 frp 不支持精细 IP 控制，只支持用户鉴权）。</p><hr><h3 id=-frpsini-支持用户密码认证不是-ip-白名单>💡 frps.ini 支持用户密码认证（不是 IP 白名单）</h3><pre tabindex=0><code>[common]
+bind_port = 7000
+dashboard_port = 7500
+authentication_method = token
+token = your-secret-token
+</code></pre><p>但这个只防止“别人用 frpc 连接”，不能防止“别人访问你暴露出去的服务”。</p><hr><h2 id=-总结推荐>🚀 总结推荐</h2><table><thead><tr><th>方案</th><th>说明</th><th>推荐度</th></tr></thead><tbody><tr><td>Nginx 限制 IP + 请求头 Token</td><td>灵活、易控制，推荐</td><td>⭐⭐⭐⭐⭐</td></tr><tr><td>Gitea 插件或中间件开发</td><td>太麻烦</td><td>⭐</td></tr><tr><td>frps 限制 frpc 用户</td><td>不解决访问问题</td><td>⭐</td></tr></tbody></table><hr><p>如果你希望我为你自动生成一份适用于你环境的 Nginx 配置（含 IP 白名单 + Token 检查），可以告诉我：</p><ul><li>局域网允许的 IP 范围</li><li>是否用 HTTPS</li><li>想通过什么 Token 控制</li></ul><p>我可以直接写出来你就复制粘贴部署即可。需要吗？</p><h3 id=frp白名单访问-qwen>frp白名单访问-qwen</h3><p>以下是 <strong>Gitea 结合 frp 实现白名单访问</strong>的完整方案，涵盖网络层、应用层和认证层的访问控制：</p><hr><h3 id=1-frp-服务端配置白名单><strong>1. frp 服务端配置白名单</strong></h3><h3 id=11-限制客户端-ip><strong>1.1 限制客户端 IP</strong></h3><p>在 <code>frps.ini</code> 中配置允许连接的客户端 IP：</p><pre tabindex=0><code>[common]
+bind_port = 7000
+token = your_secure_token
+
+# 允许的客户端 IP 列表（用逗号分隔）
+allow_clients = 192.168.1.100,203.0.113.5
+</code></pre><h3 id=12-限制代理端口><strong>1.2 限制代理端口</strong></h3><p>仅允许特定端口被代理（如 Gitea 的 HTTP 和 SSH）：</p><pre tabindex=0><code>[common]
+allow_ports = 3000,22  # Gitea HTTP 和 SSH 端口
+</code></pre><hr><h3 id=2-gitea-应用层白名单><strong>2. Gitea 应用层白名单</strong></h3><h3 id=21-ip-白名单><strong>2.1 IP 白名单</strong></h3><p>在 <code>app.ini</code> 中配置允许访问 Gitea 的 IP：</p><pre tabindex=0><code>[security]
+ALLOWED_HOSTS = 127.0.0.1,192.168.1.0/24,your-trusted-ip
+INTERNAL_TOKEN = your_secure_token  # 强化内部通信
+</code></pre><h3 id=22-禁用匿名访问><strong>2.2 禁用匿名访问</strong></h3><p>强制用户登录后操作：</p><pre tabindex=0><code>[service]
+DISABLE_REGISTRATION = true
+REQUIRE_SIGNIN_VIEW = true
+</code></pre><hr><h3 id=3-nginx-反向代理白名单可选><strong>3. Nginx 反向代理白名单（可选）</strong></h3><p>如果通过 Nginx 暴露服务，添加 IP 限制：</p><pre tabindex=0><code>server {
+    listen 443 ssl;
+    server_name git.example.com;
+
+    # 允许的 IP 列表
+    allow 192.168.1.0/24;
+    allow 203.0.113.5;
+    deny all;
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:60080&gt;;  # frp 映射的本地端口
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+</code></pre><hr><h3 id=4-防火墙规则ufw><strong>4. 防火墙规则（UFW）</strong></h3><p>直接限制 frp 端口的访问源：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 允许信任的 IP 访问 frp 端口（7000）</span>
+</span></span><span class=line><span class=cl>sudo ufw allow from 192.168.1.100 to any port <span class=m>7000</span>
+</span></span><span class=line><span class=cl>sudo ufw allow from 203.0.113.5 to any port <span class=m>7000</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 拒绝其他所有 IP</span>
+</span></span><span class=line><span class=cl>sudo ufw deny 7000/tcp
+</span></span></code></pre></div><hr><h3 id=5-动态-ip-白名单高级><strong>5. 动态 IP 白名单（高级）</strong></h3><p>如果客户端 IP 动态变化，可通过以下方式实现动态认证：</p><h3 id=51-frp-token-认证><strong>5.1 frp Token 认证</strong></h3><p>在 <code>frpc.ini</code> 和 <code>frps.ini</code> 中配置强 Token：</p><pre tabindex=0><code># frps.ini（服务端）
+token = your_secure_token
+
+# frpc.ini（客户端）
+token = your_secure_token
+</code></pre><h3 id=52-自定义脚本验证><strong>5.2 自定义脚本验证</strong></h3><p>通过 <code>frp</code> 的 <code>http_auth</code> 或 <code>plugin</code> 功能实现动态验证：</p><pre tabindex=0><code># frpc.ini（客户端）
+[gitea-http]
+type = http
+local_port = 3000
+custom_domains = git.example.com
+http_user = user
+http_pwd = password  # 基础认证
+</code></pre><hr><h3 id=6-日志与监控><strong>6. 日志与监控</strong></h3><h3 id=61-实时监控-frp-连接><strong>6.1 实时监控 frp 连接</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看 frp 连接日志</span>
+</span></span><span class=line><span class=cl>tail -f /var/log/frps.log <span class=p>|</span> grep <span class=s2>&#34;login&#34;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 检查活跃连接</span>
+</span></span><span class=line><span class=cl>netstat -anp <span class=p>|</span> grep frp
+</span></span></code></pre></div><h3 id=62-配置-fail2ban-防暴力破解><strong>6.2 配置 Fail2Ban 防暴力破解</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 安装 Fail2Ban</span>
+</span></span><span class=line><span class=cl>sudo apt install fail2ban -y
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建自定义规则（/etc/fail2ban/filter.d/frp.conf）：</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>Definition<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>failregex</span> <span class=o>=</span> ^.*Failed to authenticate client.*from &lt;HOST&gt;.*$
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 配置 jail（/etc/fail2ban/jail.local）：</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>frp<span class=o>]</span>
+</span></span><span class=line><span class=cl><span class=nv>enabled</span> <span class=o>=</span> <span class=nb>true</span>
+</span></span><span class=line><span class=cl><span class=nv>port</span> <span class=o>=</span> <span class=m>7000</span>
+</span></span><span class=line><span class=cl><span class=nv>filter</span> <span class=o>=</span> frp
+</span></span><span class=line><span class=cl><span class=nv>logpath</span> <span class=o>=</span> /var/log/frps.log
+</span></span><span class=line><span class=cl><span class=nv>maxretry</span> <span class=o>=</span> <span class=m>3</span>
+</span></span><span class=line><span class=cl><span class=nv>bantime</span> <span class=o>=</span> <span class=m>3600</span>
+</span></span></code></pre></div><hr><h3 id=7-总结><strong>7. 总结</strong></h3><ul><li><strong>核心策略</strong>：<ul><li><strong>网络层</strong>：通过 frp 和防火墙限制 IP。</li><li><strong>应用层</strong>：Gitea 配置 <code>ALLOWED_HOSTS</code> 和认证。</li><li><strong>传输层</strong>：结合 HTTPS 和 Token 加密通信。</li></ul></li><li><strong>动态场景</strong>：使用 Token 或动态 DNS 实现非固定 IP 访问。</li></ul><p>根据实际需求选择组合方案，优先保障 <strong>最小权限原则</strong> 和 <strong>加密传输</strong>。</p><h2 id=nginx反向代理>nginx反向代理</h2><h3 id=ubuntu安装>ubuntu安装</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install nginx
+</span></span><span class=line><span class=cl>sudo vim /etc/nginx/sites-available/gitea
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 文件内容</span>
+</span></span><span class=line><span class=cl>server <span class=o>{</span>
+</span></span><span class=line><span class=cl>    listen 80<span class=p>;</span>
+</span></span><span class=line><span class=cl>    server_name git.example.com<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    location / <span class=o>{</span>
+</span></span><span class=line><span class=cl>        proxy_pass http://192.168.1.100:3000<span class=p>;</span>  <span class=c1># Gitea 内网地址</span>
+</span></span><span class=line><span class=cl>        proxy_set_header Host <span class=nv>$host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        proxy_set_header X-Real-IP <span class=nv>$remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        proxy_set_header X-Forwarded-For <span class=nv>$proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        proxy_set_header X-Forwarded-Proto <span class=nv>$scheme</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动配置</span>
+</span></span><span class=line><span class=cl>sudo ln -s /etc/nginx/sites-available/gitea /etc/nginx/sites-enabled/
+</span></span><span class=line><span class=cl>sudo nginx -t <span class=o>&amp;&amp;</span> sudo systemctl reload nginx
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 停止</span>
+</span></span><span class=line><span class=cl>sudo systemctl stop nginx
+</span></span></code></pre></div><h3 id=centos7安装手动>centos7安装(手动)</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>cat /etc/centos-release
+</span></span><span class=line><span class=cl>wget https://nginx.org/packages/centos/7/x86_64/RPMS/nginx-1.24.0-1.el7.ngx.x86_64.rpm
+</span></span><span class=line><span class=cl>sudo yum install -y pcre pcre-devel zlib zlib-devel openssl openssl-devel
+</span></span><span class=line><span class=cl>sudo yum install -y epel-release
+</span></span><span class=line><span class=cl>sudo yum install -y pcre2
+</span></span><span class=line><span class=cl>sudo rpm -ivh nginx-1.24.0-1.el7.ngx.x86_64.rpm
+</span></span><span class=line><span class=cl>nginx -V
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动</span>
+</span></span><span class=line><span class=cl>sudo systemctl start nginx
+</span></span><span class=line><span class=cl>sudo systemctl status nginx
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> nginx
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 验证</span>
+</span></span><span class=line><span class=cl>http://43.138.116.20/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 卸载</span>
+</span></span><span class=line><span class=cl>sudo rpm -e nginx
+</span></span></code></pre></div><h3 id=配置方式对比>配置方式对比</h3><p>在 <strong>Gitea + Nginx + frp</strong> 的配置中，Nginx 的安装位置（内网或公网）取决于具体的网络环境和需求。以下是两种常见的架构方案及其适用场景：</p><hr><h3 id=方案-1nginx-安装在内网><strong>方案 1：Nginx 安装在内网</strong></h3><h3 id=架构描述><strong>架构描述</strong></h3><ul><li><p><strong>Nginx</strong>：部署在内网，作为 Gitea 的反向代理。</p></li><li><p><strong>frp</strong>：将 Nginx 暴露到公网。</p></li><li><p><strong>流量路径</strong>：</p><pre tabindex=0><code>用户访问 --&gt; 公网 frp 服务端 --&gt; 内网 frp 客户端 --&gt; 内网 Nginx --&gt; 内网 Gitea
+</code></pre></li></ul><h3 id=适用场景><strong>适用场景</strong></h3><ul><li>内网服务器无法直接暴露到公网（如无公网 IP 或 NAT 环境）。</li><li>需要通过 frp 实现内网穿透。</li><li>希望在内网环境中集中管理反向代理（使用 Nginx）。</li></ul><h3 id=配置示例><strong>配置示例</strong></h3><ol><li><p><strong>内网 Nginx 配置</strong>：</p><pre tabindex=0><code>server {
+    listen 80;
+    server_name git.example.com;
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:3000&gt;;  # Gitea 默认端口
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</code></pre></li><li><p><strong>frp 客户端配置（<code>frpc.ini</code>）</strong>：</p><pre tabindex=0><code>[common]
+server_addr = your-frp-server.com  # 公网 frp 服务端地址
+server_port = 7000
+token = your_token
+
+[gitea-http]
+type = http
+local_ip = 127.0.0.1
+local_port = 80  # Nginx 监听的端口
+custom_domains = git.example.com
+</code></pre></li><li><p><strong>公网 frp 服务端配置（<code>frps.ini</code>）</strong>：</p><pre tabindex=0><code>[common]
+bind_port = 7000
+vhost_http_port = 80
+token = your_token
+</code></pre></li></ol><hr><h3 id=方案-2nginx-安装在公网><strong>方案 2：Nginx 安装在公网</strong></h3><h3 id=架构描述-1><strong>架构描述</strong></h3><ul><li><p><strong>Nginx</strong>：部署在公网服务器，作为反向代理。</p></li><li><p><strong>frp</strong>：将内网 Gitea 暴露到公网。</p></li><li><p><strong>流量路径</strong>：</p><pre tabindex=0><code>用户访问 --&gt; 公网 Nginx --&gt; 公网 frp 服务端 --&gt; 内网 frp 客户端 --&gt; 内网 Gitea
+</code></pre></li></ul><h3 id=适用场景-1><strong>适用场景</strong></h3><ul><li>内网服务器无法直接暴露到公网，但有一个公网服务器可用。</li><li>希望在公网服务器上统一管理 HTTPS 和反向代理（包括多个服务）。</li><li>需要在公网 Nginx 上配置 SSL 证书（如 Let&rsquo;s Encrypt）。</li></ul><h3 id=配置示例-1><strong>配置示例</strong></h3><ol><li><p><strong>frp 客户端配置（<code>frpc.ini</code>）</strong>：</p><pre tabindex=0><code>[common]
+server_addr = your-frp-server.com  # 公网 frp 服务端地址
+server_port = 7000
+token = your_token
+
+[gitea-http]
+type = http
+local_ip = 192.168.1.100  # 内网 Gitea 地址
+local_port = 3000
+remote_port = 60080  # 公网映射端口
+custom_domains = git.example.com
+</code></pre></li><li><p><strong>公网 Nginx 配置</strong>：</p><pre tabindex=0><code>server {
+    listen 80;
+    server_name git.example.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name git.example.com;
+
+    ssl_certificate /etc/letsencrypt/live/git.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/git.example.com/privkey.pem;
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:60080&gt;;  # frp 映射的本地端口
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</code></pre></li><li><p><strong>公网 frp 服务端配置（<code>frps.ini</code>）</strong>：</p><pre tabindex=0><code>[common]
+bind_port = 7000
+vhost_http_port = 60080
+token = your_token
+</code></pre></li></ol><hr><h3 id=对比两种方案><strong>对比两种方案</strong></h3><table><thead><tr><th><strong>维度</strong></th><th><strong>Nginx 在内网</strong></th><th><strong>Nginx 在公网</strong></th></tr></thead><tbody><tr><td><strong>适用场景</strong></td><td>内网环境复杂，需集中管理内网服务</td><td>公网服务器可直接托管 HTTPS 和代理</td></tr><tr><td><strong>HTTPS 配置</strong></td><td>HTTPS 需由 frp 或其他工具处理</td><td>HTTPS 可直接在公网 Nginx 上配置</td></tr><tr><td><strong>性能开销</strong></td><td>frp 转发 HTTP 流量，可能增加延迟</td><td>frp 仅转发到内网，公网 Nginx 处理 HTTPS</td></tr><tr><td><strong>维护难度</strong></td><td>内网和公网分别管理 Nginx 和 frp</td><td>公网统一管理 Nginx 和 frp</td></tr><tr><td><strong>灵活性</strong></td><td>更适合单一内网环境</td><td>更适合多服务统一暴露</td></tr></tbody></table><hr><h3 id=推荐选择><strong>推荐选择</strong></h3><ol><li><strong>优先选择 Nginx 在公网</strong>：<ul><li>如果有公网服务器，建议将 Nginx 部署在公网，便于统一管理 HTTPS 和反向代理。</li><li>此方案更符合现代 Web 服务的最佳实践。</li></ul></li><li><strong>选择 Nginx 在内网</strong>：<ul><li>如果没有公网服务器，或者希望在内网环境中集中管理所有服务。</li><li>此方案适用于完全隔离的内网环境。</li></ul></li></ol><hr><h3 id=总结><strong>总结</strong></h3><ul><li><strong>Nginx 在内网</strong>：适合内网环境复杂、需要集中管理反向代理的场景。</li><li><strong>Nginx 在公网</strong>：适合有公网服务器、需要统一管理 HTTPS 和多服务的场景。</li></ul><p>根据实际需求选择合适的架构，并确保配置的安全性和稳定性！</p><h3 id=自签名证书>自签名证书</h3><p>以下是关于 Nginx 配置是否必须使用域名和 SSL 的详细解答：</p><hr><h3 id=一nginx-配置核心结论><strong>一、Nginx 配置核心结论</strong></h3><ol><li><strong>不需要域名</strong>：可以直接使用公网 IP 进行访问</li><li><strong>不需要 SSL</strong>：可以仅使用 HTTP 协议</li><li><strong>但存在以下限制</strong>：<ul><li>无法使用 HTTPS 加密</li><li>浏览器会标记 HTTP 为「不安全」</li><li>部分现代 Web API 要求 HTTPS</li></ul></li></ol><hr><h3 id=二纯公网-ip-配置方案><strong>二、纯公网 IP 配置方案</strong></h3><h3 id=1-基础-http-配置示例><strong>1. 基础 HTTP 配置示例</strong></h3><pre tabindex=0><code># /etc/nginx/conf.d/ip.conf
+server {
+    listen 80;                  # 监听 80 端口
+    server_name _;              # 匹配所有域名/IP
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:3000&gt;;  # 转发到实际服务端口
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+}
+</code></pre><h3 id=2-验证配置><strong>2. 验证配置</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nginx -t          <span class=c1># 检查配置语法</span>
+</span></span><span class=line><span class=cl>sudo systemctl reload nginx  <span class=c1># 重载配置</span>
+</span></span></code></pre></div><h3 id=3-访问方式><strong>3. 访问方式</strong></h3><pre tabindex=0><code>&lt;http://你的公网IP&gt;
+</code></pre><hr><h3 id=三潜在问题与解决方案><strong>三、潜在问题与解决方案</strong></h3><table><thead><tr><th><strong>问题</strong></th><th><strong>表现</strong></th><th><strong>解决方案</strong></th></tr></thead><tbody><tr><td>浏览器安全警告</td><td>地址栏显示「不安全」</td><td>可忽略，不影响基础功能使用</td></tr><tr><td>ISP 屏蔽 80 端口</td><td>无法访问 HTTP 服务</td><td>改用非标准端口（如 8080）</td></tr><tr><td>敏感信息明文传输</td><td>密码/数据可能被截获</td><td>内网使用或临时测试可接受</td></tr><tr><td>无法使用部分 Web 功能</td><td>如地理位置 API、PWA 等功能受限</td><td>升级到 HTTPS</td></tr></tbody></table><hr><h3 id=四推荐改进方案><strong>四、推荐改进方案</strong></h3><h3 id=方案-1自签名证书--https><strong>方案 1：自签名证书 + HTTPS</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 生成自签名证书</span>
+</span></span><span class=line><span class=cl>sudo mkdir -p /etc/nginx/ssl
+</span></span><span class=line><span class=cl>sudo openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 <span class=se>\\</span>
+</span></span><span class=line><span class=cl>-keyout /etc/nginx/ssl/self.key <span class=se>\\</span>
+</span></span><span class=line><span class=cl>-out /etc/nginx/ssl/self.crt
+</span></span></code></pre></div><pre tabindex=0><code># Nginx 配置
+server {
+    listen 443 ssl;
+    server_name 你的公网IP;
+
+    ssl_certificate /etc/nginx/ssl/self.crt;
+    ssl_certificate_key /etc/nginx/ssl/self.key;
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:3000&gt;;
+    }
+}
+</code></pre><p><strong>访问方式</strong>：<code>https://你的公网IP</code>（需手动信任证书）</p><h3 id=方案-2免费域名--let><strong>方案 2：免费域名 + Let&rsquo;s Encrypt</strong></h3><ol><li>注册 <a href=https://www.duckdns.org/ target=_blank rel="noopener noreffer">DuckDNS</a> 获取免费子域名</li><li>使用 Certbot 自动获取证书：</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo certbot certonly --standalone -d 你的域名.duckdns.org
+</span></span></code></pre></div><ol><li>自动配置 HTTPS：</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo certbot --nginx -d 你的域名.duckdns.org
+</span></span></code></pre></div><hr><h3 id=五防火墙配置><strong>五、防火墙配置</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 开放 HTTP 端口</span>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --permanent --add-service<span class=o>=</span>http
+</span></span><span class=line><span class=cl><span class=c1># 或自定义端口（如 8080）</span>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --permanent --add-port<span class=o>=</span>8080/tcp
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --reload
+</span></span></code></pre></div><hr><h3 id=六性能对比><strong>六、性能对比</strong></h3><table><thead><tr><th><strong>指标</strong></th><th><strong>HTTP</strong></th><th><strong>HTTPS</strong></th></tr></thead><tbody><tr><td>连接速度</td><td>略快（无加密开销）</td><td>稍慢（TLS 握手）</td></tr><tr><td>安全性</td><td>数据明文传输</td><td>全流量加密</td></tr><tr><td>浏览器兼容性</td><td>所有浏览器支持</td><td>需要有效证书</td></tr><tr><td>SEO 排名</td><td>可能影响搜索排名</td><td>Google 优先索引 HTTPS</td></tr></tbody></table><hr><h3 id=七操作建议><strong>七、操作建议</strong></h3><ol><li><strong>临时测试/内网使用</strong><ul><li>直接使用 <code>http://公网IP</code>，无需额外配置</li></ul></li><li><strong>公网长期服务</strong><ul><li>至少使用自签名证书启用 HTTPS</li><li>最佳实践：注册免费域名 + Let&rsquo;s Encrypt 证书</li></ul></li><li><strong>敏感数据处理</strong><ul><li>必须使用可信 CA 签发的 SSL 证书</li></ul></li></ol><hr><p>通过以上方案，您可以根据实际需求灵活选择配置方式。对于生产环境，<strong>强烈建议使用域名 + HTTPS</strong> 以确保安全性和兼容性。</p><h3 id=配置流程-deepseek>配置流程 deepseek</h3><p>以下是基于 CentOS 系统的 <strong>Gitea + frp + Nginx</strong> 公网访问完整配置方案：</p><hr><h3 id=一架构说明>一、架构说明</h3><pre tabindex=0><code>用户浏览器
+   ↓ HTTPS
+[公网服务器] CentOS 7/8/9
+   ├─ Nginx（SSL 终端 + 反向代理）
+   └─ frp 服务端（frps）
+         ↓ 加密隧道
+[内网服务器]
+   ├─ Gitea（端口3000）
+   └─ frp 客户端（frpc）
+</code></pre><hr><h3 id=二公网服务器配置centos>二、公网服务器配置（CentOS）</h3><h3 id=1-安装依赖>1. 安装依赖</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 安装基础工具</span>
+</span></span><span class=line><span class=cl>sudo yum install -y wget git vim firewalld
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动防火墙</span>
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now firewalld
+</span></span></code></pre></div><h3 id=2-安装配置-frp-服务端>2. 安装配置 frp 服务端</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 下载最新版 frp</span>
+</span></span><span class=line><span class=cl>wget &lt;https://github.com/fatedier/frp/releases/download/v0.52.3/frp_0.52.3_linux_amd64.tar.gz&gt;
+</span></span><span class=line><span class=cl>tar -zxvf frp_*.tar.gz
+</span></span><span class=line><span class=cl>sudo mv frp_*/frps /usr/local/bin/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建配置文件</span>
+</span></span><span class=line><span class=cl>sudo mkdir -p /etc/frp
+</span></span><span class=line><span class=cl>sudo vim /etc/frp/frps.ini
+</span></span></code></pre></div><pre tabindex=0><code>[common]
+bind_port = 7000
+token = your_secure_token_123  # 自定义安全令牌
+allow_ports = 3000-4000       # 允许转发的端口范围
+
+# 启用仪表盘（可选）
+dashboard_port = 7500
+dashboard_user = admin
+dashboard_pwd = dashboard@123
+</code></pre><h3 id=3-配置-systemd-服务>3. 配置 systemd 服务</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vim /etc/systemd/system/frps.service
+</span></span></code></pre></div><pre tabindex=0><code>[Unit]
+Description=Frp Server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/frps -c /etc/frp/frps.ini
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now frps
+</span></span></code></pre></div><h3 id=4-防火墙开放端口>4. 防火墙开放端口</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo firewall-cmd --permanent --add-port<span class=o>=</span>7000/tcp   <span class=c1># frp服务端口</span>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --permanent --add-port<span class=o>=</span>80/tcp     <span class=c1># HTTP</span>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --permanent --add-port<span class=o>=</span>443/tcp    <span class=c1># HTTPS</span>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --permanent --add-port<span class=o>=</span>7500/tcp   <span class=c1># 仪表盘端口（可选）</span>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --reload
+</span></span></code></pre></div><hr><h3 id=三nginx-配置ssl-反向代理>三、Nginx 配置（SSL 反向代理）</h3><h3 id=1-安装-nginx>1. 安装 Nginx</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y epel-release
+</span></span><span class=line><span class=cl>sudo yum install -y nginx
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now nginx
+</span></span></code></pre></div><h3 id=2-申请-ssl-证书lets-encrypt>2. 申请 SSL 证书（Let&rsquo;s Encrypt）</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo yum install -y certbot python3-certbot-nginx
+</span></span><span class=line><span class=cl>sudo certbot certonly --nginx -d git.yourdomain.com
+</span></span></code></pre></div><p>证书将保存在：</p><p><code>/etc/letsencrypt/live/git.yourdomain.com/</code></p><h3 id=3-配置反向代理>3. 配置反向代理</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vim /etc/nginx/conf.d/gitea.conf
+</span></span></code></pre></div><pre tabindex=0><code>server {
+    listen 80;
+    server_name git.yourdomain.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name git.yourdomain.com;
+
+    ssl_certificate /etc/letsencrypt/live/git.yourdomain.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/git.yourdomain.com/privkey.pem;
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:8000&gt;;  # 转发到frp映射端口
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        # 可选：限制访问IP
+        # allow 192.168.1.0/24;
+        # deny all;
+    }
+}
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nginx -t <span class=o>&amp;&amp;</span> sudo systemctl reload nginx
+</span></span></code></pre></div><hr><h3 id=四内网服务器配置gitea--frp-客户端>四、内网服务器配置（Gitea + frp 客户端）</h3><h3 id=1-安装-gitea>1. 安装 Gitea</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建用户</span>
+</span></span><span class=line><span class=cl>sudo useradd -m -s /bin/bash git
+</span></span><span class=line><span class=cl>sudo su - git
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 下载安装</span>
+</span></span><span class=line><span class=cl>wget -O gitea &lt;https://dl.gitea.com/gitea/1.21.0/gitea-1.21.0-linux-amd64&gt;
+</span></span><span class=line><span class=cl>chmod +x gitea
+</span></span><span class=line><span class=cl>./gitea web -p <span class=m>3000</span>  <span class=c1># 测试运行</span>
+</span></span></code></pre></div><h3 id=2-配置-systemd-服务>2. 配置 systemd 服务</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vim /etc/systemd/system/gitea.service
+</span></span></code></pre></div><pre tabindex=0><code>[Unit]
+Description=Gitea
+After=network.target
+
+[Service]
+User=git
+Group=git
+WorkingDirectory=/home/git/
+ExecStart=/home/git/gitea web -c /home/git/custom/conf/app.ini
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now gitea
+</span></span></code></pre></div><h3 id=3-配置-frp-客户端>3. 配置 frp 客户端</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>wget &lt;https://github.com/fatedier/frp/releases/download/v0.52.3/frp_0.52.3_linux_amd64.tar.gz&gt;
+</span></span><span class=line><span class=cl>tar -zxvf frp_*.tar.gz
+</span></span><span class=line><span class=cl>sudo mv frp_*/frpc /usr/local/bin/
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo mkdir -p /etc/frp
+</span></span><span class=line><span class=cl>sudo vim /etc/frp/frpc.ini
+</span></span></code></pre></div><pre tabindex=0><code>[common]
+server_addr = 公网服务器IP
+server_port = 7000
+token = your_secure_token_123  # 与frps一致
+
+[gitea-http]
+type = tcp
+local_ip = 127.0.0.1
+local_port = 3000
+remote_port = 8000  # 对应Nginx的proxy_pass端口
+</code></pre><h3 id=4-配置客户端服务>4. 配置客户端服务</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo vim /etc/systemd/system/frpc.service
+</span></span></code></pre></div><pre tabindex=0><code>[Unit]
+Description=Frp Client
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/frpc -c /etc/frp/frpc.ini
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+</code></pre><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now frpc
+</span></span></code></pre></div><hr><h3 id=五gitea-关键配置>五、Gitea 关键配置</h3><pre tabindex=0><code># /home/git/custom/conf/app.ini
+[server]
+DOMAIN           = git.yourdomain.com
+HTTP_PORT        = 3000
+ROOT_URL         = &lt;https://git.yourdomain.com/&gt;
+</code></pre><hr><h3 id=六验证与维护>六、验证与维护</h3><h3 id=1-服务状态检查>1. 服务状态检查</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 公网服务器</span>
+</span></span><span class=line><span class=cl>sudo systemctl status frps nginx
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 内网服务器</span>
+</span></span><span class=line><span class=cl>sudo systemctl status frpc gitea
+</span></span></code></pre></div><h3 id=2-日志监控>2. 日志监控</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># frp服务端日志</span>
+</span></span><span class=line><span class=cl>journalctl -u frps -f
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Gitea访问日志</span>
+</span></span><span class=line><span class=cl>tail -f /home/git/gitea/log/gitea.log
+</span></span></code></pre></div><h3 id=3-防火墙状态检查>3. 防火墙状态检查</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo firewall-cmd --list-all  <span class=c1># CentOS</span>
+</span></span></code></pre></div><h3 id=4-证书自动续签>4. 证书自动续签</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo crontab -e
+</span></span><span class=line><span class=cl><span class=c1># 添加：</span>
+</span></span><span class=line><span class=cl><span class=m>0</span> <span class=m>3</span> * * * /usr/bin/certbot renew --quiet
+</span></span></code></pre></div><hr><h3 id=七故障排查指南>七、故障排查指南</h3><table><thead><tr><th><strong>现象</strong></th><th><strong>检查点</strong></th></tr></thead><tbody><tr><td>无法访问HTTPS</td><td>1. 检查证书路径是否正确<br>2. 确认443端口开放</td></tr><tr><td>frp连接失败</td><td>1. 验证token一致性<br>2. 检查7000端口连通性</td></tr><tr><td>Gitea显示IP错误</td><td>检查Nginx的<code>X-Forwarded-For</code>头是否正确传递</td></tr><tr><td>内网更新后外网不生效</td><td>重启frpc服务：<code>sudo systemctl restart frpc</code></td></tr></tbody></table><hr><p>通过以上配置，可实现内网Gitea服务通过公网Nginx的安全访问。此方案具备以下优势：</p><ol><li><strong>HTTPS加密</strong>：通过Let&rsquo;s Encrypt实现免费SSL</li><li><strong>安全隔离</strong>：内网服务不直接暴露公网</li><li><strong>高可维护性</strong>：使用systemd服务管理</li><li><strong>灵活扩展</strong>：可轻松添加更多内网服务穿透</li></ol><h3 id=详细配置>详细配置</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mkdir -p /etc/nginx/ssl
+</span></span><span class=line><span class=cl>sudo chmod <span class=m>700</span> /etc/nginx/ssl
+</span></span><span class=line><span class=cl>sudo openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>-keyout /etc/nginx/ssl/self.key <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>-out /etc/nginx/ssl/self.crt
+</span></span><span class=line><span class=cl><span class=c1>#填写信息时，Common Name 填写服务器 IP 或任意名称（如 gitea.local）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo vim /etc/nginx/conf.d/gitea.conf
+</span></span><span class=line><span class=cl><span class=c1># Nginx 配置1</span>
+</span></span><span class=line><span class=cl>server <span class=o>{</span>
+</span></span><span class=line><span class=cl>    listen <span class=m>443</span> ssl<span class=p>;</span>
+</span></span><span class=line><span class=cl>    server_name 你的公网IP<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    ssl_certificate /etc/nginx/ssl/self.crt<span class=p>;</span>
+</span></span><span class=line><span class=cl>    ssl_certificate_key /etc/nginx/ssl/self.key<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    location / <span class=o>{</span>
+</span></span><span class=line><span class=cl>        proxy_pass http://127.0.0.1:3000<span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=c1># Nginx 配置2</span>
+</span></span><span class=line><span class=cl>server <span class=o>{</span>
+</span></span><span class=line><span class=cl>    listen <span class=m>443</span> ssl<span class=p>;</span>
+</span></span><span class=line><span class=cl>    server_name 你的服务器IP<span class=p>;</span>  <span class=c1># 如 123.123.123.123</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    ssl_certificate /etc/nginx/ssl/self.crt<span class=p>;</span>
+</span></span><span class=line><span class=cl>    ssl_certificate_key /etc/nginx/ssl/self.key<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=c1># 加密协议配置</span>
+</span></span><span class=line><span class=cl>    ssl_protocols TLSv1.2 TLSv1.3<span class=p>;</span>
+</span></span><span class=line><span class=cl>    ssl_ciphers HIGH:!aNULL:!MD5<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    location / <span class=o>{</span>
+</span></span><span class=line><span class=cl>        proxy_pass http://127.0.0.1:8000<span class=p>;</span>  <span class=c1># 根据实际代理端口调整</span>
+</span></span><span class=line><span class=cl>        proxy_set_header Host <span class=nv>$host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        proxy_set_header X-Real-IP <span class=nv>$remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>server <span class=o>{</span>
+</span></span><span class=line><span class=cl>    listen 80<span class=p>;</span>
+</span></span><span class=line><span class=cl>    server_name 你的服务器IP<span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=m>301</span> https://<span class=nv>$host$request_uri</span><span class=p>;</span>  <span class=c1># HTTP 强制跳转 HTTPS</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># Nginx 配置3</span>
+</span></span><span class=line><span class=cl>server <span class=o>{</span>
+</span></span><span class=line><span class=cl>    listen 80<span class=p>;</span>
+</span></span><span class=line><span class=cl>    server_name git.yourdomain.com<span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=m>301</span> https://<span class=nv>$host$request_uri</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>server <span class=o>{</span>
+</span></span><span class=line><span class=cl>    listen <span class=m>443</span> ssl<span class=p>;</span>
+</span></span><span class=line><span class=cl>    server_name git.yourdomain.com<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    ssl_certificate /etc/letsencrypt/live/git.yourdomain.com/fullchain.pem<span class=p>;</span>
+</span></span><span class=line><span class=cl>    ssl_certificate_key /etc/letsencrypt/live/git.yourdomain.com/privkey.pem<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    location / <span class=o>{</span>
+</span></span><span class=line><span class=cl>        proxy_pass http://127.0.0.1:8000<span class=p>;</span>  <span class=c1># 转发到frp映射端口</span>
+</span></span><span class=line><span class=cl>        proxy_set_header Host <span class=nv>$host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        proxy_set_header X-Real-IP <span class=nv>$remote_addr</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        proxy_set_header X-Forwarded-For <span class=nv>$proxy_add_x_forwarded_for</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        proxy_set_header X-Forwarded-Proto <span class=nv>$scheme</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1># 可选：限制访问IP</span>
+</span></span><span class=line><span class=cl>        <span class=c1># allow 192.168.1.0/24;</span>
+</span></span><span class=line><span class=cl>        <span class=c1># deny all;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 如果需要 SSH 通过 Nginx 代理（可选）</span>
+</span></span><span class=line><span class=cl>server <span class=o>{</span>
+</span></span><span class=line><span class=cl>    listen 2222<span class=p>;</span>
+</span></span><span class=line><span class=cl>    server_name git.example.com<span class=p>;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    location / <span class=o>{</span>
+</span></span><span class=line><span class=cl>        proxy_pass http://127.0.0.1:2222<span class=p>;</span>  <span class=c1># frp 映射的 SSH 端口</span>
+</span></span><span class=line><span class=cl>        proxy_set_header Host <span class=nv>$host</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=o>}</span>
+</span></span><span class=line><span class=cl><span class=o>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 检查并重载配置</span>
+</span></span><span class=line><span class=cl>sudo nginx -t
+</span></span><span class=line><span class=cl>sudo systemctl reload nginx
+</span></span></code></pre></div><h3 id=域名访问>域名访问</h3><p><code>没有公共域名，只能局域网访问</code></p><p><strong>不要开代理！！！</strong></p><p><strong>不要开代理！！！</strong></p><p><strong>不要开代理！！！</strong></p><p>以下是使用 <strong>Common Name（自定义域名）</strong> 访问 Nginx + Gitea 服务的完整配置方案，无需公网 IP 和正式域名：</p><hr><h3 id=一核心思路><strong>一、核心思路</strong></h3><ol><li><strong>本地 DNS 解析</strong>：通过修改 hosts 文件或内网 DNS 服务器，将自定义域名（如 <code>gitea.local</code>）指向服务器 IP</li><li><strong>自签名证书</strong>：生成 Common Name 匹配自定义域名的证书</li><li><strong>Nginx 配置</strong>：基于域名配置反向代理和 SSL</li><li><strong>Gitea 配置</strong>：适配自定义域名</li></ol><hr><h3 id=二操作步骤><strong>二、操作步骤</strong></h3><h3 id=1-设置本地-dns-解析><strong>1. 设置本地 DNS 解析</strong></h3><h3 id=windows-系统>Windows 系统：</h3><ol><li><p>以管理员身份编辑文件：<code>C:\\Windows\\System32\\drivers\\etc\\hosts</code></p></li><li><p>添加记录：</p><pre tabindex=0><code>192.168.1.100  gitea.local  # 替换为你的服务器内网IP
+</code></pre></li></ol><h3 id=linuxmacos-系统>Linux/macOS 系统：</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/hosts
+</span></span><span class=line><span class=cl><span class=c1># 添加相同记录</span>
+</span></span></code></pre></div><h3 id=2-生成自签名证书><strong>2. 生成自签名证书</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mkdir -p /etc/nginx/ssl
+</span></span><span class=line><span class=cl>sudo openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 <span class=se>\\</span>
+</span></span><span class=line><span class=cl>-keyout /etc/nginx/ssl/gitea.key <span class=se>\\</span>
+</span></span><span class=line><span class=cl>-out /etc/nginx/ssl/gitea.crt
+</span></span></code></pre></div><ul><li><p><strong>关键填写项</strong>：</p><pre tabindex=0><code>Common Name (e.g. server FQDN) []:gitea.local  # 必须与访问域名一致
+</code></pre></li></ul><h3 id=3-配置-nginx><strong>3. 配置 Nginx</strong></h3><pre tabindex=0><code># /etc/nginx/conf.d/gitea.conf
+server {
+    listen 80;
+    server_name gitea.local;
+    return 301 https://$host$request_uri;  # HTTP 强制跳转 HTTPS
+}
+
+server {
+    listen 443 ssl;
+    server_name gitea.local;
+
+    ssl_certificate /etc/nginx/ssl/gitea.crt;
+    ssl_certificate_key /etc/nginx/ssl/gitea.key;
+
+    location / {
+        proxy_pass &lt;http://localhost:3000&gt;;  # Gitea 实际端口
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+</code></pre><p>验证并重载配置：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nginx -t <span class=o>&amp;&amp;</span> sudo systemctl reload nginx
+</span></span></code></pre></div><h3 id=4-调整-gitea-配置><strong>4. 调整 Gitea 配置</strong></h3><pre tabindex=0><code># /etc/gitea/app.ini
+[server]
+DOMAIN           = gitea.local
+ROOT_URL         = &lt;https://gitea.local/&gt;
+</code></pre><p>重启服务：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart gitea
+</span></span></code></pre></div><hr><h3 id=三验证访问><strong>三、验证访问</strong></h3><ol><li><p>浏览器访问：</p><p><code>https://gitea.local</code></p><ul><li>首次访问需手动信任证书（点击「高级」→「继续访问」）</li></ul></li><li><p>命令行测试：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -vk &lt;https://gitea.local&gt;
+</span></span><span class=line><span class=cl><span class=c1># -k 参数忽略证书验证</span>
+</span></span></code></pre></div></li></ol><hr><h3 id=四高级配置可选><strong>四、高级配置（可选）</strong></h3><h3 id=1-内网-dns-服务器配置><strong>1. 内网 DNS 服务器配置</strong></h3><p>如果有多台设备需要访问，可在路由器或内网 DNS 服务器添加记录：</p><pre tabindex=0><code>gitea.local  A  192.168.1.100
+</code></pre><h3 id=2-证书信任配置消除浏览器警告><strong>2. 证书信任配置（消除浏览器警告）</strong></h3><ul><li><p><strong>Windows</strong>：</p><p>双击 <code>gitea.crt</code> → 选择「安装证书」→ 存储位置选「本地计算机」→ 放入「受信任的根证书颁发机构」</p></li><li><p><strong>macOS</strong>：</p><p>双击证书 → 钥匙串访问 → 拖拽到「系统」钥匙串 → 右键选择「始终信任」</p></li><li><p><strong>Linux（Ubuntu）</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo cp gitea.crt /usr/local/share/ca-certificates/
+</span></span><span class=line><span class=cl>sudo update-ca-certificates
+</span></span></code></pre></div></li></ul><h3 id=3-多域名支持><strong>3. 多域名支持</strong></h3><p>生成证书时使用 SAN（主题备用名称）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo openssl req -x509 -nodes -days <span class=m>365</span> -newkey rsa:2048 <span class=se>\\</span>
+</span></span><span class=line><span class=cl>-keyout /etc/nginx/ssl/gitea.key <span class=se>\\</span>
+</span></span><span class=line><span class=cl>-out /etc/nginx/ssl/gitea.crt <span class=se>\\</span>
+</span></span><span class=line><span class=cl>-addext <span class=s2>&#34;subjectAltName = DNS:gitea.local, DNS:git.internal&#34;</span>
+</span></span></code></pre></div><hr><h3 id=五常见问题排查><strong>五、常见问题排查</strong></h3><table><thead><tr><th><strong>问题现象</strong></th><th><strong>排查方法</strong></th></tr></thead><tbody><tr><td>浏览器提示「证书无效」</td><td>检查证书 Common Name 是否与访问域名一致；确认客户端已信任证书</td></tr><tr><td>访问被重置</td><td>检查防火墙是否放行 443 端口；确认 Nginx 服务正常运行</td></tr><tr><td>页面样式错乱</td><td>检查 Gitea 的 <code>ROOT_URL</code> 配置是否正确；清除浏览器缓存</td></tr><tr><td>仅 HTTPS 无法访问</td><td>使用 <code>curl -v</code> 查看详细握手过程；检查 Nginx 错误日志 <code>/var/log/nginx/error.log</code></td></tr></tbody></table><hr><h3 id=六生产环境建议><strong>六、生产环境建议</strong></h3><ol><li><p><strong>正式域名替代</strong>：</p><p>购买廉价域名（如 <code>.xyz</code> 域名约 $1/年），使用 Let&rsquo;s Encrypt 免费证书：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo certbot --nginx -d yourdomain.xyz
+</span></span></code></pre></div></li><li><p><strong>DNS 服务选择</strong>：</p><ul><li>免费动态 DNS：DuckDNS、No-IP</li><li>商业 DNS：Cloudflare、阿里云 DNS</li></ul></li><li><p><strong>证书自动化管理</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 添加定时任务</span>
+</span></span><span class=line><span class=cl>sudo crontab -e
+</span></span><span class=line><span class=cl><span class=c1># 添加：</span>
+</span></span><span class=line><span class=cl><span class=m>0</span> <span class=m>3</span> * * * /usr/bin/certbot renew --quiet
+</span></span></code></pre></div></li></ol><hr><p>通过以上配置，即可通过自定义域名（如 <code>gitea.local</code>）安全访问内网服务，同时为后续扩展公网访问奠定基础。</p><h2 id=frp-vs-nginx>frp vs. nginx</h2><h3 id=deepseek>deepseek</h3><p>以下是 Gitea 使用 Nginx 和 frp 作为反向代理的主要区别及适用场景分析：</p><hr><h3 id=核心区别对比表><strong>核心区别对比表</strong></h3><table><thead><tr><th>特性</th><th>Nginx 反向代理</th><th>frp 反向代理</th></tr></thead><tbody><tr><td><strong>主要定位</strong></td><td>Web 服务器专用代理</td><td>内网穿透/多协议通用代理</td></tr><tr><td><strong>典型场景</strong></td><td>公网服务器直接暴露服务</td><td>内网服务通过公网中转暴露</td></tr><tr><td><strong>协议支持</strong></td><td>专注 HTTP/HTTPS/WebSocket</td><td>支持 TCP/UDP/HTTP/HTTPS 等多协议</td></tr><tr><td><strong>SSL 终端</strong></td><td>原生支持（Let&rsquo;s Encrypt 集成）</td><td>依赖客户端配置或外部证书</td></tr><tr><td><strong>性能优化</strong></td><td>连接池、缓存、Gzip 等高级优化</td><td>基础转发，无 Web 专用优化</td></tr><tr><td><strong>配置复杂度</strong></td><td>较高（需熟悉 Nginx 语法）</td><td>较低（INI 格式简单配置）</td></tr><tr><td><strong>安全性</strong></td><td>WAF 能力、访问控制、速率限制</td><td>依赖传输层加密（如 TLS）</td></tr><tr><td><strong>部署成本</strong></td><td>需公网服务器</td><td>需要公网服务器作为中转节点</td></tr></tbody></table><hr><h3 id=一功能定位差异><strong>一、功能定位差异</strong></h3><h3 id=nginx-反向代理><strong>Nginx 反向代理</strong></h3><ul><li><p><strong>核心能力</strong>：专业的 Web 服务流量管理</p></li><li><p><strong>典型用例</strong>：</p><pre tabindex=0><code># 示例：Gitea 的 HTTPS 代理配置
+server {
+    listen 443 ssl;
+    server_name git.yourdomain.com;
+
+    ssl_certificate /path/to/fullchain.pem;
+    ssl_certificate_key /path/to/privkey.pem;
+
+    location / {
+        proxy_pass &lt;http://localhost:3000&gt;;
+        proxy_set_header Host $host;
+    }
+}
+</code></pre></li><li><p><strong>优势场景</strong>：</p><ul><li>需要 HTTPS 加密</li><li>静态资源缓存加速</li><li>多服务共享 443 端口（基于域名路由）</li></ul></li></ul><h3 id=frp-反向代理><strong>frp 反向代理</strong></h3><ul><li><p><strong>核心能力</strong>：穿透 NAT/防火墙实现服务暴露</p></li><li><p><strong>典型用例</strong>：</p><pre tabindex=0><code># frps.ini（公网服务器配置）
+[common]
+bind_port = 7000
+
+# frpc.ini（内网服务器配置）
+[common]
+server_addr = x.x.x.x  # 公网服务器IP
+server_port = 7000
+
+[gitea]
+type = tcp
+local_port = 3000
+remote_port = 8000     # 通过公网IP:8000访问
+</code></pre></li><li><p><strong>优势场景</strong>：</p><ul><li>无公网 IP 的内网环境</li><li>快速临时测试环境搭建</li><li>需要暴露非 HTTP 服务（如 SSH）</li></ul></li></ul><hr><h3 id=二安全模型对比><strong>二、安全模型对比</strong></h3><h3 id=nginx-安全增强><strong>Nginx 安全增强</strong></h3><ol><li><p>SSL 终端加密</p></li><li><p>攻击防护：</p><pre tabindex=0><code># 限制请求频率
+limit_req_zone $binary_remote_addr zone=one:10m rate=10r/s;
+</code></pre></li><li><p>访问控制：</p><pre tabindex=0><code>location /admin {
+    allow 192.168.1.0/24;
+    deny all;
+}
+</code></pre></li></ol><h3 id=frp-安全考虑><strong>frp 安全考虑</strong></h3><ol><li><p>传输加密：</p><pre tabindex=0><code># frpc.ini
+[common]
+tls_enable = true  # 启用 TLS 加密
+</code></pre></li><li><p>Token 验证：</p><pre tabindex=0><code>[common]
+authentication_method = token
+token = your_secure_token
+</code></pre></li></ol><hr><h3 id=三性能表现差异><strong>三、性能表现差异</strong></h3><table><thead><tr><th>指标</th><th>Nginx</th><th>frp</th></tr></thead><tbody><tr><td>1000并发连接</td><td>内存消耗约 50MB</td><td>内存消耗约 80MB</td></tr><tr><td>数据压缩</td><td>支持 Gzip/Brotli</td><td>无原生压缩支持</td></tr><tr><td>长连接复用</td><td>Keep-Alive 优化</td><td>基础 TCP 连接保持</td></tr><tr><td>带宽利用率</td><td>智能缓冲机制</td><td>直通式转发</td></tr></tbody></table><hr><h3 id=四部署架构对比><strong>四、部署架构对比</strong></h3><h3 id=nginx-典型架构><strong>Nginx 典型架构</strong></h3><pre tabindex=0><code>互联网用户
+   ↓ HTTPS
+[Nginx 公网服务器] ←→ [Gitea 本地服务]
+</code></pre><h3 id=frp-典型架构><strong>frp 典型架构</strong></h3><pre tabindex=0><code>互联网用户
+   ↓ TCP/HTTP
+[frp 公网服务器] ←→ [frp 客户端] ←→ [Gitea 内网服务]
+</code></pre><hr><h3 id=五选型建议><strong>五、选型建议</strong></h3><h3 id=选择-nginx-当><strong>选择 Nginx 当</strong>：</h3><ol><li>服务直接部署在公网服务器</li><li>需要 HTTPS 证书自动续签</li><li>有 Web 高级功能需求（缓存/重定向/分流）</li></ol><h3 id=选择-frp-当><strong>选择 frp 当</strong>：</h3><ol><li>服务位于无公网 IP 的内网</li><li>需要快速暴露临时测试环境</li><li>需代理非 HTTP 协议（如 Git SSH）</li></ol><h3 id=混合方案最佳实践><strong>混合方案（最佳实践）</strong>：</h3><pre tabindex=0><code>互联网用户
+   ↓ HTTPS
+[Nginx 公网服务器] ←→ [frp 公网端]
+                        ↓ 加密隧道
+                     [frp 内网端] ←→ [Gitea 内网服务]
+</code></pre><ul><li><p><strong>优势</strong>：既有 HTTPS 终端，又实现内网穿透</p></li><li><p><strong>配置要点</strong>：</p><pre tabindex=0><code># Nginx 配置转发到 frp
+location / {
+    proxy_pass http://frp_public_server:8000;
+}
+</code></pre></li></ul><hr><h3 id=六维护成本对比><strong>六、维护成本对比</strong></h3><table><thead><tr><th>操作</th><th>Nginx</th><th>frp</th></tr></thead><tbody><tr><td>证书更新</td><td><code>certbot renew</code> 自动完成</td><td>需手动替换客户端证书</td></tr><tr><td>配置热重载</td><td><code>nginx -s reload</code> 无宕机</td><td>需重启 frpc 服务</td></tr><tr><td>日志分析</td><td>完善的 access.log 格式</td><td>需自行解析 frp 日志</td></tr><tr><td>监控集成</td><td>兼容 Prometheus/Grafana</td><td>需通过 API 自行采集指标</td></tr></tbody></table><hr><p><strong>最终决策树</strong>：</p><ol><li>服务是否在内网且无公网IP？<ul><li>是 → 必须使用 frp 或类似穿透工具</li><li>否 → 直接使用 Nginx</li></ul></li><li>是否需要高级 Web 功能？<ul><li>是 → Nginx 必选</li><li>否 → 根据协议类型选择</li></ul></li></ol><p>通过以上对比，可根据实际网络环境和功能需求选择最合适的代理方案。生产环境推荐优先使用 Nginx，穿透场景下用 frp 作为补充。</p><h3 id=qwen>qwen</h3><p><strong>是的，Nginx 可以直接反向代理到内网的 Gitea 服务器，但需满足以下条件：</strong></p><hr><h3 id=前提条件><strong>前提条件</strong></h3><ol><li><strong>网络连通性</strong><ul><li>Nginx 所在的服务器（如公网服务器或内网跳板机）能够访问 Gitea 服务器的内网地址和端口（如 <code>http://192.168.1.100:3000</code>）。</li><li>如果 Gitea 在完全隔离的内网（无任何公网暴露），需通过 <strong>内网穿透工具（如 frp、ngrok）</strong> 将 Gitea 服务映射到 Nginx 可访问的节点。</li></ul></li><li><strong>Gitea 配置</strong><ul><li>Gitea 的 <code>app.ini</code> 中需正确配置 <code>ROOT_URL</code> 为 Nginx 的域名（如 <code>https://git.example.com</code>）。</li><li>确保 Gitea 监听在内网地址（如 <code>HTTP_ADDR = 0.0.0.0</code> 或 <code>192.168.1.100</code>）。</li></ul></li></ol><hr><h3 id=配置步骤><strong>配置步骤</strong></h3><h3 id=场景-1nginx-与-gitea-在同一内网><strong>场景 1：Nginx 与 Gitea 在同一内网</strong></h3><pre tabindex=0><code>server {
+    listen 80;
+    server_name git.example.com;
+
+    location / {
+        proxy_pass &lt;http://192.168.1.100:3000&gt;;  # Gitea 内网地址
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+</code></pre><h3 id=场景-2nginx-在公网gitea-在内网通过-frp-穿透><strong>场景 2：Nginx 在公网，Gitea 在内网（通过 frp 穿透）</strong></h3><ol><li><p><strong>配置 frp 将内网 Gitea 映射到公网</strong></p><ul><li><p><strong>frpc.ini（客户端）</strong>：</p><pre tabindex=0><code>[gitea]
+type = http
+local_ip = 192.168.1.100
+local_port = 3000
+remote_port = 60080  # 公网服务器上的临时端口
+custom_domains = git.example.com
+</code></pre></li><li><p><strong>frps.ini（服务端）</strong>：</p><pre tabindex=0><code>bind_port = 7000
+vhost_http_port = 60080
+</code></pre></li></ul></li><li><p><strong>Nginx 反向代理到 frp 映射的端口</strong></p><pre tabindex=0><code>server {
+    listen 80;
+    server_name git.example.com;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl;
+    server_name git.example.com;
+    ssl_certificate /etc/letsencrypt/live/git.example.com/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/git.example.com/privkey.pem;
+
+    location / {
+        proxy_pass &lt;http://127.0.0.1:60080&gt;;  # frp 映射的本地端口
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+}
+</code></pre></li></ol><hr><h3 id=注意事项><strong>注意事项</strong></h3><ol><li><strong>SSL 证书</strong><ul><li>如果通过 HTTPS 访问，需在 Nginx 层配置 Let&rsquo;s Encrypt 证书（如使用 Certbot）。</li><li>Gitea 的 <code>app.ini</code> 中设置 <code>PROTOCOL = https</code>。</li></ul></li><li><strong>安全性</strong><ul><li>限制 Nginx 的访问源（如 <code>allow/deny</code> 规则）。</li><li>启用防火墙（如 UFW）仅允许必要端口。</li></ul></li><li><strong>性能优化</strong><ul><li><p>启用 Nginx 缓存：</p><pre tabindex=0><code>proxy_buffering on;
+proxy_cache my_cache;
+</code></pre></li><li><p>调整超时时间：</p><pre tabindex=0><code>proxy_read_timeout 300s;
+proxy_connect_timeout 60s;
+</code></pre></li></ul></li></ol><hr><h3 id=常见问题><strong>常见问题</strong></h3><h3 id=q1nginx-报错><strong>Q1：Nginx 报错 <code>502 Bad Gateway</code></strong></h3><ul><li><p><strong>原因</strong>：Nginx 无法连接到 Gitea 的内网地址。</p></li><li><p><strong>解决</strong>：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 测试内网连通性</span>
+</span></span><span class=line><span class=cl>curl &lt;http://192.168.1.100:3000&gt;
+</span></span><span class=line><span class=cl><span class=c1># 检查 Gitea 服务状态</span>
+</span></span><span class=line><span class=cl>systemctl status gitea
+</span></span></code></pre></div></li></ul><h3 id=q2gitea-页面资源加载失败><strong>Q2：Gitea 页面资源加载失败</strong></h3><ul><li><p><strong>原因</strong>：<code>ROOT_URL</code> 配置错误或未正确设置反向代理头。</p></li><li><p><strong>解决</strong>：</p><pre tabindex=0><code>[server]
+ROOT_URL = &lt;https://git.example.com/&gt;
+</code></pre></li></ul><hr><h3 id=总结-1><strong>总结</strong></h3><ul><li><strong>直接反向代理</strong>：适用于 Nginx 与 Gitea 在同一网络环境。</li><li><strong>内网穿透+反向代理</strong>：适用于 Gitea 在完全隔离的内网，需结合 frp 等工具。</li><li><strong>核心配置</strong>：确保网络可达性、正确设置 <code>proxy_pass</code> 和 <code>ROOT_URL</code>。</li></ul><p>根据实际网络环境选择方案，优先通过 HTTPS 保障安全性！</p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2025-04-13</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/ data-title=Gitea搭建 data-hashtags=git><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/ data-hashtag=git><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/ data-title=Gitea搭建><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/ data-title=Gitea搭建><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://fjyu95.github.io/posts/gitea-1d2e4020f06080ff905ee0ba10dfeafa/ data-title=Gitea搭建><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/git/>Git</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/gogs-1cee4020f06080249ec6d53c8d9ef2eb/ class=prev rel=prev title=gogs><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>gogs</a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2020 - 2025</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://fjyu95.github.io/ target=_blank>fjyu95</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>

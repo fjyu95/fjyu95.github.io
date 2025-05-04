@@ -1,0 +1,32 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Slam - Category - FangjieYu‘s site</title><link>https://fjyu95.github.io/categories/slam/</link><description>Slam - Category - FangjieYu‘s site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>907040864@qq.com (fjyu95)</managingEditor><webMaster>907040864@qq.com (fjyu95)</webMaster><lastBuildDate>Mon, 13 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://fjyu95.github.io/categories/slam/" rel="self" type="application/rss+xml"/><item><title>ROS</title><link>https://fjyu95.github.io/posts/ros-17ae4020f0608037ab9ce65eddd62e49/</link><pubDate>Mon, 13 Jan 2025 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/ros-17ae4020f0608037ab9ce65eddd62e49/</guid><description><![CDATA[<h1 id="教程文档">教程文档</h1>
+<p><a href="https://fishros.com/d2lros2/#/" target="_blank" rel="noopener noreffer ">https://fishros.com/d2lros2/#/</a></p>
+<p><a href="https://www.ncnynl.com/archives/201801/2251.html" target="_blank" rel="noopener noreffer ">https://www.ncnynl.com/archives/201801/2251.html</a></p>
+<p><a href="https://book.guyuehome.com/ROS2/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2_%E6%A6%82%E5%BF%B5%E6%80%BB%E8%A7%88/" target="_blank" rel="noopener noreffer ">https://book.guyuehome.com/ROS2/2.%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/2_%E6%A6%82%E5%BF%B5%E6%80%BB%E8%A7%88/</a></p>
+<p><a href="https://fishros.org/doc/ros2/humble/Concepts/Basic.html#" target="_blank" rel="noopener noreffer ">https://fishros.org/doc/ros2/humble/Concepts/Basic.html#</a></p>
+<p><a href="https://daobook.github.io/ros2-docs/xin/Tutorials/Understanding-ROS2-Nodes.html" target="_blank" rel="noopener noreffer ">https://daobook.github.io/ros2-docs/xin/Tutorials/Understanding-ROS2-Nodes.html</a></p>
+<h1 id="安装">安装</h1>
+<p><a href="https://blog.csdn.net/m0_64346597/article/details/126526791" target="_blank" rel="noopener noreffer ">https://blog.csdn.net/m0_64346597/article/details/126526791</a></p>
+<p><a href="https://d2lros2foxy.fishros.com/#/humble/chapt1/get_started/3.%E5%8A%A8%E6%89%8B%E5%AE%89%E8%A3%85ROS2" target="_blank" rel="noopener noreffer ">https://d2lros2foxy.fishros.com/#/humble/chapt1/get_started/3.%E5%8A%A8%E6%89%8B%E5%AE%89%E8%A3%85ROS2</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">wget http://fishros.com/install -O fishros <span class="o">&amp;&amp;</span> . fishros
+</span></span><span class="line"><span class="cl">有代理时不一定要换源，出现error后先n后y经测试可以安装成功
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">printenv <span class="p">|</span> grep -i ROS
+</span></span><span class="line"><span class="cl">ros2 run demo_nodes_cpp talker
+</span></span><span class="line"><span class="cl">ros2 run demo_nodes_py listener
+</span></span><span class="line"><span class="cl">ros2 topic list
+</span></span></code></pre></div><h1 id="核心概念">核心概念</h1>
+<p>在ROS 2（Robot Operating System 2）中，<strong>节点（Nodes）</strong>、<strong>消息（Messages）</strong> 和 <strong>主题（Topics）</strong> 是核心概念，它们共同构成了ROS 2的通信机制。理解这些概念对于开发和调试ROS 2系统至关重要。</p>]]></description></item><item><title>知识笔记</title><link>https://fjyu95.github.io/posts/summary-127e4020f060808da8e0f23caf646e39/</link><pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/summary-127e4020f060808da8e0f23caf646e39/</guid><description><![CDATA[<p>deep-learning、CV（2d、3d）、RS、optical</p>
+<h1 id="视觉slam">视觉slam</h1>
+<p><a href="https://wykxwyc.github.io/2019/03/21/Small-Talk/" target="_blank" rel="noopener noreffer ">https://wykxwyc.github.io/2019/03/21/Small-Talk/</a></p>
+<h2 id="视觉slam框架">视觉slam框架</h2>
+<p></p>
+<p>整个视觉 SLAM 流程包括以下步骤。</p>
+<ol>
+<li>传感器信息读取。在视觉 SLAM 中主要为相机图像信息的读取和预处理。如果是在机器人中，还可能有码盘、惯性传感器等信息的读取和同步。</li>
+<li>视觉里程计（Visual Odometry，VO）。视觉里程计的任务是<strong>估算相邻图像间相机的运动，以及局部地图的样子</strong>。VO 又称为前端（Front End）。</li>
+<li>后端优化（Optimization）。后端接受不同时刻视觉里程计测量的相机位姿，以及<strong>回环检测</strong>的信息，对它们进行<strong>优化，得到全局一致的轨迹和地图</strong>。由于接在 VO 之后，又称为后端（Back End）。</li>
+<li>回环检测（Loop Closing）。回环检测判断机器人是否到达过先前的位置。如果检测到回环，它会把信息提供给后端进行处理。</li>
+<li>建图（Mapping）。它根据估计的轨迹，建立与任务要求对应的地图。</li>
+</ol>
+<h2 id="数学基础">数学基础</h2>
+<p>向量一般默认指列向量</p>]]></description></item></channel></rss>

@@ -1,0 +1,162 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Docker - Tag - FangjieYu‘s site</title><link>https://fjyu95.github.io/tags/docker/</link><description>Docker - Tag - FangjieYu‘s site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>907040864@qq.com (fjyu95)</managingEditor><webMaster>907040864@qq.com (fjyu95)</webMaster><lastBuildDate>Mon, 17 Oct 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://fjyu95.github.io/tags/docker/" rel="self" type="application/rss+xml"/><item><title>docker</title><link>https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/</link><pubDate>Mon, 17 Oct 2022 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/</guid><description><![CDATA[<p><a href="https://www.notion.so/dockerfile-1e3e4020f060809ba1b0faec481beaa0?pvs=21" target="_blank" rel="noopener noreffer ">dockerfile</a></p>
+<p><a href="https://www.runoob.com/docker/docker-image-usage.html" target="_blank" rel="noopener noreffer ">https://www.runoob.com/docker/docker-image-usage.html</a></p>
+<p><a href="https://hub.docker.com/" target="_blank" rel="noopener noreffer ">https://hub.docker.com/</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 查看docker版本</span>
+</span></span><span class="line"><span class="cl">docker --version
+</span></span><span class="line"><span class="cl">docker -v
+</span></span><span class="line"><span class="cl">docker info <span class="p">|</span> grep <span class="s2">&#34;Storage Driver&#34;</span> <span class="c1"># 当前使用的存储驱动</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装</span>
+</span></span><span class="line"><span class="cl">sudo snap install docker <span class="c1"># 不推荐，可能有问题</span>
+</span></span><span class="line"><span class="cl">sudo apt update
+</span></span><span class="line"><span class="cl">sudo apt install docker.io
+</span></span><span class="line"><span class="cl">sudo systemctl start docker
+</span></span><span class="line"><span class="cl">sudo systemctl <span class="nb">enable</span> docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置用户组</span>
+</span></span><span class="line"><span class="cl">sudo groupadd docker <span class="c1"># 新增dockr组,安装后会有</span>
+</span></span><span class="line"><span class="cl">newgrp docker <span class="c1"># **切换用户的主组**，否则可能因为没有sudo权限运行不了docker命令</span>
+</span></span><span class="line"><span class="cl">getent group <span class="p">|</span> grep docker <span class="c1"># 查看组</span>
+</span></span><span class="line"><span class="cl">sudo usermod -aG docker <span class="nv">$USER</span> <span class="c1"># 组中添加成员</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看本机镜像</span>
+</span></span><span class="line"><span class="cl">docker images
+</span></span><span class="line"><span class="cl">docker images &lt;image_name&gt;
+</span></span><span class="line"><span class="cl">docker images --format <span class="s1">&#39;{{.Size}}\t{{.Repository}}:{{.Tag}}&#39;</span> <span class="p">|</span> sort -h <span class="c1"># 按大小排序</span>
+</span></span><span class="line"><span class="cl">docker images --no-trunc <span class="c1"># 非节点查看</span>
+</span></span><span class="line"><span class="cl">docker images -a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查找镜像</span>
+</span></span><span class="line"><span class="cl">我们可以从 Docker Hub 网站来搜索镜像，Docker Hub 网址为： https://hub.docker.com/
+</span></span><span class="line"><span class="cl">我们也可以使用 docker search 命令来搜索镜像。比如我们需要一个 httpd 的镜像来作为我们的 web 服务。我们可以通过 docker search 命令搜索 httpd 来寻找适合我们的镜像。
+</span></span><span class="line"><span class="cl">runoob@runoob:~$  docker search httpd
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 获取镜像</span>
+</span></span><span class="line"><span class="cl">docker pull &lt;image_name&gt;:&lt;tag&gt;
+</span></span><span class="line"><span class="cl">docker pull ubuntu <span class="c1">#默认标签docker pull ubuntu</span>
+</span></span><span class="line"><span class="cl">docker pull ubuntu:20.04
+</span></span><span class="line"><span class="cl">docker pull colmap/colmap
+</span></span><span class="line"><span class="cl">docker pull colmap/colmap:v3.7
+</span></span><span class="line"><span class="cl">docker pull hub-mirror.c.163.com/library/busybox:latest <span class="c1"># 指定镜像源</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 保存离线镜像并运行</span>
+</span></span><span class="line"><span class="cl">docker save -o &lt;image-name&gt;.tar &lt;image-name&gt;:&lt;tag&gt; <span class="c1"># 保存为 tar 文件</span>
+</span></span><span class="line"><span class="cl">docker save -o ubuntu.tar ubuntu:latest
+</span></span><span class="line"><span class="cl">docker load -i ubuntu.tar <span class="c1"># 可以使用docker images查看</span>
+</span></span><span class="line"><span class="cl">docker run -it ubuntu:latest /bin/bash
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动容器</span>
+</span></span><span class="line"><span class="cl">以下命令使用 ubuntu 镜像启动一个容器，参数为以命令行模式进入该容器：
+</span></span><span class="line"><span class="cl">$ docker run -it ubuntu /bin/bash
+</span></span><span class="line"><span class="cl">docker run -it tensorflow/tensorflow:1.15.5-gpu
+</span></span><span class="line"><span class="cl">id <span class="c1"># 查看uid gid</span>
+</span></span><span class="line"><span class="cl">sudo docker run -it --user 1009:999 tensorflow/tensorflow:1.15.5-gpu /bin/bash
+</span></span><span class="line"><span class="cl">docker run -it -v ~/YFJ:/share tensorflow/tensorflow:1.15.5-gpu
+</span></span><span class="line"><span class="cl">docker run -it -v ~/Documents/python/unet_rgb:/share tensorflow/tensorflow
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">参数说明：
+</span></span><span class="line"><span class="cl">-i: 交互式操作。
+</span></span><span class="line"><span class="cl">-t: 终端。
+</span></span><span class="line"><span class="cl">ubuntu: ubuntu 镜像。
+</span></span><span class="line"><span class="cl">/bin/bash：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 /bin/bash。
+</span></span><span class="line"><span class="cl">要退出终端，直接输入 exit:
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 停止容器</span>
+</span></span><span class="line"><span class="cl">键盘快捷键 Ctrl + D 或者输入 <span class="nb">exit</span> 命令来退出容器
+</span></span><span class="line"><span class="cl">docker stop &lt;container_id_or_name&gt;
+</span></span><span class="line"><span class="cl">docker stop <span class="k">$(</span>docker ps -q<span class="k">)</span>
+</span></span><span class="line"><span class="cl">docker container prune  <span class="c1"># 删除所有退出的容器</span>
+</span></span><span class="line"><span class="cl">docker rm &lt;container_id&gt;  <span class="c1"># 删除指定容器</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看容器状态</span>
+</span></span><span class="line"><span class="cl">runoob@runoob:~$ docker ps
+</span></span><span class="line"><span class="cl">CONTAINER ID        IMAGE                  COMMAND              ...  
+</span></span><span class="line"><span class="cl">5917eac21c36        ubuntu:15.10           <span class="s2">&#34;/bin/sh -c &#39;while t…&#34;</span>    ...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 与宿主机共享目录</span>
+</span></span><span class="line"><span class="cl">docker run -it -v ~/shared_data:/data tensorflow/tensorflow
+</span></span><span class="line"><span class="cl">docker run -it -v ~/YFJ:/share tensorflow/tensorflow:1.15.5-gpu <span class="c1"># 容器中不需要手动创建share目录</span>
+</span></span><span class="line"><span class="cl">docker run -it -v ~/YFJ/python/sediment/deeplearning/demo/unet_rgb:/share tensorflow/tensorflow:latest-gpu
+</span></span><span class="line"><span class="cl">docker run --gpus all -it -v ~/Documents/python/unet_rgb:/share tensorflow/tensorflow:2.2.1-gpu
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 删除镜像</span>
+</span></span><span class="line"><span class="cl">docker rmi -f yfjie/tensorflow:latest <span class="c1"># 强制删除</span>
+</span></span><span class="line"><span class="cl">docker rmi -f &lt;IMAGE ID&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看运行中的容器</span>
+</span></span><span class="line"><span class="cl">docker ps
+</span></span><span class="line"><span class="cl">docker ps -a
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 镜像详细信息</span>
+</span></span><span class="line"><span class="cl">docker inspect &lt;镜像名称或 ID&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建/更新镜像</span>
+</span></span><span class="line"><span class="cl">docker commit ea78c33e150f yfjie/tensorflow <span class="c1"># 经测试先更新后再exit，某些版本可以先exit</span>
+</span></span><span class="line"><span class="cl">**docker commit -m<span class="o">=</span><span class="s2">&#34;has update&#34;</span> -a<span class="o">=</span><span class="s2">&#34;runoob&#34;</span> e218edb10161 runoob/ubuntu:v2**
+</span></span><span class="line"><span class="cl">docker commit <span class="o">[</span>OPTIONS<span class="o">]</span> CONTAINER <span class="o">[</span>REPOSITORY<span class="o">[</span>:TAG<span class="o">]]</span> <span class="c1"># 可以提交相同名称覆盖已有镜像</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 重启</span>
+</span></span><span class="line"><span class="cl">sudo snap restart docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># cuda运行时</span>
+</span></span><span class="line"><span class="cl">which nvidia-container-runtime
+</span></span></code></pre></div><h1 id="启用gpu">启用gpu</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">nvidia-smi  <span class="c1"># 输出 GPU 信息表示驱动正常</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加 NVIDIA Container Toolkit 的 GPG 密钥</span>
+</span></span><span class="line"><span class="cl">curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey <span class="p">|</span> sudo apt-key add -
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 添加仓库源（适用于 Ubuntu 22.04 &#34;jammy&#34;）</span>
+</span></span><span class="line"><span class="cl"><span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>. /etc/os-release<span class="p">;</span><span class="nb">echo</span> <span class="nv">$ID$VERSION_ID</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl">curl -s -L https://nvidia.github.io/nvidia-docker/<span class="nv">$distribution</span>/nvidia-docker.list <span class="p">|</span> sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo apt-get update <span class="c1"># 在有代理的情况下可能无法更新</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 安装 nvidia-container-runtime 及相关工具</span>
+</span></span><span class="line"><span class="cl">sudo apt-get install -y nvidia-container-runtime <span class="c1"># update失败可能导致无法安装</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 也可以离线安装(**Recommend**)</span>
+</span></span><span class="line"><span class="cl">https://github.com/NVIDIA/nvidia-container-toolkit/releases
+</span></span><span class="line"><span class="cl"><span class="c1">#/home/cy/pkg/coding/docker/release-v1.17.3-stable/packages/ubuntu18.04/amd64</span>
+</span></span><span class="line"><span class="cl">tar -zxvf nvidia-docker-1.14.1.tar.gz
+</span></span><span class="line"><span class="cl">sudo chmod +x *.deb
+</span></span><span class="line"><span class="cl">sudo dpkg -i ./docker-24.0.6/*.deb <span class="c1"># 同时安装多个deb,速度飞快</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看版本</span>
+</span></span><span class="line"><span class="cl">nvidia-container-runtime --version 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">sudo nano /etc/docker/daemon.json
+</span></span><span class="line"><span class="cl"><span class="c1"># 内容如下，安装后如自动生成也可以不用改</span>
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;runtimes&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;nvidia&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;/usr/bin/nvidia-container-runtime&#34;</span>,
+</span></span><span class="line"><span class="cl">      <span class="s2">&#34;runtimeArgs&#34;</span>: <span class="o">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">  <span class="o">}</span>,
+</span></span><span class="line"><span class="cl">  <span class="s2">&#34;default-runtime&#34;</span>: <span class="s2">&#34;nvidia&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">or,**recommended** this
+</span></span><span class="line"><span class="cl"><span class="o">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;default-runtime&#34;</span>: <span class="s2">&#34;nvidia&#34;</span>,
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;runtimes&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;nvidia&#34;</span>: <span class="o">{</span>
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;args&#34;</span>: <span class="o">[]</span>,
+</span></span><span class="line"><span class="cl">            <span class="s2">&#34;path&#34;</span>: <span class="s2">&#34;nvidia-container-runtime&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 使更改生效</span>
+</span></span><span class="line"><span class="cl">sudo systemctl daemon-reload <span class="c1"># 可能不需要</span>
+</span></span><span class="line"><span class="cl">sudo systemctl restart docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 查看nvidia-container-runtime安装位置</span>
+</span></span><span class="line"><span class="cl">which nvidia-container-runtime
+</span></span><span class="line"><span class="cl">sudo nvidia-ctk runtime configure --runtime<span class="o">=</span>docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># test，应显示与宿主机相同的 GPU 信息（CUDA运行时需要跟镜像的匹配）</span>
+</span></span><span class="line"><span class="cl">docker run --rm --gpus all nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi
+</span></span><span class="line"><span class="cl">docker run -it --gpus <span class="s1">&#39;&#34;device=0,2&#34;&#39;</span> --shm-size 32g image_name:tag_name <span class="c1"># 指定gpu  </span>
+</span></span></code></pre></div><h2 id="deepseek">deepseek</h2>
+<p>在 Ubuntu 22.04 上安装 <code>nvidia-container-runtime</code> 的步骤如下：</p>]]></description></item></channel></rss>

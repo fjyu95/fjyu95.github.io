@@ -1,0 +1,16 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>Deep Learning - Tag - FangjieYu‘s site</title><link>https://fjyu95.github.io/tags/deep-learning/</link><description>Deep Learning - Tag - FangjieYu‘s site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>907040864@qq.com (fjyu95)</managingEditor><webMaster>907040864@qq.com (fjyu95)</webMaster><lastBuildDate>Tue, 22 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://fjyu95.github.io/tags/deep-learning/" rel="self" type="application/rss+xml"/><item><title>知识笔记</title><link>https://fjyu95.github.io/posts/summary-127e4020f060808da8e0f23caf646e39/</link><pubDate>Tue, 22 Oct 2024 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/summary-127e4020f060808da8e0f23caf646e39/</guid><description><![CDATA[<p>deep-learning、CV（2d、3d）、RS、optical</p>
+<h1 id="视觉slam">视觉slam</h1>
+<p><a href="https://wykxwyc.github.io/2019/03/21/Small-Talk/" target="_blank" rel="noopener noreffer ">https://wykxwyc.github.io/2019/03/21/Small-Talk/</a></p>
+<h2 id="视觉slam框架">视觉slam框架</h2>
+<p></p>
+<p>整个视觉 SLAM 流程包括以下步骤。</p>
+<ol>
+<li>传感器信息读取。在视觉 SLAM 中主要为相机图像信息的读取和预处理。如果是在机器人中，还可能有码盘、惯性传感器等信息的读取和同步。</li>
+<li>视觉里程计（Visual Odometry，VO）。视觉里程计的任务是<strong>估算相邻图像间相机的运动，以及局部地图的样子</strong>。VO 又称为前端（Front End）。</li>
+<li>后端优化（Optimization）。后端接受不同时刻视觉里程计测量的相机位姿，以及<strong>回环检测</strong>的信息，对它们进行<strong>优化，得到全局一致的轨迹和地图</strong>。由于接在 VO 之后，又称为后端（Back End）。</li>
+<li>回环检测（Loop Closing）。回环检测判断机器人是否到达过先前的位置。如果检测到回环，它会把信息提供给后端进行处理。</li>
+<li>建图（Mapping）。它根据估计的轨迹，建立与任务要求对应的地图。</li>
+</ol>
+<h2 id="数学基础">数学基础</h2>
+<p>向量一般默认指列向量</p>]]></description></item><item><title>百度Paddle fluid.layers.fc API说明</title><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</link><pubDate>Fri, 03 Jan 2020 09:48:14 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddle-fluid.layers.fc-api%E8%AF%B4%E6%98%8E/</guid><description>&lt;p>学习百度的PaddlePaddle框架时，看到第一个线性回归的例子，对其中的fluid.layers.fc()函数使用有点困惑，查看官方API文档，感觉写的也不是特别清晰（可能是我理解的不好），经过一些思考后感觉应该是理解了，这里做一下总结。
+下面是部分代码：&lt;/p></description></item><item><title>百度paddlepaddle安装使用</title><link>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</link><pubDate>Fri, 03 Jan 2020 09:01:25 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/%E7%99%BE%E5%BA%A6paddlepaddle%E5%AE%89%E8%A3%85%E4%BD%BF%E7%94%A8/</guid><description>&lt;p>一直想学习一下百度的paddle框架，按照官方教程安装时，感觉步骤写的太繁琐，于是根据之前安装其他框架的经验进行尝试，使用最简单的anaconda方式进行安装，很快成功，记录一下过程。&lt;/p></description></item></channel></rss>

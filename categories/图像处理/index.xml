@@ -1,0 +1,15 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title>图像处理 - Category - FangjieYu‘s site</title><link>https://fjyu95.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/</link><description>图像处理 - Category - FangjieYu‘s site</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><managingEditor>907040864@qq.com (fjyu95)</managingEditor><webMaster>907040864@qq.com (fjyu95)</webMaster><lastBuildDate>Fri, 04 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://fjyu95.github.io/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" rel="self" type="application/rss+xml"/><item><title>OpenCV</title><link>https://fjyu95.github.io/posts/opencv-9d600a59535d4431919d0b76e8b198bf/</link><pubDate>Fri, 04 Nov 2022 00:00:00 +0000</pubDate><author>fjyu95</author><guid>https://fjyu95.github.io/posts/opencv-9d600a59535d4431919d0b76e8b198bf/</guid><description><![CDATA[<p>安装</p>
+<p>pip install opencv-python==3.4.2.16</p>
+<p>pip install opencv-contrib-python==3.4.2.16</p>
+<p>contrib版本提供了额外的扩展功能</p>
+<p><a href="https://blog.csdn.net/weixin_38673554/article/details/103639700#:~:text=%e6%8a%a5%e9%94%99%e5%8e%9f%e5%9b%a0%ef%bc%9a%e8%af%a5%e7%ae%97%e6%b3%95%e5%b7%b2%e7%bb%8f,OpenCV%e5%8e%bb%e6%8e%89%e4%ba%86%e8%bf%99%e4%b8%aa%e7%ae%97%e6%b3%95%e3%80%82" target="_blank" rel="noopener noreffer "></a></p>
+<h1 id="imread-flags">Imread flags</h1>
+<p>-1 unchanged</p>
+<p>0 gray</p>
+<p>1 color (default)</p>
+<p><a href="https://docs.opencv.org/4.x/d8/d6a/group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822" target="_blank" rel="noopener noreffer ">OpenCV: Flags used for image file reading and writing</a></p>
+<p><a href="https://docs.opencv.org/4.x/d8/d6a/group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822" target="_blank" rel="noopener noreffer ">https://docs.opencv.org/4.x/d8/d6a/group__imgcodecs__flags.html#gga61d9b0126a3e57d9277ac48327799c80af660544735200cbe942eea09232eb822</a></p>
+<h1 id="imreadimwrite">imread/imwrite</h1>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">gray</span><span class="p">(</span><span class="n">bayer</span><span class="p">)</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">color</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">default</span>
+</span></span></code></pre></div><p><strong>cv2.imwrite（）不会自动创建未有的文件夹，并不会报错！</strong></p>]]></description></item></channel></rss>
