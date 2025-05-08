@@ -1,0 +1,830 @@
+<!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>Linux command - FangjieYu‘s site</title><meta name=Description content="This is my cool site"><meta property="og:url" content="https://fjyu95.github.io/posts/linux-command/">
+<meta property="og:site_name" content="FangjieYu‘s site"><meta property="og:title" content="Linux command"><meta property="og:description" content="Linux命令速查手册"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-09-08T00:00:00+00:00"><meta property="article:modified_time" content="2025-05-01T00:00:00+00:00"><meta property="article:tag" content="Linux"><meta property="article:tag" content="Shell"><meta name=twitter:card content="summary"><meta name=twitter:title content="Linux command"><meta name=twitter:description content="Linux命令速查手册"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://fjyu95.github.io/posts/linux-command/><link rel=prev href=https://fjyu95.github.io/posts/orb-slam/><link rel=next href=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Linux command","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/fjyu95.github.io\/posts\/linux-command\/"},"genre":"posts","keywords":"linux, shell","wordcount":11608,"url":"https:\/\/fjyu95.github.io\/posts\/linux-command\/","datePublished":"2022-09-08T00:00:00+00:00","dateModified":"2025-05-01T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"fjyu95"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>posts </a><a class=menu-item href=/tags/>tags </a><a class=menu-item href=/categories/>category </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>posts</a><a class=menu-item href=/tags/ title>tags</a><a class=menu-item href=/categories/ title>category</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">Linux command</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://fjyu95.github.io/ title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>fjyu95</a></span>&nbsp;<span class=post-category>included in <a href=/categories/linux%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw" aria-hidden=true></i>Linux笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-09-08>2022-09-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;11608 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;24 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#linux命令大全>Linux命令大全</a></li><li><a href=#anaconda>Anaconda</a><ul><li><a href=#常用命令>常用命令</a></li><li><a href=#conda-环境迁移>conda 环境迁移</a></li><li><a href=#conda-自动补全>conda 自动补全</a></li><li><a href=#linux-ubuntu-conda-虚拟环境-激活>Linux Ubuntu Conda 虚拟环境 激活</a></li></ul></li><li><a href=#pip>pip</a></li><li><a href=#wsl>WSL</a><ul><li><a href=#基本使用>基本使用</a></li><li><a href=#显示图像>显示图像</a></li></ul></li><li><a href=#磁盘挂载>磁盘挂载</a><ul><li><a href=#开机自动挂载>开机自动挂载</a><ul><li><a href=#第一栏磁盘文件名><strong>第一栏：磁盘文件名</strong></a></li></ul></li><li><a href=#systemd>systemd</a></li></ul></li><li><a href=#磁盘分区>磁盘分区</a></li><li><a href=#磁盘信息>磁盘信息</a><ul><li><a href=#查看保留空间>查看保留空间</a></li></ul></li><li><a href=#环境变量>环境变量</a></li><li><a href=#语言编码>语言编码</a></li><li><a href=#ls只列出部分项>ls只列出部分项</a></li><li><a href=#ln软链接>ln软链接</a></li><li><a href=#终端显示图像-需开启xserver>终端显示图像 (需开启xserver)</a></li><li><a href=#图像处理imagemagick>图像处理/imagemagick</a></li><li><a href=#视频处理ffmpeg>视频处理/FFmpeg</a></li><li><a href=#文件传输拷贝同步-rsync>文件传输/拷贝/同步 rsync</a><ul><li><a href=#scp>scp</a></li><li><a href=#rsync>rsync</a></li></ul></li><li><a href=#文件查找-find-grep-locate>文件查找 find grep locate</a></li><li><a href=#文件比较>文件比较</a></li><li><a href=#文件移动>文件移动</a></li><li><a href=#文字处理>文字处理</a></li><li><a href=#日志输出>日志输出</a><ul><li><a href=#几个常用命令区别>几个常用命令区别</a></li></ul></li><li><a href=#linux版本内核查看>Linux版本/内核查看</a><ul><li><a href=#云厂商查询>云厂商查询</a></li></ul></li><li><a href=#查看ip>查看ip</a></li><li><a href=#网络管理>网络管理</a><ul><li><a href=#查看wifi名称>查看wifi名称</a></li></ul></li><li><a href=#系统时间时区>系统时间/时区</a></li><li><a href=#目录大小统计>目录大小/统计</a><ul><li><a href=#统计文件数>统计文件数</a></li></ul></li><li><a href=#目录树打印>目录树打印</a></li><li><a href=#快捷打开目录>快捷打开目录</a></li><li><a href=#硬件信息>硬件信息</a></li><li><a href=#shell>Shell</a><ul><li><a href=#四种执行方式>四种执行方式</a></li><li><a href=#刷新shell>刷新shell</a></li><li><a href=#查看更改shell>查看、更改shell</a></li><li><a href=#新建终端并执行命令>新建终端并执行命令</a></li></ul></li><li><a href=#压缩解压>压缩/解压</a></li><li><a href=#文件下载>文件下载</a></li><li><a href=#防火墙>防火墙</a></li><li><a href=#service相关>Service相关</a></li><li><a href=#systemctl>systemctl</a></li><li><a href=#查看桌面坏境>查看桌面坏境</a></li><li><a href=#密码管理>密码管理</a><ul><li><a href=#修改密码>修改密码</a></li><li><a href=#密码过期>密码过期</a></li></ul></li><li><a href=#进程管理>进程管理</a></li><li><a href=#用户管理>用户管理</a></li><li><a href=#用户组>用户组</a></li><li><a href=#权限管理>权限管理</a><ul><li><a href=#解除占用>解除占用</a></li></ul></li><li><a href=#docker>docker</a></li><li><a href=#ssh>SSH</a></li><li><a href=#git>git</a></li><li><a href=#驱动>驱动</a></li><li><a href=#cuda>CUDA</a></li><li><a href=#gui>GUI</a><ul><li><a href=#刷新系统ui>刷新系统UI</a></li></ul></li><li><a href=#关机重启>关机、重启</a></li><li><a href=#软件安装包管理>软件安装/包管理</a><ul><li><a href=#usrbin-vs-usrlocalbin>/usr/bin vs. /usr/local/bin</a><ul><li><a href=#1-usrbin>1. <strong><code>/usr/bin</code></strong></a></li><li><a href=#2-usrlocalbin>2. <strong><code>/usr/local/bin</code></strong></a></li></ul></li></ul></li><li><a href=#开机启动项>开机启动项</a></li><li><a href=#终端清屏>终端清屏</a></li></ul></nav></div></div><div class=content id=content><h1 id=linux命令大全>Linux命令大全</h1><p><a href=https://www.runoob.com/linux/linux-command-manual.html target=_blank rel="noopener noreffer">Linux 命令大全</a></p><h1 id=anaconda>Anaconda</h1><p><a href="https://www.notion.so/Anaconda-1cde4020f06080a58103d396c692c936?pvs=21" target=_blank rel="noopener noreffer">Anaconda</a></p><h2 id=常用命令>常用命令</h2><p><a href=https://blog.csdn.net/qq_38929105/article/details/123652248 target=_blank rel="noopener noreffer">Anaconda/pip 更换阿里源，助力 conda create -n 虚拟环境搭建_anaconda换阿里源_乄洛尘的博客-CSDN博客</a></p><p><a href=https://blog.csdn.net/menc15/article/details/71477949/ target=_blank rel="noopener noreffer">Conda常用命令整理_conda命令_CharlotteMen的博客-CSDN博客</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>conda -h <span class=c1># 查看帮助</span>
+</span></span><span class=line><span class=cl>conda info
+</span></span><span class=line><span class=cl>conda config -h 
+</span></span><span class=line><span class=cl>conda config --show <span class=c1># 查看所有配置</span>
+</span></span><span class=line><span class=cl>conda config --show-sources <span class=c1># 查看镜像源</span>
+</span></span><span class=line><span class=cl>conda config --show pkgs_dirs <span class=c1># envs_dirs</span>
+</span></span><span class=line><span class=cl>conda config --show solver <span class=c1># classic or libmamba</span>
+</span></span><span class=line><span class=cl>conda config --remove-key channels <span class=c1># 恢复默认配置</span>
+</span></span><span class=line><span class=cl>conda config --set auto_activate_base <span class=nb>false</span> <span class=c1># 不自动激活base</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>conda create -n env_name -c xxx <span class=nv>python</span><span class=o>=</span>version_number <span class=c1># 创建环境,使用vpn可能失败</span>
+</span></span><span class=line><span class=cl>conda remove -n env_name --all <span class=c1># 删除环境 (可以暴力删除envs/xxx文件夹)</span>
+</span></span><span class=line><span class=cl>sudo mv env_name new_name <span class=c1># 环境重命名</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>conda search cudnn --info <span class=c1># 查看可用版本</span>
+</span></span><span class=line><span class=cl>conda update -n base -c defaults conda <span class=c1># 更新anaconda</span>
+</span></span><span class=line><span class=cl>conda clean --all <span class=c1># 清除缓存</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 修改镜像源</span>
+</span></span><span class=line><span class=cl>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+</span></span><span class=line><span class=cl>conda config --add channels conda-forge
+</span></span><span class=line><span class=cl>conda config --set auto_activate_base <span class=nb>false</span>
+</span></span><span class=line><span class=cl>vim ~/.condarc <span class=c1># 直接编辑配置文件，不要放太多（多了反而可能出错）</span>
+</span></span><span class=line><span class=cl>channels:
+</span></span><span class=line><span class=cl>  - https://mirrors.ustc.edu.cn/anaconda/pkgs/main/
+</span></span><span class=line><span class=cl>  - https://mirrors.ustc.edu.cn/anaconda/cloud/conda-forge/
+</span></span><span class=line><span class=cl>  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+</span></span><span class=line><span class=cl>  - defaults
+</span></span></code></pre></div><h2 id=conda-环境迁移>conda 环境迁移</h2><p><a href=https://blog.csdn.net/ft_sunshine/article/details/92215164 target=_blank rel="noopener noreffer">conda环境的复制（生成.yaml文件）和pip环境的复制（生成requirements.txt）_当我们想再次创建该环境,或根据别人提供的.yaml文件复现环境时,就可以通过下面的-CSDN博客</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pip freeze &gt; requirements.txt
+</span></span><span class=line><span class=cl>pip install -r requirements.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>conda env <span class=nb>export</span> &gt; environment.yaml
+</span></span><span class=line><span class=cl>conda env create -f environment.yaml
+</span></span></code></pre></div><h2 id=conda-自动补全>conda 自动补全</h2><p><a href=https://blog.csdn.net/weixin_43152331/article/details/124929760 target=_blank rel="noopener noreffer">Ubuntu conda自动补全_sjjzym1314的博客-CSDN博客</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>conda install conda-bash-completion
+</span></span><span class=line><span class=cl><span class=c1># 指定forge源安装</span>
+</span></span><span class=line><span class=cl>conda install -c conda-forge conda-bash-completion 
+</span></span></code></pre></div><h2 id=linux-ubuntu-conda-虚拟环境-激活>Linux Ubuntu Conda 虚拟环境 激活</h2><p><a href=https://blog.csdn.net/qq_39856931/article/details/109862865 target=_blank rel="noopener noreffer">【Linux】安装Anaconda后默认不进入conda环境方法_杨小浩浩hh的博客-CSDN博客</a></p><p>1、未进入虚拟环境时：</p><p>直接 conda activate env_name</p><p>2、在虚拟环境中时</p><p>执行两次source deactivate命令 使不在conda管理的环境中</p><p>（或两次 conda deactivate命令）</p><h1 id=pip>pip</h1><p>pip 指定镜像源：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>pip -V <span class=c1># 查看pip安装路径</span>
+</span></span><span class=line><span class=cl>pip install <span class=nv>pkg_name</span><span class=o>==</span>xxx
+</span></span><span class=line><span class=cl>pip config <span class=nb>set</span> global.index-url <span class=o>[</span>https://pypi.tuna.tsinghua.edu.cn/simple<span class=o>](</span>https://pypi.tuna.tsinghua.edu.cn/simple<span class=o>)</span>
+</span></span><span class=line><span class=cl>pip config <span class=nb>unset</span> global.index-url <span class=c1># 恢复默认源</span>
+</span></span><span class=line><span class=cl>pip config list <span class=c1># 查看镜像地址</span>
+</span></span><span class=line><span class=cl>pip show pkg_name <span class=c1># 查看包路径（安装位置）</span>
+</span></span><span class=line><span class=cl>pip list -v <span class=c1># 显示详细信息，包括包路径</span>
+</span></span><span class=line><span class=cl>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple package_name <span class=c1># 指定源</span>
+</span></span><span class=line><span class=cl>pip install --upgrade pip <span class=c1># 升级pip</span>
+</span></span><span class=line><span class=cl>pip3 install --upgrade pip
+</span></span><span class=line><span class=cl>https://www.piwheels.org/project/pip/ <span class=c1># 手动下载地址，注意与python版本的适配</span>
+</span></span><span class=line><span class=cl>-f 是为 pip 提供额外的搜索路径，用来查找包文件。它既可以是一个本地路径，也可以是一个网络路径。
+</span></span><span class=line><span class=cl>--index-url 是直接替换默认的 PyPI 源，指定一个新的包索引来查找和解析包依赖信息。
+</span></span><span class=line><span class=cl>pip show pkg_name <span class=c1># 查看包信息</span>
+</span></span><span class=line><span class=cl>pip cache purge  <span class=c1># 清理全局 Pip 缓存</span>
+</span></span></code></pre></div><h1 id=wsl>WSL</h1><h2 id=基本使用>基本使用</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># WSL本地根目录</span>
+</span></span><span class=line><span class=cl>C:<span class=se>\U</span>sers<span class=se>\f</span>jyu<span class=se>\A</span>ppData<span class=se>\L</span>ocal<span class=se>\P</span>ackages<span class=se>\C</span>anonicalGroupLimited.Ubuntu18.04onWindows_79rhkp1fndgsc<span class=se>\L</span>ocalState<span class=se>\r</span>ootfs挂载网络共享磁盘：（/mnt目录下）
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 挂载</span>
+</span></span><span class=line><span class=cl>sudo mount -t drvfs R: r <span class=o>(</span>每次开机需要重新挂载<span class=o>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置软链接：（目标目录可以不存在）</span>
+</span></span><span class=line><span class=cl>sudo ln -s /mnt/r/RD<span class=se>\ </span>Data/QTE/YFJ YFJ
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除软链接</span>
+</span></span><span class=line><span class=cl>sudo unlink YFJ
+</span></span></code></pre></div><p><a href=http://man6.org/blog/Windows/WSL%e4%b8%8eWindows%e5%85%b1%e4%ba%ab%e7%9b%ae%e5%bd%95.md target=_blank rel="noopener noreffer">WSL与Windows共享目录.md</a></p><p><a href=https://zhuanlan.zhihu.com/p/34884285 target=_blank rel="noopener noreffer">WSL 使用指南——04 安装桌面环境</a></p><h2 id=显示图像>显示图像</h2><p>需要安装xming（启动xlaunch）</p><p>还需要下载安装fonts，否则中文乱码</p><p>.bashrc设置</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=kr>export</span> <span class=nx>DISPLAY</span><span class=o>=:</span><span class=mf>0.0</span> <span class=err>#</span> <span class=nx>显示图形界面</span>
+</span></span><span class=line><span class=cl><span class=kr>export</span> <span class=nx>LIBGL_ALWAYS_INDIRECT</span><span class=o>=</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>mount</span> <span class=o>-</span><span class=nx>t</span> <span class=nx>drvfs</span> <span class=nx>R</span><span class=o>:</span> <span class=err>/mnt/r # 自动挂载共享盘</span>
+</span></span><span class=line><span class=cl><span class=nx>cd</span> <span class=o>/</span><span class=nx>mnt</span><span class=o>/</span><span class=nx>YFJ</span><span class=o>/</span><span class=nx>python</span>
+</span></span><span class=line><span class=cl><span class=nx>ll</span> <span class=o>-</span><span class=nx>htr</span>
+</span></span></code></pre></div><h1 id=磁盘挂载>磁盘挂载</h1><p><a href=https://www.runoob.com/linux/linux-comm-mount.html target=_blank rel="noopener noreffer">Linux mount命令 | 菜鸟教程</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mount -t drvfs R: r <span class=c1># WSL挂载</span>
+</span></span><span class=line><span class=cl>sudo mount -t drvfs R: /mnt/r <span class=c1># 自动挂载共享盘</span>
+</span></span><span class=line><span class=cl>mount -o loop /tmp/image.iso /mnt/cdrom <span class=c1># ISO挂载</span>
+</span></span><span class=line><span class=cl>sudo mount -t cifs -o <span class=nv>username</span><span class=o>=</span><span class=s2>&#34;303lab&#34;</span>,password<span class=o>=</span><span class=s2>&#34;quanta303&#34;</span> //192.168.2.112/6 /home/zhaoyun/192.168.2.112
+</span></span><span class=line><span class=cl>sudo mount -o <span class=nv>username</span><span class=o>=</span>fjyu@quantaeye.local,password<span class=o>=</span>123456,uid<span class=o>=</span>1009,gid<span class=o>=</span><span class=m>1011</span> //192.168.3.10/QuantaEye/RD<span class=se>\ </span>Data /share
+</span></span><span class=line><span class=cl>sudo mount -t ntfs3 /dev/sda2 /media/yfjie/文档 <span class=c1># 以ntfs3格式挂载磁盘</span>
+</span></span><span class=line><span class=cl>sudo mount -t ntfs-3g /dev/sda2 /media/hdd -o force <span class=c1># 强制挂载，忽略权限检查</span>
+</span></span></code></pre></div><h2 id=开机自动挂载>开机自动挂载</h2><p><a href=https://gnu-linux.readthedocs.io/zh/latest/Chapter02/00_fstab.html target=_blank rel="noopener noreffer">开机自动挂载硬盘 — Linux latest 文档</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>cp</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>fstab</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>fstab</span><span class=p>.</span><span class=nx>bak</span> 
+</span></span><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>vim</span> <span class=o>/</span><span class=nx>etc</span><span class=o>/</span><span class=nx>fstab</span> 
+</span></span><span class=line><span class=cl><span class=err>/dev/sdb1 /mnt/mydrive ext4 defaults 0 0</span>
+</span></span><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>mount</span> <span class=o>-</span><span class=nx>a</span> <span class=err>#</span> <span class=nx>使挂载生效</span>
+</span></span><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>reboot</span>
+</span></span></code></pre></div><h3 id=第一栏磁盘文件名><strong>第一栏：磁盘文件名</strong></h3><p>这个字段可以填写的数据主要有三种：</p><ul><li>磁盘设备的文件名，如 <code>/dev/sda1</code></li><li>磁盘设备的 <a href=https://gnu-linux.readthedocs.io/zh/latest/Chapter03/00_uuid.html target=_blank rel="noopener noreffer">UUID</a> 名称，如 UUID=xxx</li><li>磁盘设备的 LABEL 名称，例如 LABEL=xxx</li></ul><h2 id=systemd>systemd</h2><p><a href=https://www.expoli.tech/articles/2022/12/23/use-systemd-mount-any-device#837c6064cb3d4e759a9ffee839855549 target=_blank rel="noopener noreffer">https://www.expoli.tech/articles/2022/12/23/use-systemd-mount-any-device#837c6064cb3d4e759a9ffee839855549</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>[</span><span class=nx>Unit</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>Description</span><span class=o>=</span><span class=nx>Mount</span> <span class=nx>mydisk</span> <span class=nx>at</span> <span class=nx>startup</span>
+</span></span><span class=line><span class=cl><span class=err>#</span><span class=nx>After</span><span class=o>=</span><span class=nx>network</span><span class=p>.</span><span class=nx>target</span>
+</span></span><span class=line><span class=cl><span class=nx>After</span><span class=o>=</span><span class=nx>local</span><span class=o>-</span><span class=nx>fs</span><span class=p>.</span><span class=nx>target</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Service</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>Type</span><span class=o>=</span><span class=nx>oneshot</span>
+</span></span><span class=line><span class=cl><span class=nx>ExecStart</span><span class=o>=</span><span class=nx>sudo</span> <span class=nx>mount</span> <span class=o>-</span><span class=nx>t</span> <span class=nx>ntfs3</span> <span class=o>/</span><span class=nx>dev</span><span class=o>/</span><span class=nx>sda2</span> <span class=o>/</span><span class=nx>media</span><span class=o>/</span><span class=nx>yfjie</span><span class=o>/</span><span class=nx>文档</span>
+</span></span><span class=line><span class=cl><span class=nx>RemainAfterExit</span><span class=o>=</span><span class=kc>true</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=nx>Install</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nx>WantedBy</span><span class=o>=</span><span class=nx>multi</span><span class=o>-</span><span class=nx>user</span><span class=p>.</span><span class=nx>target</span>
+</span></span></code></pre></div><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ll /etc/systemd/system/
+</span></span><span class=line><span class=cl>sudo mkdir -p /mnt/mydisk
+</span></span><span class=line><span class=cl>sudo systemctl daemon-reload
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> mnt-mydisk.mount  <span class=c1># 启用开机自启</span>
+</span></span><span class=line><span class=cl>sudo systemctl start mnt-mydisk.mount   <span class=c1># 立即挂载</span>
+</span></span></code></pre></div><h1 id=磁盘分区>磁盘分区</h1><p><a href=https://www.cnblogs.com/andy9468/p/14252003.html target=_blank rel="noopener noreffer">总结-磁盘+分区+文件系统+挂载的查询 - 安迪9468 - 博客园</a></p><p><a href=https://linux.cn/article-10727-1.html target=_blank rel="noopener noreffer">技术|Linux 中获取硬盘分区或文件系统的 UUID 的七种方法</a></p><ul><li><code>lsblk</code>：这个命令会显示所有可用磁盘和分区的信息。在输出结果中，您可以看到每个磁盘和分区的名称、 挂载点和文件系统类型等信息。</li><li><code>sudo fdisk -l</code>：这个命令会列出所有的磁盘分区表。在输出结果中，您可以看到每个磁盘的名称、大小和分区数量等信息，以及每个分区的编号、大小和文件系统类型等信息。</li><li><code>sudo parted -l</code>：这个命令会显示更详细的磁盘和分区信息，包括每个分区的文件系统标签和UUID等信息。</li><li>blkid # block uuid</li><li>lsblk -f # list uuid，<strong>Recommended</strong></li><li>ll /dev/disk/by-uuid/</li></ul><h1 id=磁盘信息>磁盘信息</h1><p><a href="https://www.notion.so/ncdu-1dfe4020f06080bd809fdc7edadcbc66?pvs=21" target=_blank rel="noopener noreffer">ncdu</a></p><p><a href=https://www.runoob.com/linux/linux-comm-df.html target=_blank rel="noopener noreffer">Linux df 命令</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>df -hT
+</span></span><span class=line><span class=cl>df -h /path/to/your/file_or/dir <span class=c1># 查看目录所在的挂载点及挂载设备</span>
+</span></span><span class=line><span class=cl>ncdu <span class=c1># d键可以删除,i键显示元信息</span>
+</span></span><span class=line><span class=cl>ncdu /home <span class=c1># 可选sudo</span>
+</span></span><span class=line><span class=cl>ncdu /
+</span></span><span class=line><span class=cl>sudo ncdu / --exclude /data <span class=o>[</span>--exclude /mnt --exclude /media<span class=o>]</span> 
+</span></span></code></pre></div><h2 id=查看保留空间>查看保留空间</h2><p>sudo tune2fs -l /dev/sda1 | grep &ldquo;Reserved block count&rdquo;</p><p>单位：4KB</p><h1 id=环境变量>环境变量</h1><p>在 Linux 中，有许多常用的环境变量可用于控制系统行为、配置应用程序和提供有关系统和用户环境的信息。以下是一些常用的 Linux 环境变量：</p><ol><li><strong>PATH</strong>：指定系统在哪些目录中搜索可执行文件。当你在终端中输入命令时，系统会在 PATH 中指定的目录中查找这些命令的可执行文件。</li><li><strong>HOME</strong>：指定当前用户的主目录路径。大多数用户相关的配置文件和数据都存储在 HOME 目录下。</li><li><strong>USER</strong>：当前登录用户的用户名。</li><li><strong>PWD</strong>：当前工作目录的路径。</li><li><strong>LANG</strong>：指定默认的区域设置语言。它影响了程序的语言和格式化输出。</li><li><strong>TZ</strong>：指定系统时区。</li><li><strong>SHELL</strong>：指定默认的登录 shell。</li><li><strong>EDITOR</strong>：指定默认的文本编辑器。</li><li><strong>TERM</strong>：指定当前终端类型。</li><li><strong>LD_LIBRARY_PATH</strong>：指定系统在哪些目录中搜索共享库文件。</li><li><strong>DISPLAY</strong>：指定 X11 显示服务器的地址。</li><li><strong>PS1</strong>：指定命令提示符的格式。</li></ol><p>这些只是一些常见的 Linux 环境变量，实际上还有许多其他环境变量可用于各种用途。你可以在终端中使用 <code>env</code> 命令来查看当前定义的所有环境变量，以及它们的值。</p><h1 id=语言编码>语言编码</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$LANG</span>
+</span></span><span class=line><span class=cl><span class=nb>export</span> <span class=nv>LANG</span><span class=o>=</span>en_US.UTF-8
+</span></span><span class=line><span class=cl>locale -a
+</span></span><span class=line><span class=cl>sudo dpkg-reconfigure locales
+</span></span></code></pre></div><h1 id=ls只列出部分项>ls只列出部分项</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ll <span class=p>|</span> head -n <span class=m>10</span>
+</span></span><span class=line><span class=cl>ll <span class=p>|</span> tail -n <span class=m>10</span>
+</span></span><span class=line><span class=cl>ls <span class=p>|</span> grep <span class=s2>&#34;pattern&#34;</span>
+</span></span><span class=line><span class=cl>ll -X <span class=c1># 扩展名排序</span>
+</span></span><span class=line><span class=cl>ls -l <span class=p>|</span> grep ^d <span class=c1># 仅显示目录</span>
+</span></span><span class=line><span class=cl>ls -l <span class=p>|</span> grep ^- <span class=c1># 仅显示文件</span>
+</span></span><span class=line><span class=cl>ls -lSr <span class=c1># 从小到大排序，-r为逆序排列</span>
+</span></span><span class=line><span class=cl>ls -l <span class=p>|</span> grep <span class=s2>&#34;^-&#34;</span> <span class=p>|</span> wc -l <span class=c1># 统计文件数</span>
+</span></span><span class=line><span class=cl>ls -ld .* <span class=p>|</span> grep -v <span class=s1>&#39;^\.\.?$&#39;</span> <span class=c1># 仅显示隐藏文件</span>
+</span></span></code></pre></div><p><a href=https://blog.csdn.net/yingzinanfei/article/details/54893494 target=_blank rel="noopener noreffer">ls 按大小和扩展名排序_ls按照文件名排序_陈止风的博客-CSDN博客</a></p><p><a href=https://noahsnail.com/2017/02/07/2017-02-07-Linux%e7%bb%9f%e8%ae%a1%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%8b%e7%9a%84%e6%96%87%e4%bb%b6%e6%95%b0%e7%9b%ae/ target=_blank rel="noopener noreffer">Linux统计文件夹下的文件数目</a></p><p><a href=https://xujinzh.github.io/2022/01/21/ls-dir-file/index.html target=_blank rel="noopener noreffer">https://xujinzh.github.io/2022/01/21/ls-dir-file/index.html</a></p><h1 id=ln软链接>ln软链接</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 创建快捷方式（源文件必须是绝对路径）</span>
+</span></span><span class=line><span class=cl>ln -s /path/to/original/file/example.txt /path/to/shortcut/example.lnk 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置软链接：（目标目录可以不存在）</span>
+</span></span><span class=line><span class=cl>sudo ln -s /mnt/r/RD<span class=se>\ </span>Data/QTE/YFJ YFJ
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除软链接</span>
+</span></span><span class=line><span class=cl>sudo unlink YFJ
+</span></span><span class=line><span class=cl>ln -sf /path/to/source ebook <span class=c1># 强制覆盖</span>
+</span></span></code></pre></div><h1 id=终端显示图像-需开启xserver>终端显示图像 (需开启xserver)</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>display img_path
+</span></span><span class=line><span class=cl>eog img_path <span class=c1># 通用，慢</span>
+</span></span><span class=line><span class=cl>catimg your_image.jpg <span class=c1># 快速显示</span>
+</span></span><span class=line><span class=cl>catimg -w <span class=m>50</span> filepath
+</span></span><span class=line><span class=cl>w3m -o <span class=nv>auto_image</span><span class=o>=</span>TRUE your_image.jpg
+</span></span><span class=line><span class=cl>chafa your_image.jpg
+</span></span><span class=line><span class=cl>feh your_image.jpg
+</span></span><span class=line><span class=cl>gpicview your_image.jpg <span class=c1># 推荐，略快</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># yum安装catimg，直接下下载.rpm包然后yum install</span>
+</span></span></code></pre></div><h1 id=图像处理imagemagick>图像处理/imagemagick</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt update <span class=o>&amp;&amp;</span> sudo apt install imagemagick
+</span></span><span class=line><span class=cl><span class=c1># mogrify会覆盖原图</span>
+</span></span><span class=line><span class=cl>mogrify -resize 50% *.jpg <span class=c1># 等比例缩放</span>
+</span></span><span class=line><span class=cl>mogrify -resize 800x *.jpg  <span class=c1># 宽度固定为 800，高度按比例调整</span>
+</span></span><span class=line><span class=cl>mogrify -resize 800x600 *.jpg <span class=c1># 限制最大尺寸，并保持宽高比</span>
+</span></span><span class=line><span class=cl>mogrify -resize 800x600! *.jpg <span class=c1># 强制变形</span>
+</span></span><span class=line><span class=cl>mogrify -resize 1024x768 *.png *.jpg <span class=c1># 多种格式</span>
+</span></span><span class=line><span class=cl>mogrify -format jpg *.png <span class=c1># 批量格式转换</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># convert生成新文件</span>
+</span></span><span class=line><span class=cl>convert input.jpg -resize 50% output.jpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 图像信息</span>
+</span></span><span class=line><span class=cl>identify image.jpg
+</span></span><span class=line><span class=cl>identify -verbose image.jpg <span class=c1># 详细信息</span>
+</span></span></code></pre></div><h1 id=视频处理ffmpeg>视频处理/FFmpeg</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 设备查看</span>
+</span></span><span class=line><span class=cl>lsusb
+</span></span><span class=line><span class=cl>ls /dev/video*
+</span></span><span class=line><span class=cl>v4l2-ctl --list-devices
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 列出指定视频设备支持的视频格式</span>
+</span></span><span class=line><span class=cl>v4l2-ctl --device<span class=o>=</span>/dev/video0 --list-formats
+</span></span><span class=line><span class=cl>v4l2-ctl --device<span class=o>=</span>/dev/video0 --list-formats-ext <span class=c1># 详细信息</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 当前视频格式和分辨率</span>
+</span></span><span class=line><span class=cl>v4l2-ctl --device<span class=o>=</span>/dev/video0 --get-fmt-video
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设备支持的所有控制项及其当前值</span>
+</span></span><span class=line><span class=cl>v4l2-ctl --device<span class=o>=</span>/dev/video0 --list-ctrls
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 显示指定视频设备的基本信息</span>
+</span></span><span class=line><span class=cl>v4l2-ctl --device<span class=o>=</span>/dev/video0 --info
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 控制软件</span>
+</span></span><span class=line><span class=cl>cheese
+</span></span><span class=line><span class=cl>guvcview <span class=c1># recommend</span>
+</span></span><span class=line><span class=cl>v4l2 <span class=nb>test</span> utility
+</span></span><span class=line><span class=cl>orbbec viewer <span class=c1># 管理员权限运行</span>
+</span></span><span class=line><span class=cl>rviz
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 相机设置</span>
+</span></span><span class=line><span class=cl>v4l2-ctl --set-fmt-video<span class=o>=</span><span class=nv>width</span><span class=o>=</span>1920,height<span class=o>=</span>1080,pixelformat<span class=o>=</span>MJPG --device /dev/video0
+</span></span><span class=line><span class=cl>v4v4l2-ctl --device<span class=o>=</span>/dev/video0 --set-fmt-video<span class=o>=</span><span class=nv>width</span><span class=o>=</span>1280,height<span class=o>=</span>720,pixelformat<span class=o>=</span>MJPG
+</span></span><span class=line><span class=cl>auto_exposure <span class=o>(</span>自动曝光<span class=o>)</span>
+</span></span><span class=line><span class=cl><span class=nv>min</span><span class=o>=</span><span class=m>0</span> <span class=nv>max</span><span class=o>=</span><span class=m>3</span> <span class=nv>default</span><span class=o>=</span><span class=m>3</span> <span class=nv>value</span><span class=o>=</span><span class=m>3</span> <span class=o>(</span>Aperture Priority Mode<span class=o>)</span>
+</span></span><span class=line><span class=cl>控制自动曝光的模式。
+</span></span><span class=line><span class=cl>0：禁用自动曝光（手动曝光）。
+</span></span><span class=line><span class=cl>1：启用自动曝光（快门优先模式）。
+</span></span><span class=line><span class=cl>2：启用自动曝光（ISO 优先模式）。
+</span></span><span class=line><span class=cl>3：启用自动曝光（光圈优先模式，默认设置）。
+</span></span><span class=line><span class=cl>dmesg <span class=p>|</span> grep -i usb <span class=c1># 查看内核日志</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 视频流查看</span>
+</span></span><span class=line><span class=cl>mplayer tv:// -tv <span class=nv>device</span><span class=o>=</span>/dev/video0 <span class=c1># 读取并显示视频流</span>
+</span></span><span class=line><span class=cl>ffplay /dev/video0 <span class=c1># 基于FFmpeg和SDL库,s逐帧、p播放</span>
+</span></span><span class=line><span class=cl>ffplay -x <span class=m>640</span> -y <span class=m>480</span> -framerate <span class=m>30</span> /dev/video0
+</span></span><span class=line><span class=cl>ffplay /dev/video0 -stats <span class=c1># 显示分辨率和帧率,终端中</span>
+</span></span><span class=line><span class=cl>ffplay /dev/video0 -pix_fmt yuv422p <span class=c1># mjpeg</span>
+</span></span><span class=line><span class=cl>vlc v4l2:///dev/video0
+</span></span><span class=line><span class=cl>ffprobe /dev/video0
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 视频保存</span>
+</span></span><span class=line><span class=cl>ffmpeg -f v4l2 -i /dev/video0 -f mp4 ouqtput.mp4 <span class=c1># recommend</span>
+</span></span><span class=line><span class=cl>ffmpeg -f v4l2 -i /dev/video0 -vcodec libx264 -pixfmt yuv420p mycamera.h264
+</span></span><span class=line><span class=cl>v4l2-ctl --device<span class=o>=</span>/dev/video0 --stream-mmap --stream-to<span class=o>=</span>output.yuv --stream-count<span class=o>=</span><span class=m>300</span>
+</span></span><span class=line><span class=cl>mplayer tv:// -tv <span class=nv>device</span><span class=o>=</span>/dev/video0 -dumpstream -dumpfile output.ts
+</span></span><span class=line><span class=cl>cv2.VideoWriter<span class=o>(</span><span class=s1>&#39;output.avi&#39;</span>, fourcc, 20.0, <span class=o>(</span>640, 480<span class=o>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 图像保存</span>
+</span></span><span class=line><span class=cl>v4l2-ctl --device<span class=o>=</span>/dev/video0 --capture --file<span class=o>=</span>test.jpg
+</span></span><span class=line><span class=cl>ffmpeg -f v4l2 -i /dev/video0 -vframes <span class=m>1</span> test.jpg <span class=c1># or .png</span>
+</span></span><span class=line><span class=cl>ffmpeg -f v4l2 -i /dev/video0 -vf <span class=s2>&#34;scale=1920:1080&#34;</span> -vframes <span class=m>1</span> image.jpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>- f v4l2 指定输入格式为 V4L2（Video <span class=k>for</span> Linux 2）。
+</span></span><span class=line><span class=cl>-i /dev/video0 指定输入设备（通常是 /dev/video0，可以根据实际设备更改）。
+</span></span><span class=line><span class=cl>-vframes <span class=m>1</span> 指定仅捕获一帧图像。
+</span></span><span class=line><span class=cl>test.jpg 为输出文件名。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 图像信息</span>
+</span></span><span class=line><span class=cl>sudo apt install exiftool
+</span></span><span class=line><span class=cl>exiftool test.jpg
+</span></span><span class=line><span class=cl>ffmpeg -i test.jpg
+</span></span><span class=line><span class=cl>ffprobe test.jpg
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 视频信息</span>
+</span></span><span class=line><span class=cl>exiftool &lt;文件名&gt;
+</span></span><span class=line><span class=cl>ffprobe &lt;文件名&gt;
+</span></span><span class=line><span class=cl>mediainfo &lt;文件名&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 提取视频帧</span>
+</span></span><span class=line><span class=cl>ffmpeg -i input.mp4 -vframes <span class=m>1</span> -vf <span class=s2>&#34;select=&#39;eq(n,0)&#39;&#34;</span> output.png <span class=c1># 提取第一帧</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 视频剪辑</span>
+</span></span><span class=line><span class=cl>ffmpeg -i input.mp4 -t <span class=m>115</span> -c copy output.mp4
+</span></span><span class=line><span class=cl>ffmpeg -i input.mp4 -t <span class=m>115</span> output.mp4 <span class=c1># 重新编码</span>
+</span></span></code></pre></div><h1 id=文件传输拷贝同步-rsync>文件传输/拷贝/同步 rsync</h1><p><a href="https://www.notion.so/rsync-1cde4020f06080608d05ec983fe17274?pvs=21" target=_blank rel="noopener noreffer">文件传输/拷贝/同步 rsync</a></p><p>cp -a 保留归档信息（<code>archive</code>）</p><h2 id=scp>scp</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install lrzsz
+</span></span><span class=line><span class=cl>scp
+</span></span><span class=line><span class=cl>rsync
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 本地到远程</span>
+</span></span><span class=line><span class=cl>scp local_file remote_username@remote_ip:remote_folder 
+</span></span><span class=line><span class=cl>scp local_file remote_username@remote_ip:remote_file
+</span></span><span class=line><span class=cl>scp -P <span class=m>2222</span> localfile user@remotehost:/path/to/destination
+</span></span><span class=line><span class=cl>scp -r local_folder remote_username@remote_ip:remote_folder
+</span></span><span class=line><span class=cl>scp -P <span class=m>2222</span> -r myfolder user@192.168.1.100:/home/user/newfolder <span class=c1># rename</span>
+</span></span></code></pre></div><p><a href="https://linuxtools-rst.readthedocs.io/zh-cn/latest/tool/scp.html#:~:text=scp%E6%98%AFsecure%20copy%E7%9A%84,%E4%BD%A0%E6%8A%8A%E6%96%87%E4%BB%B6%E7%A7%BB%E5%87%BA%E6%9D%A5%E3%80%82" target=_blank rel="noopener noreffer">https://linuxtools-rst.readthedocs.io/zh-cn/latest/tool/scp.html#:~:text=scp%E6%98%AFsecure%20copy%E7%9A%84,%E4%BD%A0%E6%8A%8A%E6%96%87%E4%BB%B6%E7%A7%BB%E5%87%BA%E6%9D%A5%E3%80%82</a></p><p><a href=https://www.linuxrumen.com/rmxx/1336.html target=_blank rel="noopener noreffer">scp复制文件时排除指定文件</a></p><h2 id=rsync>rsync</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>avz</span> <span class=o>-</span><span class=n>n</span> <span class=o>-</span><span class=n>h</span> <span class=o>.</span> <span class=mf>43.138.116.20</span><span class=p>:</span><span class=o>~/</span><span class=n>pics</span> <span class=c1># 同步当前目录与远程服务器目录（DRY RUN）</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>avzP</span> <span class=o>-</span><span class=n>nh</span> <span class=n>stellar_web_recon</span><span class=o>/</span> <span class=n>stellar_engine_web_reconstruction</span><span class=o>/</span> <span class=o>--</span><span class=n>exclude</span> <span class=o>.</span><span class=n>git</span> <span class=c1># 排除所有.git</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>e</span> <span class=s2>&#34;ssh -p 2222&#34;</span> <span class=o>-</span><span class=n>avz</span> <span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>zhaoyun</span><span class=o>/</span><span class=n>YFJ</span><span class=o>/</span><span class=n>python</span><span class=o>/</span><span class=n>sediment</span><span class=o>/</span><span class=n>deeplearning</span><span class=o>/</span><span class=n>Keras</span><span class=o>-</span><span class=n>Semantic</span><span class=o>-</span><span class=n>Segmentation</span><span class=o>/</span><span class=n>utils</span><span class=o>/</span> <span class=n>yfjie</span><span class=o>@</span><span class=mf>43.139.81.212</span><span class=p>:</span><span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>yfjie</span><span class=o>/</span><span class=n>Documents</span><span class=o>/</span><span class=n>python</span><span class=o>/</span><span class=n>Keras</span><span class=o>-</span><span class=n>Semantic</span><span class=o>-</span><span class=n>Segmentation</span><span class=o>/</span><span class=n>utils</span> <span class=o>--</span><span class=n>delete</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>e</span> <span class=s2>&#34;ssh -p 2222&#34;</span> <span class=o>-</span><span class=n>avz</span> <span class=n>yfjie</span><span class=o>@</span><span class=mf>43.139.81.212</span><span class=p>:</span><span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>yfjie</span><span class=o>/</span><span class=n>Documents</span><span class=o>/</span><span class=n>python</span><span class=o>/</span><span class=n>Keras</span><span class=o>-</span><span class=n>Semantic</span><span class=o>-</span><span class=n>Segmentation</span><span class=o>/</span><span class=n>utils</span> <span class=n>tmp</span><span class=o>/</span> <span class=o>--</span><span class=n>exclude</span> <span class=o>*</span><span class=n>cache</span><span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>e</span> <span class=s2>&#34;ssh -p 2222&#34;</span> <span class=o>-</span><span class=n>avz</span> <span class=o>-</span><span class=n>n</span> <span class=o>-</span><span class=n>h</span> <span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>zhaoyun</span><span class=o>/</span><span class=n>YFJ</span><span class=o>/</span><span class=n>python</span><span class=o>/</span><span class=n>sediment</span><span class=o>/</span><span class=n>deeplearning</span><span class=o>/</span><span class=n>Keras</span><span class=o>-</span><span class=n>Semantic</span><span class=o>-</span><span class=n>Segmentation</span><span class=o>/</span> <span class=n>yfjie</span><span class=o>@</span><span class=mf>43.139.81.212</span><span class=p>:</span><span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>yfjie</span><span class=o>/</span><span class=n>Documents</span><span class=o>/</span><span class=n>python</span><span class=o>/</span><span class=n>Keras</span><span class=o>-</span><span class=n>Semantic</span><span class=o>-</span><span class=n>Segmentation</span><span class=o>/</span> <span class=o>--</span><span class=n>exclude</span> <span class=n>weights</span> <span class=o>--</span><span class=n>exclude</span> <span class=n>data</span> <span class=o>--</span><span class=n>exclude</span> <span class=o>.</span><span class=n>idea</span> <span class=o>--</span><span class=n>exclude</span> <span class=o>*</span><span class=n>cache</span><span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>e</span> <span class=s2>&#34;ssh -p 2222&#34;</span> <span class=o>-</span><span class=n>avz</span> <span class=o>-</span><span class=n>n</span> <span class=o>-</span><span class=n>h</span> <span class=n>yfjie</span><span class=o>@</span><span class=mf>43.139.81.212</span><span class=p>:</span><span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>yfjie</span><span class=o>/</span><span class=n>Documents</span><span class=o>/</span><span class=n>slam</span><span class=o>/</span><span class=n>ORB_SLAM2</span> <span class=o>/</span><span class=n>share</span><span class=o>/</span><span class=n>QTE</span><span class=o>/</span><span class=n>YFJ</span><span class=o>/</span><span class=n>SLAM</span><span class=o>/</span><span class=n>ORB_SLAM2</span> <span class=o>--</span><span class=n>exclude</span> <span class=n>Vocabulary</span> <span class=o>--</span><span class=n>exclude</span> <span class=o>.</span><span class=n>idea</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>--</span><span class=n>include</span> <span class=n>image</span> <span class=o>--</span><span class=n>exclude</span> <span class=s2>&#34;/*&#34;</span> <span class=c1># 仅同步image目录</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>av</span> <span class=o>--</span><span class=n>exclude</span><span class=o>-</span><span class=n>from</span><span class=o>=</span><span class=s1>&#39;exclude.txt&#39;</span> <span class=n>user</span><span class=nd>@remote</span><span class=p>:</span><span class=o>/</span><span class=n>data</span><span class=o>/</span><span class=n>projectA</span><span class=o>/</span> <span class=o>./</span><span class=n>projectA</span><span class=o>/</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>注意事项</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>源路径斜杠</span> <span class=p>(</span><span class=o>/</span><span class=p>)</span> <span class=n>的影响</span> <span class=err>：</span> <span class=s2>&#34;带 / 复制内容，不带 / 复制整个目录&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>本地同步</span> <span class=n>时</span><span class=err>，</span><span class=n>目标路径的</span> <span class=o>/</span> <span class=n>基本无影响</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=n>远程同步</span> <span class=n>时</span><span class=err>，</span><span class=n>目标路径的</span> <span class=o>/</span> <span class=n>可能会影响路径解析</span><span class=err>，</span><span class=n>复制到符号链接指向的位置</span><span class=err>。</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 加速传输</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>avzP</span> <span class=o>/</span><span class=n>path</span><span class=o>/</span><span class=n>to</span><span class=o>/</span><span class=n>bigfile</span> <span class=n>user</span><span class=nd>@remote_ip</span><span class=p>:</span><span class=o>/</span><span class=n>target</span><span class=o>/</span><span class=nb>dir</span><span class=o>/</span> <span class=c1># 显示进度 + 支持断点续传</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>avz</span> <span class=o>--</span><span class=n>progress</span> <span class=o>--</span><span class=n>partial</span> <span class=o>--</span><span class=n>inplace</span> <span class=o>--</span><span class=n>compress</span><span class=o>-</span><span class=n>level</span><span class=o>=</span><span class=mi>9</span> <span class=o>/</span><span class=n>path</span><span class=o>/</span><span class=n>to</span><span class=o>/</span><span class=n>file</span> <span class=n>user</span><span class=nd>@remote</span><span class=p>:</span><span class=o>/</span><span class=n>dest</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=n>rsync</span> <span class=o>-</span><span class=n>vP</span> <span class=o>--</span><span class=n>block</span><span class=o>-</span><span class=n>size</span><span class=o>=</span><span class=mi>1</span><span class=n>M</span> <span class=o>--</span><span class=n>inplace</span> <span class=o>--</span><span class=n>no</span><span class=o>-</span><span class=n>checksum</span> <span class=o>/</span><span class=n>path</span><span class=o>/</span><span class=n>to</span><span class=o>/</span><span class=n>file</span> <span class=n>user</span><span class=nd>@remote</span><span class=p>:</span><span class=o>/</span><span class=n>dest</span><span class=o>/</span> <span class=c1># 单个大文件</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>       
+</span></span></code></pre></div><h1 id=文件查找-find-grep-locate>文件查找 find grep locate</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=mi>1</span><span class=err>、</span><span class=n>find</span>
+</span></span><span class=line><span class=cl><span class=n>find</span> <span class=o>.</span> <span class=o>-</span><span class=n>iname</span> <span class=s2>&#34;stripe_locs.png&#34;</span> <span class=o>-</span><span class=n>exec</span> <span class=n>ls</span> <span class=o>-</span><span class=n>l</span> <span class=p>{}</span> \<span class=p>;</span> <span class=c1># 并显示文件大小</span>
+</span></span><span class=line><span class=cl><span class=n>find</span> <span class=o>.</span> <span class=o>-</span><span class=nb>type</span> <span class=n>f</span> <span class=o>-</span><span class=n>name</span> <span class=s2>&#34;*.sh&#34;</span> <span class=c1># 查找文件</span>
+</span></span><span class=line><span class=cl><span class=n>find</span> <span class=o>/</span><span class=n>media</span><span class=o>/</span><span class=n>yfjie</span><span class=o>/</span> <span class=o>-</span><span class=nb>type</span> <span class=n>d</span> <span class=o>-</span><span class=n>iname</span> <span class=n>lsy</span> <span class=c1># 查找目录</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>2</span><span class=err>、</span><span class=n>locate</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>apt</span> <span class=n>install</span> <span class=n>mlocate</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>updatedb</span>
+</span></span><span class=line><span class=cl><span class=n>sudo</span> <span class=n>vim</span> <span class=o>/</span><span class=n>etc</span><span class=o>/</span><span class=n>updatedb</span><span class=o>.</span><span class=n>conf</span> <span class=c1># PRUNEPATHS 排除路径</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>locate</span> <span class=o>-</span><span class=n>i</span> <span class=n>wljslmz</span><span class=o>.</span><span class=n>ppt</span> <span class=c1># 忽略大小写</span>
+</span></span><span class=line><span class=cl><span class=n>locate</span> <span class=o>*.</span><span class=n>ppt</span>
+</span></span><span class=line><span class=cl><span class=n>locate</span> <span class=o>-</span><span class=n>n</span> <span class=mi>20</span> <span class=s1>&#39;*.ppt&#39;</span> <span class=c1># 查找20条</span>
+</span></span><span class=line><span class=cl><span class=n>locate</span> <span class=o>-</span><span class=n>c</span> <span class=s1>&#39;*.ppt&#39;</span> <span class=c1># 统计数量</span>
+</span></span><span class=line><span class=cl><span class=n>locate</span> <span class=o>-</span><span class=n>r</span> <span class=s1>&#39;/dirname$&#39;</span> <span class=c1># 仅查找目录</span>
+</span></span><span class=line><span class=cl><span class=n>locate</span> <span class=o>-</span><span class=n>b</span> <span class=n>test_locate</span><span class=o>.</span><span class=n>txt</span> <span class=c1># 仅basenanme</span>
+</span></span><span class=line><span class=cl><span class=n>P</span><span class=o>.</span><span class=n>S</span><span class=o>.</span> <span class=n>搜索ntfs磁盘updatedb时会报错</span><span class=err>（</span><span class=n>段错误</span><span class=err>）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>3</span><span class=err>、</span><span class=n>grep</span>
+</span></span><span class=line><span class=cl><span class=n>grep</span> <span class=o>-</span><span class=n>r</span> <span class=s2>&#34;keyword&#34;</span> <span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>user</span><span class=o>/</span><span class=n>documents</span><span class=o>/*</span> <span class=c1># 递归搜索</span>
+</span></span><span class=line><span class=cl><span class=n>grep</span> <span class=s2>&#34;verify 0&#34;</span> <span class=o>-</span><span class=n>r</span> <span class=o>-</span><span class=n>n</span> <span class=o>.</span> <span class=c1># 当前目录下递归搜索并显示行号</span>
+</span></span><span class=line><span class=cl><span class=n>grep</span> <span class=o>-</span><span class=n>rn</span> <span class=o>--</span><span class=n>include</span><span class=o>=</span><span class=s2>&#34;*.py&#34;</span> <span class=s2>&#34;keyword&#34;</span> <span class=o>/</span><span class=n>path</span><span class=o>/</span><span class=n>to</span><span class=o>/</span><span class=n>your</span><span class=o>/</span><span class=n>code</span>
+</span></span><span class=line><span class=cl><span class=n>grep</span> <span class=o>-</span><span class=n>rn</span> <span class=o>--</span><span class=n>include</span><span class=o>=</span><span class=s2>&#34;*.{py,txt}&#34;</span> <span class=s2>&#34;keyword&#34;</span> <span class=o>/</span><span class=n>path</span><span class=o>/</span><span class=n>to</span><span class=o>/</span><span class=n>your</span><span class=o>/</span>
+</span></span><span class=line><span class=cl><span class=n>rg</span> <span class=o>-</span><span class=n>rn</span> <span class=s2>&#34;keyword&#34;</span> <span class=o>-</span><span class=n>t</span> <span class=n>py</span> <span class=o>/</span><span class=n>path</span><span class=o>/</span><span class=n>to</span><span class=o>/</span><span class=n>your</span><span class=o>/</span><span class=n>codecode</span> <span class=c1># ripgrep</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>grep</span> <span class=s2>&#34;get_panorama.py&#34;</span> <span class=o>-</span><span class=n>r</span> <span class=o>-</span><span class=n>n</span> <span class=n>evt21</span><span class=o>/</span><span class=n>test3</span><span class=o>/</span><span class=n>logs</span><span class=o>/</span> <span class=o>&gt;</span> <span class=n>not_saveimg</span><span class=o>.</span><span class=n>txt</span>
+</span></span><span class=line><span class=cl><span class=n>grep</span> <span class=o>-</span><span class=n>i</span> <span class=s2>&#34;pattern&#34;</span> <span class=n>file</span><span class=o>.</span><span class=n>txt</span> <span class=c1># 不区分大小写</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>i</span> <span class=c1>#不区分大小写</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>n</span> <span class=c1>#显示行号</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 递归筛选并按大小排序</span>
+</span></span><span class=line><span class=cl><span class=n>find</span> <span class=o>.</span> <span class=o>-</span><span class=nb>type</span> <span class=n>f</span> <span class=o>-</span><span class=n>name</span> <span class=s2>&#34;*.py&#34;</span> <span class=o>-</span><span class=n>exec</span> <span class=n>ls</span> <span class=o>-</span><span class=n>lhS</span> <span class=p>{}</span> <span class=o>+</span> <span class=o>|</span> <span class=n>sort</span> <span class=o>-</span><span class=n>k</span> <span class=mi>5</span> <span class=o>-</span><span class=n>hr</span>
+</span></span></code></pre></div><pre tabindex=0><code>^
+锚定行的开始 如：&#39;^grep&#39;匹配所有以grep开头的行。
+$
+锚定行的结束 如：&#39;grep$&#39;匹配所有以grep结尾的行。
+</code></pre><p><a href=http://noahsnail.com/2017/02/07/2017-02-07-Linux%e7%bb%9f%e8%ae%a1%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%8b%e7%9a%84%e6%96%87%e4%bb%b6%e6%95%b0%e7%9b%ae/ target=_blank rel="noopener noreffer">Linux统计文件夹下的文件数目</a></p><p><a href=https://blog.csdn.net/xyznol/article/details/54967303 target=_blank rel="noopener noreffer">find命令并显示文件大小_find 显示文件大小_唐木的博客-CSDN博客</a></p><h1 id=文件比较>文件比较</h1><p><a href="https://www.notion.so/c8a5f3f62247429e95921f16916c3995?pvs=21" target=_blank rel="noopener noreffer">文件比较</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>diff -r /path/to/dir1 /path/to/dir2
+</span></span><span class=line><span class=cl>diff -rs --color<span class=o>=</span>always 目录1 目录2 <span class=p>|</span> less -R <span class=c1># 详细内容差异对比</span>
+</span></span><span class=line><span class=cl>diff -r --exclude<span class=o>=</span><span class=s1>&#39;.git&#39;</span> projectA/ projectB/ <span class=c1># 目录排除,-x</span>
+</span></span><span class=line><span class=cl>diff -r --exclude<span class=o>=</span><span class=s1>&#39;__pycache__&#39;</span> --exclude<span class=o>=</span><span class=s1>&#39;*.log&#39;</span> dir1/ dir2/ <span class=c1># 通配符排除</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>rsync -avnc /path/to/dir1/ /path/to/dir2/
+</span></span><span class=line><span class=cl>rsync -avnc -Ph /path/to/dir1/ /path/to/dir2/
+</span></span></code></pre></div><h1 id=文件移动>文件移动</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 批量移动</span>
+</span></span><span class=line><span class=cl>mv folder_<span class=o>{</span>21..100<span class=o>}</span> ..
+</span></span><span class=line><span class=cl>mkdir <span class=nv>$USER</span>
+</span></span><span class=line><span class=cl>mkdir <span class=k>$(</span>whoami<span class=k>)</span>
+</span></span></code></pre></div><h1 id=文字处理>文字处理</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 去除空行</span>
+</span></span><span class=line><span class=cl>sed <span class=s1>&#39;/^\s*$/d&#39;</span> input.txt &gt; output.txt
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 文件批量重命名</span>
+</span></span><span class=line><span class=cl>sudo apt install rename （Perl 版本）
+</span></span><span class=line><span class=cl>rename <span class=s1>&#39;s/old/new/&#39;</span> *
+</span></span></code></pre></div><h1 id=日志输出>日志输出</h1><p><a href="https://www.notion.so/19fe4020f06080fd8576c89e31feb19f?pvs=21" target=_blank rel="noopener noreffer">日志输出</a></p><p><a href=https://www.jianshu.com/p/ad879061edb2 target=_blank rel="noopener noreffer">https://www.jianshu.com/p/ad879061edb2</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>**一、基础重定向，终端不显示**
+</span></span><span class=line><span class=cl><span class=c1># ****重定向的含义是改变原有输出方式</span>
+</span></span><span class=line><span class=cl><span class=c1># 1. 覆盖写入文件</span>
+</span></span><span class=line><span class=cl><span class=c1># 仅保存标准输出（stdout）</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> &gt; output.log
+</span></span><span class=line><span class=cl><span class=c1># 同时保存标准输出和错误输出（stdout + stderr）</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> &gt; output.log 2&gt;<span class=p>&amp;</span><span class=m>1</span>   <span class=c1># 写法1 **通用**</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> <span class=p>&amp;</span>&gt; output.log       <span class=c1># 写法2（Bash特有）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 2. 追加写入文件</span>
+</span></span><span class=line><span class=cl><span class=c1># 追加标准输出</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> &gt;&gt; output.log
+</span></span><span class=line><span class=cl><span class=c1># 追加标准输出和错误输出</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> &gt;&gt; output.log 2&gt;<span class=p>&amp;</span><span class=m>1</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> <span class=p>&amp;</span>&gt;&gt; output.log      <span class=c1># Bash特有</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>**二、实时输出并保存（tee命令）**
+</span></span><span class=line><span class=cl><span class=c1># 同时显示输出并写入文件（覆盖旧内容）</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> <span class=p>|</span> tee output.log
+</span></span><span class=line><span class=cl><span class=c1># 同时保存标准输出和错误输出</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>|</span> tee output.log
+</span></span><span class=line><span class=cl><span class=c1># 追加内容到文件</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> <span class=p>|</span> tee -a output.log
+</span></span><span class=line><span class=cl><span class=c1># 追加并合并所有输出流</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>|</span> tee -a output.log
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>**三、后台运行并记录日志**
+</span></span><span class=line><span class=cl><span class=c1># 输出重定向到 nohup.out（默认）</span>
+</span></span><span class=line><span class=cl>nohup <span class=nb>command</span> <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl><span class=c1># 自定义输出文件</span>
+</span></span><span class=line><span class=cl>nohup <span class=nb>command</span> &gt; output.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl><span class=c1># 后台运行并记录输出</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> &gt; output.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span>
+</span></span></code></pre></div><h2 id=几个常用命令区别>几个常用命令区别</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>command</span> &gt; output.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=c1># 仅输出到日志文件，运行后前台处于挂起状态，关闭终端后程序停止运行</span>
+</span></span><span class=line><span class=cl><span class=nb>command</span> &gt; output.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span> <span class=c1># 仅输出到日志文件，运行后程序进入后台执行，关闭终端后程序停止运行，jobs -l查看</span>
+</span></span><span class=line><span class=cl>nohup <span class=nb>command</span> &gt; output.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span> <span class=c1># 仅输出到日志文件，运行后程序进入后台执行，关闭终端后程序继续运行，ps aux | grep kywd</span>
+</span></span><span class=line><span class=cl>ros2 run demo_nodes_cpp talker 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>|</span> tee -a talker.log 
+</span></span><span class=line><span class=cl>nohup ros2 run demo_nodes_cpp talker 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>|</span> tee -a talker.log <span class=p>&amp;</span> <span class=c1># 终端是单独进程的关闭终端会停止(某些终端)</span>
+</span></span><span class=line><span class=cl>nohup your_command 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>|</span> tee -a your_logfile <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 使用disown从shell作业表移除进程，使其不受终端影响</span>
+</span></span><span class=line><span class=cl>ros2 run demo_nodes_cpp talker 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>|</span> tee -a talker.log <span class=p>&amp;</span>
+</span></span><span class=line><span class=cl><span class=nb>disown</span> -h %1  <span class=c1># %1 为作业号（通过 `jobs -l` 查看）</span>
+</span></span></code></pre></div><h1 id=linux版本内核查看>Linux版本/内核查看</h1><p><a href=https://linux.cn/article-9586-1.html target=_blank rel="noopener noreffer">https://linux.cn/article-9586-1.html</a><br><em><strong>!!!不要自动更新</strong></em><br><em><strong>!!!不要自动更新</strong></em><br><em><strong>!!!不要自动更新</strong></em></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>lsb_release -a <span class=c1># 推荐</span>
+</span></span><span class=line><span class=cl><span class=s1>&#39;&#39;&#39;
+</span></span></span><span class=line><span class=cl><span class=s1>No LSB modules are available.
+</span></span></span><span class=line><span class=cl><span class=s1>Distributor ID: Ubuntu
+</span></span></span><span class=line><span class=cl><span class=s1>Description: Ubuntu 16.04.3 LTS
+</span></span></span><span class=line><span class=cl><span class=s1>Release: 16.04
+</span></span></span><span class=line><span class=cl><span class=s1>Codename: xenial
+</span></span></span><span class=line><span class=cl><span class=s1>&#39;&#39;&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>uname -a
+</span></span><span class=line><span class=cl>cat /proc/version <span class=c1># 内核</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 列出所有内核</span>
+</span></span><span class=line><span class=cl>dpkg --list <span class=p>|</span> grep linux-image <span class=c1># ubuntu</span>
+</span></span><span class=line><span class=cl>rpm -qa <span class=p>|</span> grep kernel <span class=c1># CentOS</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 清理内核</span>
+</span></span><span class=line><span class=cl>sudo apt remove linux-image-X.X.X-XX-generic <span class=c1># 删除旧的内核</span>
+</span></span><span class=line><span class=cl>sudo apt autoremove <span class=c1># 自动清理未使用的旧内核和依赖</span>
+</span></span></code></pre></div><h2 id=云厂商查询>云厂商查询</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo dmidecode -t system
+</span></span><span class=line><span class=cl>sudo dmidecode -s system-manufacturer
+</span></span><span class=line><span class=cl>sudo lshw -short
+</span></span></code></pre></div><h1 id=查看ip>查看ip</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=err>#</span> <span class=nx>本地ip</span>
+</span></span><span class=line><span class=cl><span class=nx>hostname</span> <span class=o>-</span><span class=nx>I</span> 
+</span></span><span class=line><span class=cl><span class=nx>ifconfig</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=err>#</span> <span class=nx>公网ip</span>
+</span></span><span class=line><span class=cl><span class=nx>curl</span> <span class=nx>ifconfig</span><span class=p>.</span><span class=nx>me</span> <span class=err>#</span> <span class=nx>仅输出ip</span><span class=err>，</span><span class=nx>不换行</span>
+</span></span><span class=line><span class=cl><span class=nx>curl</span> <span class=nx>ipinfo</span><span class=p>.</span><span class=nx>io</span><span class=o>/</span><span class=nx>ip</span>
+</span></span><span class=line><span class=cl><span class=nx>curl</span> <span class=nx>ip</span><span class=p>.</span><span class=nx>sb</span> <span class=err>#</span> <span class=nx>换行</span> 
+</span></span><span class=line><span class=cl><span class=nx>curl</span> <span class=nx>cip</span><span class=p>.</span><span class=nx>cc</span> <span class=err>#</span> <span class=nx>提供额外信息</span>
+</span></span></code></pre></div><h1 id=网络管理>网络管理</h1><h2 id=查看wifi名称>查看wifi名称</h2><p>在Linux系统中，你可以使用不同的命令来查看当前连接的WiFi网络的名称。以下是一些常用的命令：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nmcli（NetworkManager Command Line Interface）：
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>nmcli connection show --active
+</span></span><span class=line><span class=cl>这个命令会显示当前激活（连接）的网络连接信息，包括WiFi网络的名称。
+</span></span><span class=line><span class=cl>如果你正在使用 NetworkManager 来管理网络连接，这是一个很方便的命令。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>iwconfig
+</span></span><span class=line><span class=cl>iwconfig 命令显示当前无线网络接口的信息，包括连接的WiFi网络的名称（ESSID）。
+</span></span><span class=line><span class=cl>但是，该命令在一些新的系统上可能已经被弃用，而 nmcli 更为推荐。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>iw dev
+</span></span><span class=line><span class=cl>iw 命令也是一个用于配置和显示无线设备信息的工具。
+</span></span><span class=line><span class=cl>上述命令显示当前无线设备的详细信息，其中包括连接的WiFi网络的名称。
+</span></span></code></pre></div><p>请注意，具体命令的可用性和输出可能因Linux发行版和使用的网络管理工具而有所不同。在大多数现代Linux系统中，nmcli 是一个强大而通用的工具，而在一些老旧系统中，可能需要使用其他命令。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nmcli
+</span></span><span class=line><span class=cl>nmcli connection show --active
+</span></span><span class=line><span class=cl>nmcli -t -f active,ssid dev wifi <span class=p>|</span> grep yes
+</span></span><span class=line><span class=cl>nmcli dev wifi list
+</span></span><span class=line><span class=cl>iwconfig
+</span></span><span class=line><span class=cl>iw
+</span></span><span class=line><span class=cl>iw dev
+</span></span><span class=line><span class=cl>iwgetid -r
+</span></span></code></pre></div><h1 id=系统时间时区>系统时间/时区</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>date
+</span></span><span class=line><span class=cl>timedatectl
+</span></span></code></pre></div><h1 id=目录大小统计>目录大小/统计</h1><p><a href="https://blog.csdn.net/duan19920101/article/details/104823301#:~:text=du%E5%91%BD%E4%BB%A4%E7%94%A8%E4%BA%8E%E6%98%BE%E7%A4%BA,%E6%89%80%E5%8D%A0%E7%94%A8%E7%9A%84%E7%A3%81%E7%9B%98%E7%A9%BA%E9%97%B4%E3%80%82" target=_blank rel="noopener noreffer">Linux查看文件或文件夹大小: du命令_那年聪聪的博客-CSDN博客_linux查看文件夹大小</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>du
+</span></span><span class=line><span class=cl>du -h -d <span class=m>1</span> <span class=c1># 第一级目录</span>
+</span></span><span class=line><span class=cl>du -m -d <span class=m>1</span> <span class=c1># 以MB单位显示</span>
+</span></span><span class=line><span class=cl>du -sh <span class=c1># 总空间</span>
+</span></span><span class=line><span class=cl>du -sh <span class=o>&amp;&amp;</span> find . -type f <span class=p>|</span> wc -l <span class=c1># 同时查看文件数</span>
+</span></span><span class=line><span class=cl>find /目标路径 -maxdepth <span class=m>1</span> -mindepth <span class=m>1</span> -type d -print0 <span class=p>|</span> xargs -0 -I<span class=o>{}</span> sh -c <span class=s1>&#39;echo &#34;{}: $(find &#34;{}&#34; -type f | wc -l)&#34;&#39;</span>
+</span></span><span class=line><span class=cl>find . -maxdepth <span class=m>1</span> -mindepth <span class=m>1</span> -type d -exec sh -c <span class=s1>&#39;echo &#34;{}: $(find &#34;{}&#34; -type f | wc -l)&#34;&#39;</span> <span class=se>\;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> d in /目标路径/*/<span class=p>;</span> <span class=k>do</span> <span class=nb>echo</span> <span class=s2>&#34;</span><span class=si>${</span><span class=nv>d</span><span class=p>%?</span><span class=si>}</span><span class=s2>: </span><span class=k>$(</span>find <span class=s2>&#34;</span><span class=nv>$d</span><span class=s2>&#34;</span> -type f <span class=p>|</span> wc -l<span class=k>)</span><span class=s2>&#34;</span><span class=p>;</span> <span class=k>done</span>
+</span></span></code></pre></div><h2 id=统计文件数>统计文件数</h2><p><a href=http://noahsnail.com/2017/02/07/2017-02-07-Linux%e7%bb%9f%e8%ae%a1%e6%96%87%e4%bb%b6%e5%a4%b9%e4%b8%8b%e7%9a%84%e6%96%87%e4%bb%b6%e6%95%b0%e7%9b%ae/ target=_blank rel="noopener noreffer">Linux统计文件夹下的文件数目</a></p><p>统计各个一级子目录下所有文件数</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=k>for</span> dir in /path/to/directory/*/<span class=p>;</span> <span class=k>do</span> <span class=nb>echo</span> -n <span class=s2>&#34;</span><span class=nv>$dir</span><span class=s2>: &#34;</span><span class=p>;</span> find <span class=s2>&#34;</span><span class=nv>$dir</span><span class=s2>&#34;</span> -type f <span class=p>|</span> wc -l<span class=p>;</span><span class=k>done</span>
+</span></span></code></pre></div><p>让我们逐步解释这个命令：</p><ul><li><code>for dir in /path/to/directory/*/; do</code>: 这部分命令用于遍历指定目录下的每个一级子目录。</li><li><code>find "$dir" -type f</code>: 这部分命令用于在当前子目录中查找所有的文件。</li><li><code>| wc -l</code>: 这部分命令用于统计文件的数量。</li></ul><p>通过使用这个<code>for</code>循环，你可以一次性地统计每个一级子目录下所有文件的数量。</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 筛选特定类型</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> dir in ./*/<span class=p>;</span> <span class=k>do</span> <span class=nb>echo</span> -n <span class=s2>&#34;</span><span class=nv>$dir</span><span class=s2>: &#34;</span><span class=p>;</span> find <span class=s2>&#34;</span><span class=nv>$dir</span><span class=s2>&#34;</span> -maxdepth <span class=m>1</span> -type f -iname <span class=s2>&#34;*.txt&#34;</span> <span class=p>|</span> wc -l<span class=p>;</span> <span class=k>done</span>
+</span></span></code></pre></div><h1 id=目录树打印>目录树打印</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>tree
+</span></span><span class=line><span class=cl>tree -L <span class=m>2</span> <span class=c1># 指定层级</span>
+</span></span><span class=line><span class=cl>tree -l -u -g -s -D --du /path/to/directory &gt; output.txt <span class=c1># 详细信息</span>
+</span></span></code></pre></div><p><a href=https://www.runoob.com/linux/linux-comm-tree.html target=_blank rel="noopener noreffer">Linux tree命令 | 菜鸟教程</a></p><h1 id=快捷打开目录>快捷打开目录</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nautilus /path/to/directory
+</span></span><span class=line><span class=cl>xdg-open /path/to/directory
+</span></span></code></pre></div><h1 id=硬件信息>硬件信息</h1><p><a href=https://www.jianshu.com/p/7181f1d09339 target=_blank rel="noopener noreffer">Ubuntu查看硬件配置</a></p><p>cpu:</p><p><code>cat /proc/cpuinfo | grep model\ name</code></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install cpuinfo
+</span></span><span class=line><span class=cl>cpu-info
+</span></span></code></pre></div><p>显卡:</p><p>lspci | grep -i vga</p><p>watch -n 1 nvidia-smi</p><p>查看所有（第三方库）</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt install screenfetch
+</span></span><span class=line><span class=cl>screenfetch
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo apt install neofetch
+</span></span><span class=line><span class=cl>neofetch
+</span></span></code></pre></div><p><a href=https://www.51cto.com/article/714293.html target=_blank rel="noopener noreffer"></a></p><p><a href=https://www.cnblogs.com/gcstsz/p/16213646.html target=_blank rel="noopener noreffer">https://www.cnblogs.com/gcstsz/p/16213646.html</a></p><p><a href=https://www.cnblogs.com/gcstsz/p/16213646.html target=_blank rel="noopener noreffer">CentOS 7如何安装Neofetch</a></p><p><a href=https://www.cnblogs.com/liangjiongyao/p/10134513.html target=_blank rel="noopener noreffer">CentOS7.6安装screenfetch</a></p><h1 id=shell>Shell</h1><p><a href="https://www.notion.so/Shell-47380679f631425798a9348b997d0eec?pvs=21" target=_blank rel="noopener noreffer">Shell</a></p><h2 id=四种执行方式>四种执行方式</h2><p><a href=https://www.jianshu.com/p/46666ced3bc0 target=_blank rel="noopener noreffer">https://www.jianshu.com/p/46666ced3bc0</a></p><p><a href=https://www.jianshu.com/p/46666ced3bc0 target=_blank rel="noopener noreffer">Linux下四种方式执行.sh文件的区别</a></p><h2 id=刷新shell>刷新shell</h2><p><code>source ~/.bashrc</code></p><p>. ~/.bashrc</p><h2 id=查看更改shell>查看、更改shell</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#查看当前所使用的shell</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$SHELL</span> <span class=c1># Recommend，必须大写</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=si>${</span><span class=nv>SHELL</span><span class=si>}</span>
+</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$0</span>
+</span></span><span class=line><span class=cl><span class=c1>#查看当前用户可以使用的shell</span>
+</span></span><span class=line><span class=cl>cat /etc/shells
+</span></span><span class=line><span class=cl><span class=c1>#查看所有用户使用的shell</span>
+</span></span><span class=line><span class=cl>vim /etc/passwd 
+</span></span><span class=line><span class=cl><span class=c1># 设置shell类型</span>
+</span></span><span class=line><span class=cl>chsh -s /bin/bash
+</span></span><span class=line><span class=cl>sudo chsh -s /bin/bash username
+</span></span><span class=line><span class=cl>sudo vim /etc/passwd <span class=c1># 直接编辑</span>
+</span></span></code></pre></div><h2 id=新建终端并执行命令>新建终端并执行命令</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>gnome-terminal --title <span class=s2>&#34;run matlab&#34;</span> -- bash -c <span class=s2>&#34;echo </span><span class=nv>$exec</span><span class=s2>;</span><span class=nv>$exec</span><span class=s2> -x&#34;</span>
+</span></span></code></pre></div><h1 id=压缩解压>压缩/解压</h1><p><a href="https://www.notion.so/f037aef6c76c44728ddc657ec3132c12?pvs=21" target=_blank rel="noopener noreffer">压缩/解压</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=mi>1</span> <span class=c1># zip</span>
+</span></span><span class=line><span class=cl><span class=c1># zip [选项] 压缩包名 源文件或源目录列表</span>
+</span></span><span class=line><span class=cl><span class=n>tar</span> <span class=o>-</span><span class=n>zcvf</span> <span class=n>test</span><span class=o>.</span><span class=n>tar</span><span class=o>.</span><span class=n>gz</span> <span class=o>./</span><span class=n>test</span> <span class=c1># 推荐用于 Linux 归档与备份</span>
+</span></span><span class=line><span class=cl><span class=nb>zip</span> <span class=o>-</span><span class=n>r</span> <span class=n>archive_name</span><span class=o>.</span><span class=n>zip</span> <span class=n>folder_name</span><span class=o>/</span> <span class=c1># 跨平台友好</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>2</span> <span class=c1># unzip</span>
+</span></span><span class=line><span class=cl><span class=n>tar</span> <span class=o>-</span><span class=n>zxvf</span> <span class=n>abc</span><span class=o>.</span><span class=n>tgz</span>
+</span></span><span class=line><span class=cl><span class=n>unzip</span>
+</span></span><span class=line><span class=cl><span class=n>unzip</span> <span class=n>example</span><span class=o>.</span><span class=n>zip</span> <span class=o>-</span><span class=n>d</span> <span class=n>extracted</span> <span class=c1># 指定目录</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>3</span> <span class=c1># unrar</span>
+</span></span><span class=line><span class=cl><span class=n>unrar</span> <span class=n>x</span> <span class=n>test</span><span class=o>.</span><span class=n>rar</span> <span class=c1># 默认当前目录</span>
+</span></span><span class=line><span class=cl><span class=n>unrar</span> <span class=n>x</span> <span class=n>example</span><span class=o>.</span><span class=n>rar</span> <span class=o>/</span><span class=n>home</span><span class=o>/</span><span class=n>user</span><span class=o>/</span><span class=n>documents</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=mi>4</span> <span class=c1># sudo apt install xz-utils</span>
+</span></span><span class=line><span class=cl><span class=n>xz</span> <span class=o>-</span><span class=n>d</span> <span class=n>xxx</span><span class=o>.</span><span class=n>tar</span><span class=o>.</span><span class=n>xz</span> <span class=c1># 会首先解压为tar文件</span>
+</span></span><span class=line><span class=cl><span class=n>which</span> <span class=n>xz</span>
+</span></span><span class=line><span class=cl><span class=n>whersis</span> <span class=n>xz</span>
+</span></span><span class=line><span class=cl><span class=n>dpkg</span> <span class=o>-</span><span class=n>l</span> <span class=o>|</span> <span class=n>gerp</span> <span class=n>xz</span>
+</span></span></code></pre></div><h1 id=文件下载>文件下载</h1><p><a href="https://www.notion.so/1cde4020f060804ba4b3cd9f307fd708?pvs=21" target=_blank rel="noopener noreffer">文件下载</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 基础下载</span>
+</span></span><span class=line><span class=cl>wget URL                 <span class=c1># 下载单个文件</span>
+</span></span><span class=line><span class=cl>wget -c URL              <span class=c1># 断点续传</span>
+</span></span><span class=line><span class=cl><span class=nb>time</span> wget URL            <span class=c1># 显示时间</span>
+</span></span><span class=line><span class=cl>curl -O URL  
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 多线程加速</span>
+</span></span><span class=line><span class=cl>aria2c -c -x <span class=m>16</span> -s <span class=m>16</span> URL
+</span></span><span class=line><span class=cl>aria2c -x <span class=m>16</span> -s <span class=m>16</span> -k 1M -c URL
+</span></span><span class=line><span class=cl>-x <span class=m>16</span> 多线程（最多 <span class=m>16</span> 线程）
+</span></span><span class=line><span class=cl>-s <span class=m>16</span> 连接数（16 个并行连接）
+</span></span><span class=line><span class=cl>-k 1M 每个连接最小分块 1MB
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 适用于服务器文件同步和大文件下载，支持断点续传</span>
+</span></span><span class=line><span class=cl>rsync -avz --progress user@server:/path/to/file localfile
+</span></span><span class=line><span class=cl>-a 保持权限
+</span></span><span class=line><span class=cl>-v 显示详细信息
+</span></span><span class=line><span class=cl>-z 压缩传输
+</span></span><span class=line><span class=cl>--progress 显示进度
+</span></span></code></pre></div><p><a href=https://linux.cn/article-8124-1.html target=_blank rel="noopener noreffer">https://linux.cn/article-8124-1.html</a></p><p><a href=https://linux.cn/article-8124-1.html target=_blank rel="noopener noreffer">分享|4 个 Linux 下最好的命令行下载管理器/加速器</a></p><p><a href=https://cloud.tencent.com/developer/article/1852397 target=_blank rel="noopener noreffer">https://cloud.tencent.com/developer/article/1852397</a></p><p><a href=https://cloud.tencent.com/developer/article/1852397 target=_blank rel="noopener noreffer">Linux curl 命令下载文件</a></p><h1 id=防火墙>防火墙</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看防火墙状态</span>
+</span></span><span class=line><span class=cl><span class=c1># 首先查看防火墙是否开启，如未开启，需要先开启防火墙并作开机自启</span>
+</span></span><span class=line><span class=cl>sudo ufw status <span class=c1># Debian系 默认防火墙工具</span>
+</span></span><span class=line><span class=cl>sudo firewall-cmd --state <span class=c1>#  Red Hat系 默认防火墙工具</span>
+</span></span><span class=line><span class=cl>sudo systemctl status firewalld
+</span></span><span class=line><span class=cl>sudo iptables -L <span class=c1># 防火墙底层工具，灵活性和精细控制</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 开启防火墙并设置开机自启</span>
+</span></span><span class=line><span class=cl>sudo ufw <span class=nb>enable</span>
+</span></span><span class=line><span class=cl>systemctl start firewalld
+</span></span><span class=line><span class=cl>systemctl <span class=nb>enable</span> firewalld
+</span></span><span class=line><span class=cl><span class=c1>#一般需要重启一下机器，不然后面做的设置可能不会生效</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 关闭防火墙</span>
+</span></span><span class=line><span class=cl>sudo ufw disable
+</span></span><span class=line><span class=cl>sudo systemctl stop firewalld
+</span></span><span class=line><span class=cl>sudo iptables -F <span class=c1># 细粒度配置</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 允许局域网通过防火墙，这个范围包含从 192.168.0.1 到 192.168.0.254 的所有 IP 地址</span>
+</span></span><span class=line><span class=cl>sudo ufw allow from 192.168.31.0/24
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 高级用法</span>
+</span></span><span class=line><span class=cl>sudo ss -tulpn <span class=p>|</span> grep <span class=m>3000</span>
+</span></span><span class=line><span class=cl>sudo lsof -i :3000
+</span></span><span class=line><span class=cl>sudo ufw status verbose
+</span></span><span class=line><span class=cl>sudo ufw status numbered
+</span></span><span class=line><span class=cl>sudo ufw delete <span class=o>[</span>规则编号<span class=o>]</span> <span class=c1># 即时生效</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 开放端口</span>
+</span></span><span class=line><span class=cl>firewall-cmd --zone<span class=o>=</span>public --add-port<span class=o>=</span>7000/tcp --permanent
+</span></span><span class=line><span class=cl><span class=c1># firewall-cmd --permanent --add-port=7000/tcp</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看开放端口列表</span>
+</span></span><span class=line><span class=cl>firewall-cmd --permanent --zone<span class=o>=</span>public --list-ports
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 防火墙reload</span>
+</span></span><span class=line><span class=cl>firewall-cmd --reload
+</span></span></code></pre></div><p>关闭电脑防火墙可能会带来一些安全和隐私方面的危害。防火墙是一种网络安全工具，用于监控和控制计算机与网络之间的通信，目的是阻止潜在的恶意流量。关闭防火墙可能导致以下问题：</p><pre tabindex=0><code>网络攻击： 开放的计算机端口和服务更容易受到网络攻击。关闭防火墙可能会使计算机容易受到恶意扫描、端口扫描和其他攻击。
+
+病毒和恶意软件： 恶意软件通常会利用计算机的漏洞进行入侵。关闭防火墙可能增加恶意软件感染的风险，因为它可以更容易地通过网络传播。
+
+未授权访问： 没有防火墙的计算机可能容易受到未授权访问。黑客可能能够远程访问你的计算机，查看或修改你的文件，甚至控制你的系统。
+
+隐私问题： 关闭防火墙可能导致个人信息泄露。一些恶意软件和攻击者可能利用计算机上的漏洞来获取用户的个人信息。
+
+网络干扰： 在没有防火墙的情况下，网络流量可能会更容易受到干扰，可能导致网络连接不稳定或变得更慢。
+</code></pre><p>在安全性方面，强烈建议保持计算机防火墙的开启状态，以减少网络风险。如果有必要关闭防火墙，应该仅在可信任的网络环境中，并在必要时限制计算机上的服务和端口的访问。在任何情况下，最好的做法是根据实际需求配置防火墙规则，而不是完全禁用防火墙。</p><h1 id=service相关>Service相关</h1><p>查看服务安装路径</p><p>1、先查PID</p><p>ps aux|grep nginx</p><p>2、再查路径</p><p>ls -l /proc/PID/exe</p><h1 id=systemctl>systemctl</h1><p><a href="https://www.notion.so/systemctl-1d3e4020f06080fbb17ec26edeef5ee8?pvs=21" target=_blank rel="noopener noreffer">systemctl</a></p><h1 id=查看桌面坏境>查看桌面坏境</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>echo</span> <span class=nv>$XDG_CURRENT_DESKTOP</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo apt install screenfetch
+</span></span><span class=line><span class=cl>screenfetch
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo apt install neofetch （recommend）
+</span></span><span class=line><span class=cl>neofetch
+</span></span></code></pre></div><p><a href=https://www.faqforge.com/linux/how-to-check-which-desktop-environment-is-used-on-linux/ target=_blank rel="noopener noreffer">https://www.faqforge.com/linux/how-to-check-which-desktop-environment-is-used-on-linux/</a></p><p><a href=https://www.faqforge.com/linux/how-to-check-which-desktop-environment-is-used-on-linux/ target=_blank rel="noopener noreffer">How to check which Desktop Environment is used on Linux</a></p><p><a href=https://zhuanlan.zhihu.com/p/133301317 target=_blank rel="noopener noreffer">如何找出你所使用的桌面环境 | Linux 中国</a></p><p><a href=https://www.cnblogs.com/kerrycode/p/4790021.html target=_blank rel="noopener noreffer">潇湘隐者</a></p><h1 id=密码管理>密码管理</h1><h2 id=修改密码>修改密码</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo passwd user_name
+</span></span><span class=line><span class=cl><span class=c1># or</span>
+</span></span><span class=line><span class=cl>passwd
+</span></span></code></pre></div><p><a href=https://blog.csdn.net/qq_43176116/article/details/88908431 target=_blank rel="noopener noreffer">Ubuntu修改登录密码_qq_43176116的博客-CSDN博客</a></p><p><a href="https://www.jianshu.com/p/a0a7645a2c2e?u_atoken=ea1f5441-7d23-472d-848a-43829d3377b1&amp;u_asession=01DVgGLz0Cq0spMvEHqpBruJCuVFgnkiiKFxvBjPPHdY6_XURtiYHd_IdGtcw9BmU8X0KNBwm7Lovlpxjd_P_q4JsKWYrT3W_NKPr8w6oU7K966AdcOpkqX3shBKwRfjspdSd2xtyR8tGtAryp6pbvRmBkFo3NEHBv0PZUm6pbxQU&amp;u_asig=0542fXvqK8gRfKwMVOlZEptbE1uSQ7-TMyJciggcm3yeUJffmPFkD7p-vBa4WwWwI7mLO3XoCn7eyEzmmeyKoHZ5X-jZftIeqOLkYI7uihjpE5Mmg0JYUludOhsEsRAnnfbaLJ9BTVL7wx1Ss7N3co9mTULnOCkWg6hAX8_t4dAef9JS7q8ZD7Xtz2Ly-b0kmuyAKRFSVJkkdwVUnyHAIJzZQ9KvbfrBcROmz0zhJhtXYZCzc77KwYS93Kh6U2cu1Iwt74LEzKVH73PIwzPMOHf-3h9VXwMyh6PgyDIVSG1W_EJoqVKI9yy0uU4HBs1Acaxn0LoX_xzVj5DWoTxavnSbFUUCVSFRn7S7lgy5hsvzVXXSZYw7y_gyjHcJCDtqEomWspDxyAEEo4kbsryBKb9Q&amp;u_aref=JbkEzUjzI%2BKXOtiFtd9KWCVytAI%3D" target=_blank rel="noopener noreffer">Linux管理员修改和查看普通用户密码</a></p><h2 id=密码过期>密码过期</h2><p><a href=https://www.cnblogs.com/machangwei-8/p/10352676.html target=_blank rel="noopener noreffer">chage命令详解 - 马昌伟 - 博客园</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>sudo</span> <span class=n>chage</span> <span class=o>-</span><span class=n>l</span> <span class=n>nvidia</span>
+</span></span><span class=line><span class=cl><span class=n>chage</span> <span class=p>[</span><span class=n>选项</span><span class=p>]</span> <span class=n>用户名</span>
+</span></span><span class=line><span class=cl><span class=n>选项</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>m</span><span class=err>：</span><span class=n>密码可更改的最小天数</span><span class=err>。</span><span class=n>为零时代表任何时候都可以更改密码</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>M</span><span class=err>：</span><span class=n>密码保持有效的最大天数</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>w</span><span class=err>：</span><span class=n>用户密码到期前</span><span class=err>，</span><span class=n>提前收到警告信息的天数</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>E</span><span class=err>：</span><span class=n>帐号到期的日期</span><span class=err>。</span><span class=n>过了这天</span><span class=err>，</span><span class=n>此帐号将不可用</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>d</span><span class=err>：</span><span class=n>上一次更改的日期</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>i</span><span class=err>：</span><span class=n>停滞时期</span><span class=err>。</span><span class=n>如果一个密码已过期这些天</span><span class=err>，</span><span class=n>那么此帐号将不可用</span><span class=err>。</span>
+</span></span><span class=line><span class=cl><span class=o>-</span><span class=n>l</span><span class=err>：</span><span class=n>例出当前的设置</span><span class=err>。</span><span class=n>由非特权用户来确定他们的密码或帐号何时过期</span><span class=err>。</span>
+</span></span></code></pre></div><h1 id=进程管理>进程管理</h1><p><a href="https://www.notion.so/e7186176fa3546ef80e1c34cf4e36dd7?pvs=21" target=_blank rel="noopener noreffer">进程管理</a></p><p><a href=https://img-blog.csdn.net/20170429113245014 target=_blank rel="noopener noreffer">https://img-blog.csdn.net/20170429113245014</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ps aux
+</span></span><span class=line><span class=cl>ps -ef
+</span></span><span class=line><span class=cl>top
+</span></span><span class=line><span class=cl>htop
+</span></span></code></pre></div><h1 id=用户管理>用户管理</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cat /etc/passwd <span class=c1># 查看本地所有用户信息，速度快</span>
+</span></span><span class=line><span class=cl>getent passwd <span class=c1># 本地+网络用户信息</span>
+</span></span><span class=line><span class=cl>getent passwd <span class=p>|</span> cut -d: -f1 <span class=c1># 只列出用户名</span>
+</span></span><span class=line><span class=cl>who <span class=c1># 查看当前系统中正在登录的用户</span>
+</span></span><span class=line><span class=cl>w <span class=c1># 同who</span>
+</span></span><span class=line><span class=cl> 
+</span></span><span class=line><span class=cl>useradd -m username <span class=c1># 添加用户并创建主目录，默认无密码</span>
+</span></span><span class=line><span class=cl>sudo passwd username <span class=c1># 设置密码</span>
+</span></span><span class=line><span class=cl>sudo userdel username <span class=c1># 删除用户</span>
+</span></span><span class=line><span class=cl>sudo userdel -r username <span class=c1># 删除用户及主目录</span>
+</span></span><span class=line><span class=cl>sudo useradd -m &lt;用户名&gt; <span class=o>&amp;&amp;</span> <span class=nb>echo</span> <span class=s2>&#34;&lt;用户名&gt;:</span><span class=k>$(</span>openssl rand -base64 12<span class=k>)</span><span class=s2>&#34;</span> <span class=p>|</span> sudo chpasswd <span class=c1># 创建并生成16位密码</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 切换用户</span>
+</span></span><span class=line><span class=cl>su - &lt;用户名&gt; <span class=c1># 需要普通用户密码</span>
+</span></span><span class=line><span class=cl>sudo -iu &lt;用户名&gt; <span class=c1># 需要管理员密码（在sudo组）</span>
+</span></span></code></pre></div><h1 id=用户组>用户组</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>getent group <span class=c1># 查看系统中的用户组(本地+网络)</span>
+</span></span><span class=line><span class=cl>getent group <span class=p>|</span> grep &lt;group_name&gt;
+</span></span><span class=line><span class=cl>cat /etc/group <span class=c1># 查看本地用户组</span>
+</span></span><span class=line><span class=cl><span class=c1># “get entries”，意为“获取条目”。它的主要功能是查询系统数据库中的记录信息</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看所属的用户组</span>
+</span></span><span class=line><span class=cl>groups
+</span></span><span class=line><span class=cl>groups xxx
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>sudo usermod -aG &lt;groupname&gt; &lt;username&gt; <span class=c1># 添加成员到用户组</span>
+</span></span><span class=line><span class=cl>sudo vim /etc/group <span class=c1># 直接修改，不推荐</span>
+</span></span><span class=line><span class=cl><span class=c1># 输出格式解析</span>
+</span></span><span class=line><span class=cl>group_name:x:GID:user_list
+</span></span><span class=line><span class=cl>    group_name：用户组名称。
+</span></span><span class=line><span class=cl>    x：密码占位符（实际密码存储在 /etc/gshadow 中）。
+</span></span><span class=line><span class=cl>    GID：用户组 ID。
+</span></span><span class=line><span class=cl>    user_list：属于该组的用户列表（用逗号分隔）。取决于所属组的权限分配
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看特定用户所属的组</span>
+</span></span><span class=line><span class=cl>id username <span class=c1># 比groups输出更详细，包括uid、gid等</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 移除组内特定用户</span>
+</span></span><span class=line><span class=cl>sudo gpasswd -d username groupname
+</span></span></code></pre></div><h1 id=权限管理>权限管理</h1><p><a href="https://www.notion.so/319ec6cb6e514e4899ee2f101a5a72d1?pvs=21" target=_blank rel="noopener noreffer">权限管理</a></p><ul><li><strong><code>chmod</code></strong>：改变文件夹的访问权限，但无法指定特定用户。</li><li><strong><code>chown</code></strong>：改变文件夹的所有者或用户组，适用于基于用户或组的权限管理。</li><li><strong><code>setfacl</code></strong>：更灵活的访问控制，允许为特定用户设置权限。</li></ul><p><a href=https://wangchujiang.com/linux-command/c/setfacl.html target=_blank rel="noopener noreffer">https://wangchujiang.com/linux-command/c/setfacl.html</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 基本设置</span>
+</span></span><span class=line><span class=cl>chmod
+</span></span><span class=line><span class=cl>sudo chown -R user1:group1 mydir <span class=c1># 修改所有者和组</span>
+</span></span><span class=line><span class=cl>sudo chown -R user1:group1 mydir
+</span></span><span class=line><span class=cl>sudo chgrp -R group1 mydir <span class=c1># 修改所属的组</span>
+</span></span><span class=line><span class=cl>sudo chmod g+s mydir <span class=c1># 设置 组继承（SGID 位）setgid 只影响 新建目录的组（让它们属于 gs_scene），但不会影响权限。</span>
+</span></span><span class=line><span class=cl>ls -ld mydir <span class=c1># 检查继承生效（x--&gt;s）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># ACL精细控制</span>
+</span></span><span class=line><span class=cl>sudo apt install acl
+</span></span><span class=line><span class=cl>getfacl /data <span class=c1># 查看文件夹当前的 ACL 设置</span>
+</span></span><span class=line><span class=cl>setfacl -m u:user1:rx /data <span class=c1># 为特定用户添加访问权限</span>
+</span></span><span class=line><span class=cl>setfacl -m g:group1:rw /data <span class=c1># 为特定用户组添加访问权限</span>
+</span></span><span class=line><span class=cl>setfacl -d -m u:user1:rw /data <span class=c1># 为新创建的文件或文件夹设置默认 ACL 继承权限,不能代替仅-m</span>
+</span></span><span class=line><span class=cl>setfacl -d -m g:group1:rx /data
+</span></span><span class=line><span class=cl>setfacl -d -x g:group1 /data <span class=c1># 移除特定继承权限</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># umask</span>
+</span></span><span class=line><span class=cl><span class=nb>umask</span> 是用户创建文件或目录时的默认权限掩码。不同用户可能有不同的 <span class=nb>umask</span> 设置。
+</span></span><span class=line><span class=cl>假设当前用户的 <span class=nb>umask</span> 为 002，那么创建目录时默认权限会是 775（rwxrwxr - x）
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 移除权限</span>
+</span></span><span class=line><span class=cl>chmod g-s gs_scene/stellar_web_recon/ <span class=c1># 移除权限继承</span>
+</span></span><span class=line><span class=cl>chmod g-w,o-rwx gs_scene/stellar_web_recon/ <span class=c1># 缩减权限</span>
+</span></span></code></pre></div><h2 id=解除占用>解除占用</h2><p><a href=https://wangchujiang.com/linux-command/c/lsof.html target=_blank rel="noopener noreffer">lsof 命令，Linux lsof 命令详解：显示Linux系统当前已打开的所有文件列表 <code>lsof -p pid</code> - Linux 命令搜索引擎</a></p><p>win10:</p><p>任务管理器—性能选项卡—资源监视器—搜索关联的句柄—删除句柄</p><p><a href=https://blog.csdn.net/u014175572/article/details/50946471 target=_blank rel="noopener noreffer">https://blog.csdn.net/u014175572/article/details/50946471</a></p><h1 id=docker>docker</h1><p><a href="https://www.notion.so/docker-199e4020f06080f09e9cd8f239bcf9e7?pvs=21" target=_blank rel="noopener noreffer">docker</a></p><p><a href=https://hub.docker.com/ target=_blank rel="noopener noreffer">https://hub.docker.com/</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看docker版本</span>
+</span></span><span class=line><span class=cl>docker --version
+</span></span><span class=line><span class=cl>docker -v
+</span></span><span class=line><span class=cl>docker info <span class=p>|</span> grep <span class=s2>&#34;Storage Driver&#34;</span> <span class=c1># 当前使用的存储驱动</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 安装</span>
+</span></span><span class=line><span class=cl>sudo snap install docker <span class=c1># 不推荐，可能有问题</span>
+</span></span><span class=line><span class=cl>sudo apt update
+</span></span><span class=line><span class=cl>sudo apt install docker.io
+</span></span><span class=line><span class=cl>sudo systemctl start docker
+</span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 设置用户组</span>
+</span></span><span class=line><span class=cl>sudo groupadd docker <span class=c1># 新增dockr组</span>
+</span></span><span class=line><span class=cl>newgrp docker <span class=c1># **切换用户的主组**，否则可能因为没有sudo权限运行不了docker命令</span>
+</span></span><span class=line><span class=cl>getent group <span class=p>|</span> grep docker <span class=c1># 查看组</span>
+</span></span><span class=line><span class=cl>sudo usermod -aG docker <span class=nv>$USER</span> <span class=c1># 组中添加成员</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看本机镜像</span>
+</span></span><span class=line><span class=cl>docker images
+</span></span><span class=line><span class=cl>docker images &lt;image_name&gt;
+</span></span><span class=line><span class=cl>docker images --format <span class=s1>&#39;{{.Size}}\t{{.Repository}}:{{.Tag}}&#39;</span> <span class=p>|</span> sort -h <span class=c1># 按大小排序</span>
+</span></span><span class=line><span class=cl>docker images --no-trunc <span class=c1># 非截断查看</span>
+</span></span><span class=line><span class=cl>docker images -a
+</span></span><span class=line><span class=cl>docker images -f <span class=s2>&#34;dangling=true&#34;</span> <span class=c1># 悬空镜像（未被任何容器引用）</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查找镜像</span>
+</span></span><span class=line><span class=cl>我们可以从 Docker Hub 网站来搜索镜像，Docker Hub 网址为： https://hub.docker.com/
+</span></span><span class=line><span class=cl>我们也可以使用 docker search 命令来搜索镜像。比如我们需要一个 httpd 的镜像来作为我们的 web 服务。我们可以通过 docker search 命令搜索 httpd 来寻找适合我们的镜像。
+</span></span><span class=line><span class=cl>runoob@runoob:~$  docker search httpd
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 获取镜像</span>
+</span></span><span class=line><span class=cl>docker pull &lt;image_name&gt;:&lt;tag&gt;
+</span></span><span class=line><span class=cl>docker pull ubuntu <span class=c1>#默认标签docker pull ubuntu</span>
+</span></span><span class=line><span class=cl>docker pull ubuntu:20.04
+</span></span><span class=line><span class=cl>docker pull colmap/colmap
+</span></span><span class=line><span class=cl>docker pull colmap/colmap:v3.7
+</span></span><span class=line><span class=cl>docker pull hub-mirror.c.163.com/library/busybox:latest <span class=c1># 指定镜像源</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 保存离线镜像并运行</span>
+</span></span><span class=line><span class=cl>docker save -o &lt;image-name&gt;.tar &lt;image-name&gt;:&lt;tag&gt; <span class=c1># 保存为 tar 文件</span>
+</span></span><span class=line><span class=cl>docker save -o ubuntu.tar ubuntu:latest
+</span></span><span class=line><span class=cl>docker load -i ubuntu.tar <span class=c1># 可以使用docker images查看</span>
+</span></span><span class=line><span class=cl>docker run -it ubuntu:latest /bin/bash
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 启动容器</span>
+</span></span><span class=line><span class=cl>以下命令使用 ubuntu 镜像启动一个容器，参数为以命令行模式进入该容器：
+</span></span><span class=line><span class=cl>$ docker run -it ubuntu /bin/bash
+</span></span><span class=line><span class=cl>docker run -it tensorflow/tensorflow:1.15.5-gpu
+</span></span><span class=line><span class=cl>id <span class=c1># 查看uid gid</span>
+</span></span><span class=line><span class=cl>sudo docker run -it --user 1009:999 tensorflow/tensorflow:1.15.5-gpu /bin/bash
+</span></span><span class=line><span class=cl>docker run -it -v ~/YFJ:/share tensorflow/tensorflow:1.15.5-gpu
+</span></span><span class=line><span class=cl>docker run -it -v ~/Documents/python/unet_rgb:/share tensorflow/tensorflow
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>参数说明：
+</span></span><span class=line><span class=cl>-i: 交互式操作。
+</span></span><span class=line><span class=cl>-t: 终端。
+</span></span><span class=line><span class=cl>ubuntu: ubuntu 镜像。
+</span></span><span class=line><span class=cl>/bin/bash：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 /bin/bash。
+</span></span><span class=line><span class=cl>要退出终端，直接输入 exit:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 停止容器</span>
+</span></span><span class=line><span class=cl>键盘快捷键 Ctrl + D 或者输入 <span class=nb>exit</span> 命令来退出容器
+</span></span><span class=line><span class=cl>docker stop &lt;container_id_or_name&gt;
+</span></span><span class=line><span class=cl>docker stop <span class=k>$(</span>docker ps -q<span class=k>)</span>
+</span></span><span class=line><span class=cl>docker container prune  <span class=c1># 删除所有退出的容器</span>
+</span></span><span class=line><span class=cl>docker container prune -f <span class=c1># 强制删除</span>
+</span></span><span class=line><span class=cl>docker rm &lt;container_id&gt;  <span class=c1># 删除指定容器</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看容器状态</span>
+</span></span><span class=line><span class=cl>runoob@runoob:~$ docker ps
+</span></span><span class=line><span class=cl>CONTAINER ID        IMAGE                  COMMAND              ...  
+</span></span><span class=line><span class=cl>5917eac21c36        ubuntu:15.10           <span class=s2>&#34;/bin/sh -c &#39;while t…&#34;</span>    ...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 与宿主机共享目录</span>
+</span></span><span class=line><span class=cl>docker run -it -v ~/shared_data:/data tensorflow/tensorflow
+</span></span><span class=line><span class=cl>docker run -it -v ~/YFJ:/share tensorflow/tensorflow:1.15.5-gpu <span class=c1># 容器中不需要手动创建share目录</span>
+</span></span><span class=line><span class=cl>docker run -it -v ~/YFJ/python/sediment/deeplearning/demo/unet_rgb:/share tensorflow/tensorflow:latest-gpu
+</span></span><span class=line><span class=cl>docker run --gpus all -it -v ~/Documents/python/unet_rgb:/share tensorflow/tensorflow:2.2.1-gpu
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 删除镜像</span>
+</span></span><span class=line><span class=cl>docker rmi -f yfjie/tensorflow:latest <span class=c1># 强制删除</span>
+</span></span><span class=line><span class=cl>docker rmi -f &lt;IMAGE ID&gt;
+</span></span><span class=line><span class=cl>docker image prune -f <span class=c1># 删除所有悬空镜像</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看运行中的容器</span>
+</span></span><span class=line><span class=cl>docker ps
+</span></span><span class=line><span class=cl>docker ps -a
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 镜像详细信息</span>
+</span></span><span class=line><span class=cl>docker inspect &lt;镜像名称或 ID&gt;
+</span></span><span class=line><span class=cl>docker <span class=nb>history</span> &lt;镜像名称或 ID&gt;
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 创建/更新镜像</span>
+</span></span><span class=line><span class=cl>docker commit ea78c33e150f yfjie/tensorflow <span class=c1># 经测试先更新后再exit，某些版本可以先exit</span>
+</span></span><span class=line><span class=cl>**docker commit -m<span class=o>=</span><span class=s2>&#34;has update&#34;</span> -a<span class=o>=</span><span class=s2>&#34;runoob&#34;</span> e218edb10161 runoob/ubuntu:v2**
+</span></span><span class=line><span class=cl>docker commit <span class=o>[</span>OPTIONS<span class=o>]</span> CONTAINER <span class=o>[</span>REPOSITORY<span class=o>[</span>:TAG<span class=o>]]</span> <span class=c1># 可以提交相同名称覆盖已有镜像</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重启</span>
+</span></span><span class=line><span class=cl>sudo snap restart docker
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># cuda运行时</span>
+</span></span><span class=line><span class=cl>which nvidia-container-runtime
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 挂载多个目录</span>
+</span></span><span class=line><span class=cl>docker run -d <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /host/path1:/container/path1 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /host/path2:/container/path2 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  -v /host/path3:/container/path3 <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  --name my_container <span class=se>\
+</span></span></span><span class=line><span class=cl><span class=se></span>  my_image
+</span></span><span class=line><span class=cl>  
+</span></span><span class=line><span class=cl><span class=c1># 拷贝文件</span>
+</span></span><span class=line><span class=cl>docker cp &lt;container_id&gt;:/path/in/container /host/path <span class=c1># docker ps (id or NAMES)</span>
+</span></span><span class=line><span class=cl>docker cp /host/path &lt;container_id&gt;:/path/in/container
+</span></span><span class=line><span class=cl>docker <span class=nb>exec</span> -it &lt;container_id&gt; /bin/bash <span class=c1># 进入容器内部再cp</span>
+</span></span></code></pre></div><h1 id=ssh>SSH</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>ssh-keygen <span class=c1># 生成密钥对</span>
+</span></span><span class=line><span class=cl>ssh-copy-id -i /home/nvidia/.ssh/id_rsa.pub nvidia@nvidia11 <span class=c1># 拷贝公钥</span>
+</span></span><span class=line><span class=cl>ssh-copy-id <span class=s2>&#34;-p 2222 myuser@123.45.67.89&#34;</span>
+</span></span><span class=line><span class=cl><span class=c1># 远程服务器ssh信息变更无法连接时，删除known_hosts中对应条目</span>
+</span></span><span class=line><span class=cl>ssh-keygen -R &lt;远程主机IP或域名&gt;
+</span></span></code></pre></div><p><a href="https://www.linuxcool.com/ssh-keygen#:~:text=ssh%2Dkeygen%E5%91%BD%E4%BB%A4%E6%9D%A5%E8%87%AA%E4%BA%8E,%E4%B8%A4%E7%A7%8D%E5%AF%86%E9%92%A5%E6%A0%BC%E5%BC%8F%E3%80%82" target=_blank rel="noopener noreffer">https://www.linuxcool.com/ssh-keygen#:~:text=ssh-keygen命令来自于,两种密钥格式。</a></p><p><a href="https://www.linuxcool.com/ssh-keygen#:~:text=ssh%2Dkeygen%E5%91%BD%E4%BB%A4%E6%9D%A5%E8%87%AA%E4%BA%8E,%E4%B8%A4%E7%A7%8D%E5%AF%86%E9%92%A5%E6%A0%BC%E5%BC%8F%E3%80%82" target=_blank rel="noopener noreffer">ssh-keygen命令 - 生成SSH密钥文件</a></p><p><a href=https://blog.csdn.net/qq_16268979/article/details/108899178 target=_blank rel="noopener noreffer">linux文件目录：.ssh目录下各文件的作用_啊荻～的博客-CSDN博客</a></p><p><a href=https://blog.51cto.com/3381847248/2066599 target=_blank rel="noopener noreffer">ssh配置文件详解_51CTO博客_ssh框架配置文件详解</a></p><h1 id=git>git</h1><p><a href="https://www.notion.so/Git-92912fb2b4d443b0999031bf8e296561?pvs=21" target=_blank rel="noopener noreffer">Git</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>git config --list
+</span></span><span class=line><span class=cl><span class=nb>unset</span> http_proxy https_proxy HTTP_PROXY HTTPS_PROXY
+</span></span><span class=line><span class=cl>git config --global --unset http.proxy
+</span></span><span class=line><span class=cl>git config --global --unset https.proxy
+</span></span><span class=line><span class=cl>https://kkgithub.com <span class=c1># 镜像站</span>
+</span></span></code></pre></div><h1 id=驱动>驱动</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=err>#</span> <span class=nx>uninstall</span>
+</span></span><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>apt</span><span class=o>-</span><span class=nx>get</span> <span class=nx>remove</span> <span class=o>--</span><span class=nx>purge</span> <span class=nx>nvidia</span><span class=o>*</span>
+</span></span></code></pre></div><h1 id=cuda>CUDA</h1><p><a href="https://www.notion.so/CUDA-19ae4020f06080878b98cfac7fb34898?pvs=21" target=_blank rel="noopener noreffer">CUDA</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=c1># 基础用法</span>
+</span></span><span class=line><span class=cl><span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span>
+</span></span><span class=line><span class=cl><span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span> <span class=o>-</span><span class=n>L</span> <span class=c1># 列出所有 GPU 的物理索引和名称</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span> <span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span> <span class=c1># 每2秒刷新</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span> <span class=o>-</span><span class=n>n</span> <span class=mi>1</span> <span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span>
+</span></span><span class=line><span class=cl><span class=n>watch</span> <span class=o>-</span><span class=n>n</span> <span class=mi>1</span> <span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span> <span class=o>-</span><span class=n>i</span> <span class=mi>0</span><span class=p>,</span><span class=mi>1</span> <span class=c1># 指定逻辑索引</span>
+</span></span><span class=line><span class=cl><span class=n>Ctrl</span> <span class=o>+</span> <span class=n>C</span> <span class=n>退出</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 查看显存占用</span>
+</span></span><span class=line><span class=cl><span class=n>gpustat</span> <span class=o>-</span><span class=n>i</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl><span class=n>gpustat</span> <span class=o>-</span><span class=n>p</span> <span class=o>-</span><span class=n>c</span> <span class=o>-</span><span class=n>u</span>
+</span></span><span class=line><span class=cl><span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span> <span class=o>-</span><span class=n>i</span> <span class=mi>0</span> <span class=o>--</span><span class=n>query</span><span class=o>-</span><span class=n>compute</span><span class=o>-</span><span class=n>apps</span><span class=o>=</span><span class=n>pid</span><span class=p>,</span><span class=n>used_memory</span><span class=p>,</span><span class=n>process_name</span> <span class=o>--</span><span class=nb>format</span><span class=o>=</span><span class=n>csv</span><span class=p>,</span><span class=n>noheader</span><span class=p>,</span><span class=n>nounits</span> <span class=o>|</span> <span class=n>sort</span> <span class=o>-</span><span class=n>k2</span> <span class=o>-</span><span class=n>nr</span>
+</span></span><span class=line><span class=cl><span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span> <span class=o>--</span><span class=n>query</span><span class=o>-</span><span class=n>gpu</span><span class=o>=</span><span class=n>index</span><span class=p>,</span><span class=n>memory</span><span class=o>.</span><span class=n>used</span><span class=p>,</span><span class=n>memory</span><span class=o>.</span><span class=n>total</span> <span class=o>--</span><span class=nb>format</span><span class=o>=</span><span class=n>csv</span><span class=p>,</span><span class=n>noheader</span> <span class=o>|</span> <span class=n>sort</span> <span class=o>-</span><span class=n>t</span> <span class=s1>&#39;,&#39;</span> <span class=o>-</span><span class=n>k2</span> <span class=o>-</span><span class=n>nr</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>torch</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>is_available</span><span class=p>())</span> <span class=c1># 检查CUDA是否可用</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>device_count</span><span class=p>())</span> <span class=c1># 显示GPU数量</span>
+</span></span><span class=line><span class=cl><span class=n>nvidia</span><span class=o>-</span><span class=n>smi</span> <span class=o>--</span><span class=n>query</span><span class=o>-</span><span class=n>gpu</span><span class=o>=</span><span class=n>compute_cap</span> <span class=o>--</span><span class=nb>format</span><span class=o>=</span><span class=n>csv</span> <span class=c1># 显卡算力</span>
+</span></span><span class=line><span class=cl><span class=n>visible_gpus</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>environ</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s2>&#34;CUDA_VISIBLE_DEVICES&#34;</span><span class=p>,</span> <span class=s2>&#34;&#34;</span><span class=p>)</span><span class=o>.</span><span class=n>split</span><span class=p>(</span><span class=s2>&#34;,&#34;</span><span class=p>)</span> <span class=c1># 物理索引</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>**</span><span class=c1># 注意区分gpu的物理索引与逻辑索引**</span>
+</span></span><span class=line><span class=cl><span class=kn>from</span> <span class=nn>icecream</span> <span class=kn>import</span> <span class=n>ic</span>
+</span></span><span class=line><span class=cl><span class=n>ic</span><span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>is_available</span><span class=p>())</span> <span class=c1># Check if CUDA is available</span>
+</span></span><span class=line><span class=cl><span class=n>ic</span><span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>device_count</span><span class=p>())</span>
+</span></span><span class=line><span class=cl><span class=n>ic</span><span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>current_device</span><span class=p>())</span> <span class=c1># 检查当前使用的 GPU</span>
+</span></span><span class=line><span class=cl><span class=n>ic</span><span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>get_device_name</span><span class=p>(</span><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>current_device</span><span class=p>()))</span> <span class=c1># 获取当前 GPU 名称</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>torch</span><span class=o>.</span><span class=n>cuda</span><span class=o>.</span><span class=n>empty_cache</span><span class=p>()</span> <span class=c1># Release all unoccupied cached memory</span>
+</span></span><span class=line><span class=cl><span class=n>os</span><span class=o>.</span><span class=n>environ</span><span class=p>[</span><span class=s2>&#34;CUDA_VISIBLE_DEVICES&#34;</span><span class=p>]</span> <span class=o>=</span> <span class=s2>&#34;1,2&#34;</span> <span class=c1># 可能需要放在torch导入之前</span>
+</span></span></code></pre></div><img src=nvidia-smi.png width=75%><h1 id=gui>GUI</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cat /etc/X11/default-display-manager <span class=c1>#查看</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>LightDM 相关操作
+</span></span><span class=line><span class=cl>切换命令行：alt-ctrl-F1。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>LightDM 日志：/var/log/lightdm。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>关停 LightDM：$ sudo stop lightdm。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>启动 LightDM：$ sudo start lightdm。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>设置 LightDM 为默认显示管理器：$ sudo dpkg-recofigure lightdm。
+</span></span></code></pre></div><h2 id=刷新系统ui>刷新系统UI</h2><p>使用快捷键刷新 GNOME Shell</p><ol><li>按下 <strong>Alt + F2</strong>。</li><li>输入字母 <strong><code>r</code></strong> 并按下回车。</li></ol><ul><li>这将重新加载 GNOME Shell，刷新 UI，而不关闭当前的应用程序。</li></ul><h1 id=关机重启>关机、重启</h1><p><a href=https://www.w3cschool.cn/linux/linux-are12oz3.html target=_blank rel="noopener noreffer">https://www.w3cschool.cn/linux/linux-are12oz3.html</a></p><p>1、halt：立刻关机</p><p>2、<code>poweroff：立刻关机</code> (recommend)</p><p>3、<code>shutdown -h now：立刻关机(root用户使用)</code></p><p>4、shutdown -h 10：10分钟后自动关机</p><p>注意，如果是通过shutdown命令设置关机的话，可以用shutdown -c命令取消重启</p><p><strong>重启命令</strong></p><p>1、reboot 立即重启</p><p>2、shutdown -r now 立刻重启(root用户使用)</p><p>3、shutdown -r 10 过10分钟自动重启(root用户使用)</p><p>4、shutdown -r 20:35 在时间为20:35时候重启(root用户使用)</p><p>如果是通过shutdown命令设置重启的话，可以用shutdown -c命令取消重启</p><h1 id=软件安装包管理>软件安装/包管理</h1><p><a href="https://www.notion.so/b9e986f69b994115ae2889a39d480976?pvs=21" target=_blank rel="noopener noreffer">软件安装/包管理</a></p><img src=pkg-mgr.png width=75%><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1>#安装</span>
+</span></span><span class=line><span class=cl>sudo apt install &lt;package_name&gt;
+</span></span><span class=line><span class=cl>sudo dpkg -i .deb
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#查看版本</span>
+</span></span><span class=line><span class=cl>sudo apt list --installed <span class=p>|</span> grep screen
+</span></span><span class=line><span class=cl>dpkg -l <span class=p>|</span> grep qq <span class=c1># 查找dpkg安装的软件</span>
+</span></span><span class=line><span class=cl>dpkg-query -s libsuitesparse-dev <span class=c1># 详细信息</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#修复</span>
+</span></span><span class=line><span class=cl>sudo apt-get check
+</span></span><span class=line><span class=cl>sudo apt --fix-broken install
+</span></span><span class=line><span class=cl>sudo apt install -f
+</span></span><span class=line><span class=cl>sudo apt-get -f install
+</span></span><span class=line><span class=cl>sudo dpkg --configure -a
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#卸载</span>
+</span></span><span class=line><span class=cl>sudo apt remove &lt;package_name&gt; <span class=c1># 只移除软件,先查找到正确名称</span>
+</span></span><span class=line><span class=cl>sudo apt purge &lt;package_name&gt; <span class=c1># 移除软件及配置，保留数据（需手动清除）</span>
+</span></span><span class=line><span class=cl>sudo apt autoremove <span class=c1># 清理孤立依赖项</span>
+</span></span><span class=line><span class=cl>sudo apt clean <span class=c1># 清理软件包缓存</span>
+</span></span><span class=line><span class=cl>rm -rf ~/.config/软件名 <span class=c1># 可选手动删除配置</span>
+</span></span><span class=line><span class=cl>sudo rm -rf /etc/软件名
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#更新指定软件</span>
+</span></span><span class=line><span class=cl>sudo apt install --only-upgrade google-chrome-stable
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># snap</span>
+</span></span><span class=line><span class=cl>sudo snap install notepadqq
+</span></span><span class=line><span class=cl>sudo snap remove notepadqq
+</span></span><span class=line><span class=cl>snap <span class=nb>help</span> --all
+</span></span><span class=line><span class=cl>snap list
+</span></span><span class=line><span class=cl>snap info 应用名称
+</span></span><span class=line><span class=cl>which notepad-plus-plus
+</span></span></code></pre></div><h2 id=usrbin-vs-usrlocalbin>/usr/bin vs. /usr/local/bin</h2><h3 id=1-usrbin>1. <strong><code>/usr/bin</code></strong></h3><ul><li><strong>系统级别目录</strong>：<code>/usr/bin</code> 是系统默认的二进制文件目录，存放了大部分由操作系统包管理器（如 <code>apt</code>、<code>yum</code>）安装的应用程序和命令。</li><li><strong>系统维护</strong>：文件通常由操作系统的包管理工具维护和更新，用户不应直接在这个目录中添加或删除文件。</li><li><strong>标准工具</strong>：该目录下的工具和应用程序通常是系统运行所必需的，包括常见的命令如 <code>ls</code>、<code>grep</code>、<code>tar</code> 等。</li></ul><h3 id=2-usrlocalbin>2. <strong><code>/usr/local/bin</code></strong></h3><ul><li><strong>用户级别目录</strong>：<code>/usr/local/bin</code> 主要用于存放用户自行编译或安装的应用程序和脚本。这个目录专门为管理员和用户提供一个位置来安装全局可用的程序，而不影响系统自带的工具。</li><li><strong>手动安装</strong>：当你手动编译和安装一个软件包，默认情况下它会被安装到 <code>/usr/local</code> 下的相应子目录（如 <code>bin</code>、<code>lib</code>、<code>share</code> 等）。这样可以避免与系统自带的文件发生冲突。</li><li><strong>优先级</strong>：在默认的 PATH 环境变量中，<code>/usr/local/bin</code> 通常位于 <code>/usr/bin</code> 之前，这意味着当同名程序同时存在于这两个目录时，系统会优先使用 <code>/usr/local/bin</code> 中的版本。</li></ul><h1 id=开机启动项>开机启动项</h1><p>systemctl</p><p><a href=https://www.cnblogs.com/jins-note/p/13284170.html target=_blank rel="noopener noreffer">Ubuntu systemctl 查看管理系统启动项 - Jerry_Jin - 博客园</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>systemctl</span> <span class=nx>list</span><span class=o>-</span><span class=nx>unit</span><span class=o>-</span><span class=nx>files</span> <span class=o>|</span> <span class=nx>grep</span> <span class=nx>enabled</span>
+</span></span><span class=line><span class=cl><span class=nx>sudo</span> <span class=nx>systemctl</span> <span class=nx>is</span><span class=o>-</span><span class=nx>enabled</span> <span class=nx>firewalld</span>
+</span></span></code></pre></div><h1 id=终端清屏>终端清屏</h1><p><a href=https://juejin.cn/post/7023984066672230414 target=_blank rel="noopener noreffer">linux极简小知识：39、终端清屏的快捷命令ctrl+l，及shell终端中常用快捷键总结【ctrl + c|d|z|s|q|r|o|a|e|u|w|k】 - 掘金</a></p><ul><li>ctrl + l：即 clear 命令。清除终端命令屏幕显示的内容，比如当终端命令屏显示的内容太多时，想清掉屏幕上显示的内容，就可以用clear命令或ctrl+l。（Clear screen）</li><li>ctrl + c：终止命令的执行。（Kill foreground process）</li><li>ctrl + d： 退出 shell，相当于 exit 命令；在输入中 ctrl + d 也表示EOF。（Terminate input, or exit shell）【当前shell行没有任何内容时，才会退出shell】</li><li>ctrl + z：将当前进程置于后台并挂起，可使用 <code>fg</code> 命令还原到前台继续执行（<code>bg</code> 命令将一个在后台暂停的命令，变成继续执行）。（Suspend foreground process）</li><li>ctrl + s：挂起当前shell输出。（Suspend output）</li><li>ctrl + q：重新启用shell输出。（Resume output）</li><li>Ctrl + o：丢弃输出。（Discard output）</li><li>ctrl + r：从命令历史查找。</li><li>ctrl + a：光标移到行首。</li><li>ctrl + e：光标移到行尾。</li><li>ctrl + u：清除光标到行首的字符 。</li><li>ctrl + w：清除光标之前一个单词 。</li><li>ctrl + k：清除光标到行尾的字符。</li><li>ctrl + t：交换光标前两个字符。</li><li>ctrl + y：粘贴前一ctrl+u类命令删除的字符。</li><li>ctrl + p：上一条命令。</li><li>ctrl + n：下一条命令。</li><li>ctrl + v：输入控制字符 如ctrl+v ，会输入^M</li><li>ctrl + f：光标后移一个字符。</li><li>ctrl + b：光标前移一个字符。</li><li>ctrl + h：删除光标前一个字符。</li></ul></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2025-05-01</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://fjyu95.github.io/posts/linux-command/ data-title="Linux command" data-hashtags=linux,shell><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://fjyu95.github.io/posts/linux-command/ data-hashtag=linux><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://fjyu95.github.io/posts/linux-command/ data-title="Linux command"><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://fjyu95.github.io/posts/linux-command/ data-title="Linux command"><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://fjyu95.github.io/posts/linux-command/ data-title="Linux command"><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/linux/>Linux</a>,&nbsp;<a href=/tags/shell/>Shell</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/orb-slam/ class=prev rel=prev title=ORB-SLAM><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>ORB-SLAM</a>
+<a href=/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ class=next rel=next title=docker>docker<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2020 - 2025</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://fjyu95.github.io/ target=_blank>fjyu95</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
+</a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
