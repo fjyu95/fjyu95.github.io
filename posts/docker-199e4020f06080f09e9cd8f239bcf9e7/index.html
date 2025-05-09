@@ -1,9 +1,108 @@
 <!doctype html><html lang=en-us><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=robots content="noodp"><title>docker - FangjieYu‘s site</title><meta name=Description content="This is my cool site"><meta property="og:url" content="https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/">
-<meta property="og:site_name" content="FangjieYu‘s site"><meta property="og:title" content="docker"><meta property="og:description" content="docker常用操作总结"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-10-17T00:00:00+00:00"><meta property="article:modified_time" content="2025-03-29T00:00:00+00:00"><meta property="article:tag" content="Docker"><meta name=twitter:card content="summary"><meta name=twitter:title content="docker"><meta name=twitter:description content="docker常用操作总结"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/><link rel=prev href=https://fjyu95.github.io/posts/linux-command/><link rel=next href=https://fjyu95.github.io/posts/git-bash/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"docker","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/fjyu95.github.io\/posts\/docker-199e4020f06080f09e9cd8f239bcf9e7\/"},"genre":"posts","keywords":"docker","wordcount":4427,"url":"https:\/\/fjyu95.github.io\/posts\/docker-199e4020f06080f09e9cd8f239bcf9e7\/","datePublished":"2022-10-17T00:00:00+00:00","dateModified":"2025-03-29T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"fjyu95"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>posts </a><a class=menu-item href=/tags/>tags </a><a class=menu-item href=/categories/>category </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
-<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>posts</a><a class=menu-item href=/tags/ title>tags</a><a class=menu-item href=/categories/ title>category</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
-<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">docker</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://fjyu95.github.io/ title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>fjyu95</a></span>&nbsp;<span class=post-category>included in <a href=/categories/linux%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw" aria-hidden=true></i>Linux笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-10-17>2022-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;4427 words&nbsp;
-<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;9 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>Contents</span>
-<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#启用gpu>启用gpu</a><ul><li><a href=#deepseek>deepseek</a><ul><li><a href=#1-安装前提条件><strong>1. 安装前提条件</strong></a></li><li><a href=#2-配置-nvidia-container-toolkit-仓库><strong>2. 配置 NVIDIA Container Toolkit 仓库</strong></a></li><li><a href=#1-添加仓库密钥和源><strong>(1) 添加仓库密钥和源</strong></a></li><li><a href=#2-更新包列表><strong>(2) 更新包列表</strong></a></li><li><a href=#3-安装-nvidia-container-runtime><strong>3. 安装 NVIDIA Container Runtime</strong></a></li><li><a href=#4-配置-docker-使用-nvidia-运行时><strong>4. 配置 Docker 使用 NVIDIA 运行时</strong></a></li><li><a href=#1-编辑-docker-配置文件><strong>(1) 编辑 Docker 配置文件</strong></a></li><li><a href=#2-添加以下内容><strong>(2) 添加以下内容</strong></a></li><li><a href=#3-保存并退出编辑器><strong>(3) 保存并退出编辑器</strong></a></li><li><a href=#4-重启-docker-服务><strong>(4) 重启 Docker 服务</strong></a></li><li><a href=#5-验证安装><strong>5. 验证安装</strong></a></li><li><a href=#1-运行测试容器><strong>(1) 运行测试容器</strong></a></li><li><a href=#2-预期输出><strong>(2) 预期输出</strong></a></li><li><a href=#6-常见问题解决><strong>6. 常见问题解决</strong></a></li><li><a href=#1-报错><strong>(1) 报错 &ldquo;Failed to initialize NVML: Driver/library version mismatch&rdquo;</strong></a></li><li><a href=#2-报错><strong>(2) 报错 &ldquo;nvidia-container-runtime not found&rdquo;</strong></a></li><li><a href=#3-docker-服务启动失败><strong>(3) Docker 服务启动失败</strong></a></li><li><a href=#7-扩展配置可选><strong>7. 扩展配置（可选）</strong></a></li><li><a href=#1-限制容器-gpu-访问><strong>(1) 限制容器 GPU 访问</strong></a></li><li><a href=#2-安装-nvidia-docker2旧版兼容><strong>(2) 安装 nvidia-docker2（旧版兼容）</strong></a></li><li><a href=#总结><strong>总结</strong></a></li></ul></li><li><a href=#faq>FAQ</a></li></ul></li><li><a href=#镜像加速><strong>镜像加速</strong></a><ul><li><ul><li><a href=#离线安装>离线安装</a></li><li><a href=#配置无效问题>配置无效问题</a></li></ul></li></ul></li><li><a href=#多个目录映射>多个目录映射</a><ul><li><ul><li><a href=#使用-v-选项挂载多个目录>使用 <code>v</code> 选项挂载多个目录：</a></li></ul></li></ul></li><li><a href=#修改容器内apt镜像源>修改容器内apt镜像源</a></li><li><a href=#容器id>容器id</a></li><li><a href=#迁移导出>迁移导出</a><ul><li><ul><li><a href=#容器迁移如果需要保留运行状态挂载>容器迁移（如果需要保留运行状态、挂载）</a></li></ul></li></ul></li><li><a href=#配置代理>配置代理</a><ul><li><ul><li><a href=#linux-系统>Linux 系统</a></li><li><a href=#系统级代理配置>系统级代理配置</a></li><li><a href=#容器级代理配置>容器级代理配置</a></li><li><a href=#windows-系统>Windows 系统</a></li><li><a href=#docker-desktop-配置>Docker Desktop 配置</a></li><li><a href=#macos-系统>macOS 系统</a></li><li><a href=#docker-desktop-配置-1>Docker Desktop 配置</a></li></ul></li></ul></li><li><a href=#临时提升权限操作文件>临时提升权限操作文件</a><ul><li><a href=#-实现步骤有-root-权限前提>✅ 实现步骤（有 root 权限前提）</a><ul><li><a href=#-场景目标>🧱 场景目标：</a></li></ul></li><li><a href=#-前提条件>🔐 前提条件</a></li><li><a href=#-示例挂载宿主机任意目录并修改权限>🧪 示例：挂载宿主机任意目录并修改权限</a></li><li><a href=#-修改任意目录权限的技巧常用>🛠️ 修改任意目录权限的技巧（常用）</a></li><li><a href=#-风险提醒>⚠️ 风险提醒</a></li><li><a href=#-推荐替代方案安全做法>✅ 推荐替代方案（安全做法）</a></li><li><a href=#-总结一句话>🎯 总结一句话：</a></li><li><a href=#-脚本fix-permssh>✅ 脚本：<code>fix-perms.sh</code></a></li><li><a href=#-用法>🔧 用法</a></li><li><a href=#-可选增强功能>📌 可选增强功能</a></li><li><a href=#-注意事项>🚨 注意事项</a></li></ul></li><li><a href=#faq-1>FAQ</a></li></ul></nav></div></div><div class=content id=content><p><a href="https://www.notion.so/dockerfile-1e3e4020f060809ba1b0faec481beaa0?pvs=21" target=_blank rel="noopener noreffer">dockerfile</a></p><p><a href=https://www.runoob.com/docker/docker-image-usage.html target=_blank rel="noopener noreffer">https://www.runoob.com/docker/docker-image-usage.html</a></p><p><a href=https://hub.docker.com/ target=_blank rel="noopener noreffer">https://hub.docker.com/</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看docker版本</span>
+<meta property="og:site_name" content="FangjieYu‘s site"><meta property="og:title" content="docker"><meta property="og:description" content="docker常用操作总结"><meta property="og:locale" content="en_us"><meta property="og:type" content="article"><meta property="article:section" content="posts"><meta property="article:published_time" content="2022-10-17T00:00:00+00:00"><meta property="article:modified_time" content="2025-03-29T00:00:00+00:00"><meta property="article:tag" content="Docker"><meta name=twitter:card content="summary"><meta name=twitter:title content="docker"><meta name=twitter:description content="docker常用操作总结"><meta name=application-name content="My cool site"><meta name=apple-mobile-web-app-title content="My cool site"><meta name=theme-color content="#ffffff"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=mask-icon href=/safari-pinned-tab.svg color=#5bbad5><link rel=manifest href=/site.webmanifest><link rel=canonical href=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/><link rel=prev href=https://fjyu95.github.io/posts/linux-command/><link rel=next href=https://fjyu95.github.io/posts/git-bash/><link rel=stylesheet href=/css/style.min.css><link rel=preload href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.1.1/css/all.min.css></noscript><link rel=preload href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css as=style onload='this.onload=null,this.rel="stylesheet"'><noscript><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"docker","inLanguage":"en-us","mainEntityOfPage":{"@type":"WebPage","@id":"https:\/\/fjyu95.github.io\/posts\/docker-199e4020f06080f09e9cd8f239bcf9e7\/"},"genre":"posts","keywords":"docker","wordcount":4747,"url":"https:\/\/fjyu95.github.io\/posts\/docker-199e4020f06080f09e9cd8f239bcf9e7\/","datePublished":"2022-10-17T00:00:00+00:00","dateModified":"2025-03-29T00:00:00+00:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"fjyu95"},"description":""}</script></head><body data-header-desktop=fixed data-header-mobile=auto><script type=text/javascript>(window.localStorage&&localStorage.getItem("theme")?localStorage.getItem("theme")==="dark":"auto"==="auto"?window.matchMedia("(prefers-color-scheme: dark)").matches:"auto"==="dark")&&document.body.setAttribute("theme","dark")</script><div id=mask></div><div class=wrapper><header class=desktop id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu><div class=menu-inner><a class=menu-item href=/posts/>posts </a><a class=menu-item href=/tags/>tags </a><a class=menu-item href=/categories/>category </a><a class=menu-item href=/about/>about </a><span class="menu-item delimiter"></span><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></div></header><header class=mobile id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="FangjieYu‘s site">fjyu95</a></div><div class=menu-toggle id=menu-toggle-mobile><span></span><span></span><span></span></div></div><div class=menu id=menu-mobile><a class=menu-item href=/posts/ title>posts</a><a class=menu-item href=/tags/ title>tags</a><a class=menu-item href=/categories/ title>category</a><a class=menu-item href=/about/ title>about</a><a href=javascript:void(0); class="menu-item theme-switch" title="Switch Theme">
+<i class="fas fa-adjust fa-fw" aria-hidden=true></i></a></div></div></header><main class=main><div class=container><div class=toc id=toc-auto><h2 class=toc-title>Contents</h2><div class=toc-content id=toc-content-auto></div></div><article class="page single"><h1 class="single-title animate__animated animate__flipInX">docker</h1><div class=post-meta><div class=post-meta-line><span class=post-author><a href=https://fjyu95.github.io/ title=Author target=_blank rel="noopener noreffer author" class=author><i class="fas fa-user-circle fa-fw" aria-hidden=true></i>fjyu95</a></span>&nbsp;<span class=post-category>included in <a href=/categories/linux%E7%AC%94%E8%AE%B0/><i class="far fa-folder fa-fw" aria-hidden=true></i>Linux笔记</a></span></div><div class=post-meta-line><i class="far fa-calendar-alt fa-fw" aria-hidden=true></i>&nbsp;<time datetime=2022-10-17>2022-10-17</time>&nbsp;<i class="fas fa-pencil-alt fa-fw" aria-hidden=true></i>&nbsp;4747 words&nbsp;
+<i class="far fa-clock fa-fw" aria-hidden=true></i>&nbsp;10 minutes&nbsp;</div></div><div class="details toc" id=toc-static data-kept><div class="details-summary toc-title"><span>Contents</span>
+<span><i class="details-icon fas fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#启用gpu>启用gpu</a><ul><li><a href=#deepseek>deepseek</a><ul><li><a href=#1-安装前提条件><strong>1. 安装前提条件</strong></a></li><li><a href=#2-配置-nvidia-container-toolkit-仓库><strong>2. 配置 NVIDIA Container Toolkit 仓库</strong></a></li><li><a href=#1-添加仓库密钥和源><strong>(1) 添加仓库密钥和源</strong></a></li><li><a href=#2-更新包列表><strong>(2) 更新包列表</strong></a></li><li><a href=#3-安装-nvidia-container-runtime><strong>3. 安装 NVIDIA Container Runtime</strong></a></li><li><a href=#4-配置-docker-使用-nvidia-运行时><strong>4. 配置 Docker 使用 NVIDIA 运行时</strong></a></li><li><a href=#1-编辑-docker-配置文件><strong>(1) 编辑 Docker 配置文件</strong></a></li><li><a href=#2-添加以下内容><strong>(2) 添加以下内容</strong></a></li><li><a href=#3-保存并退出编辑器><strong>(3) 保存并退出编辑器</strong></a></li><li><a href=#4-重启-docker-服务><strong>(4) 重启 Docker 服务</strong></a></li><li><a href=#5-验证安装><strong>5. 验证安装</strong></a></li><li><a href=#1-运行测试容器><strong>(1) 运行测试容器</strong></a></li><li><a href=#2-预期输出><strong>(2) 预期输出</strong></a></li><li><a href=#6-常见问题解决><strong>6. 常见问题解决</strong></a></li><li><a href=#1-报错><strong>(1) 报错 &ldquo;Failed to initialize NVML: Driver/library version mismatch&rdquo;</strong></a></li><li><a href=#2-报错><strong>(2) 报错 &ldquo;nvidia-container-runtime not found&rdquo;</strong></a></li><li><a href=#3-docker-服务启动失败><strong>(3) Docker 服务启动失败</strong></a></li><li><a href=#7-扩展配置可选><strong>7. 扩展配置（可选）</strong></a></li><li><a href=#1-限制容器-gpu-访问><strong>(1) 限制容器 GPU 访问</strong></a></li><li><a href=#2-安装-nvidia-docker2旧版兼容><strong>(2) 安装 nvidia-docker2（旧版兼容）</strong></a></li><li><a href=#总结><strong>总结</strong></a></li></ul></li><li><a href=#faq>FAQ</a></li></ul></li><li><a href=#镜像加速><strong>镜像加速</strong></a><ul><li><ul><li><a href=#离线安装>离线安装</a></li><li><a href=#配置无效问题>配置无效问题</a></li></ul></li></ul></li><li><a href=#多个目录映射>多个目录映射</a><ul><li><ul><li><a href=#使用-v-选项挂载多个目录>使用 <code>v</code> 选项挂载多个目录：</a></li></ul></li></ul></li><li><a href=#修改容器内apt镜像源>修改容器内apt镜像源</a></li><li><a href=#容器id>容器id</a></li><li><a href=#迁移导出>迁移导出</a><ul><li><ul><li><a href=#容器迁移如果需要保留运行状态挂载>容器迁移（如果需要保留运行状态、挂载）</a></li></ul></li></ul></li><li><a href=#配置代理>配置代理</a><ul><li><ul><li><a href=#linux-系统>Linux 系统</a></li><li><a href=#系统级代理配置>系统级代理配置</a></li><li><a href=#容器级代理配置>容器级代理配置</a></li><li><a href=#windows-系统>Windows 系统</a></li><li><a href=#docker-desktop-配置>Docker Desktop 配置</a></li><li><a href=#macos-系统>macOS 系统</a></li><li><a href=#docker-desktop-配置-1>Docker Desktop 配置</a></li></ul></li></ul></li><li><a href=#临时提升权限操作文件>临时提升权限操作文件</a><ul><li><a href=#-实现步骤有-root-权限前提>✅ 实现步骤（有 root 权限前提）</a><ul><li><a href=#-场景目标>🧱 场景目标：</a></li></ul></li><li><a href=#-前提条件>🔐 前提条件</a></li><li><a href=#-示例挂载宿主机任意目录并修改权限>🧪 示例：挂载宿主机任意目录并修改权限</a></li><li><a href=#-修改任意目录权限的技巧常用>🛠️ 修改任意目录权限的技巧（常用）</a></li><li><a href=#-风险提醒>⚠️ 风险提醒</a></li><li><a href=#-推荐替代方案安全做法>✅ 推荐替代方案（安全做法）</a></li><li><a href=#-总结一句话>🎯 总结一句话：</a></li><li><a href=#-脚本fix-permssh>✅ 脚本：<code>fix-perms.sh</code></a></li><li><a href=#-用法>🔧 用法</a></li><li><a href=#-可选增强功能>📌 可选增强功能</a></li><li><a href=#-注意事项>🚨 注意事项</a></li></ul></li><li><a href=#faq-1>FAQ</a></li></ul></nav></div></div><div class=content id=content><p><a href="https://www.notion.so/dockerfile-1e3e4020f060809ba1b0faec481beaa0?pvs=21" target=_blank rel="noopener noreffer">dockerfile</a></p><p><a href=https://www.runoob.com/docker/docker-image-usage.html target=_blank rel="noopener noreffer">https://www.runoob.com/docker/docker-image-usage.html</a></p><p><a href=https://hub.docker.com/ target=_blank rel="noopener noreffer">https://hub.docker.com/</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span><span class=lnt>72
+</span><span class=lnt>73
+</span><span class=lnt>74
+</span><span class=lnt>75
+</span><span class=lnt>76
+</span><span class=lnt>77
+</span><span class=lnt>78
+</span><span class=lnt>79
+</span><span class=lnt>80
+</span><span class=lnt>81
+</span><span class=lnt>82
+</span><span class=lnt>83
+</span><span class=lnt>84
+</span><span class=lnt>85
+</span><span class=lnt>86
+</span><span class=lnt>87
+</span><span class=lnt>88
+</span><span class=lnt>89
+</span><span class=lnt>90
+</span><span class=lnt>91
+</span><span class=lnt>92
+</span><span class=lnt>93
+</span><span class=lnt>94
+</span><span class=lnt>95
+</span><span class=lnt>96
+</span><span class=lnt>97
+</span><span class=lnt>98
+</span><span class=lnt>99
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 查看docker版本</span>
 </span></span><span class=line><span class=cl>docker --version
 </span></span><span class=line><span class=cl>docker -v
 </span></span><span class=line><span class=cl>docker info <span class=p>|</span> grep <span class=s2>&#34;Storage Driver&#34;</span> <span class=c1># 当前使用的存储驱动</span>
@@ -102,7 +201,64 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># cuda运行时</span>
 </span></span><span class=line><span class=cl>which nvidia-container-runtime
-</span></span></code></pre></div><h1 id=启用gpu>启用gpu</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nvidia-smi  <span class=c1># 输出 GPU 信息表示驱动正常</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=启用gpu>启用gpu</h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nvidia-smi  <span class=c1># 输出 GPU 信息表示驱动正常</span>
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 添加 NVIDIA Container Toolkit 的 GPG 密钥</span>
 </span></span><span class=line><span class=cl>curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey <span class=p>|</span> sudo apt-key add -
@@ -159,21 +315,44 @@
 </span></span><span class=line><span class=cl><span class=c1># test，应显示与宿主机相同的 GPU 信息（CUDA运行时需要跟镜像的匹配）</span>
 </span></span><span class=line><span class=cl>docker run --rm --gpus all nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi
 </span></span><span class=line><span class=cl>docker run -it --gpus <span class=s1>&#39;&#34;device=0,2&#34;&#39;</span> --shm-size 32g image_name:tag_name <span class=c1># 指定gpu  </span>
-</span></span></code></pre></div><h2 id=deepseek>deepseek</h2><p>在 Ubuntu 22.04 上安装 <code>nvidia-container-runtime</code> 的步骤如下：</p><hr><h3 id=1-安装前提条件><strong>1. 安装前提条件</strong></h3><ul><li><p><strong>已安装 NVIDIA 驱动程序</strong><br>确保 NVIDIA 驱动已正确安装，可通过以下命令验证：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nvidia-smi  <span class=c1># 输出 GPU 信息表示驱动正常</span>
-</span></span></code></pre></div></li><li><p><strong>已安装 Docker 引擎</strong><br>若未安装 Docker，执行以下命令安装：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get update
+</span></span></code></pre></td></tr></table></div></div><h2 id=deepseek>deepseek</h2><p>在 Ubuntu 22.04 上安装 <code>nvidia-container-runtime</code> 的步骤如下：</p><hr><h3 id=1-安装前提条件><strong>1. 安装前提条件</strong></h3><ul><li><p><strong>已安装 NVIDIA 驱动程序</strong><br>确保 NVIDIA 驱动已正确安装，可通过以下命令验证：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nvidia-smi  <span class=c1># 输出 GPU 信息表示驱动正常</span>
+</span></span></code></pre></td></tr></table></div></div></li><li><p><strong>已安装 Docker 引擎</strong><br>若未安装 Docker，执行以下命令安装：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get update
 </span></span><span class=line><span class=cl>sudo apt-get install docker.io
 </span></span><span class=line><span class=cl>sudo systemctl <span class=nb>enable</span> --now docker
-</span></span></code></pre></div></li></ul><hr><h3 id=2-配置-nvidia-container-toolkit-仓库><strong>2. 配置 NVIDIA Container Toolkit 仓库</strong></h3><h3 id=1-添加仓库密钥和源><strong>(1) 添加仓库密钥和源</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 添加 NVIDIA Container Toolkit 的 GPG 密钥</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><hr><h3 id=2-配置-nvidia-container-toolkit-仓库><strong>2. 配置 NVIDIA Container Toolkit 仓库</strong></h3><h3 id=1-添加仓库密钥和源><strong>(1) 添加仓库密钥和源</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 添加 NVIDIA Container Toolkit 的 GPG 密钥</span>
 </span></span><span class=line><span class=cl>curl -s -L &lt;https://nvidia.github.io/nvidia-docker/gpgkey&gt; <span class=p>|</span> sudo apt-key add -
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 添加仓库源（适用于 Ubuntu 22.04 &#34;jammy&#34;）</span>
 </span></span><span class=line><span class=cl><span class=nv>distribution</span><span class=o>=</span><span class=k>$(</span>. /etc/os-release<span class=p>;</span><span class=nb>echo</span> <span class=nv>$ID$VERSION_ID</span><span class=k>)</span>
 </span></span><span class=line><span class=cl>curl -s -L &lt;https://nvidia.github.io/nvidia-docker/<span class=nv>$distribution</span>/nvidia-docker.list&gt; <span class=p>|</span> sudo tee /etc/apt/sources.list.d/nvidia-docker.list
-</span></span></code></pre></div><h3 id=2-更新包列表><strong>(2) 更新包列表</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get update
-</span></span></code></pre></div><hr><h3 id=3-安装-nvidia-container-runtime><strong>3. 安装 NVIDIA Container Runtime</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 安装 nvidia-container-runtime 及相关工具</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-更新包列表><strong>(2) 更新包列表</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get update
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=3-安装-nvidia-container-runtime><strong>3. 安装 NVIDIA Container Runtime</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 安装 nvidia-container-runtime 及相关工具</span>
 </span></span><span class=line><span class=cl>sudo apt-get install -y nvidia-container-runtime
-</span></span></code></pre></div><hr><h3 id=4-配置-docker-使用-nvidia-运行时><strong>4. 配置 Docker 使用 NVIDIA 运行时</strong></h3><h3 id=1-编辑-docker-配置文件><strong>(1) 编辑 Docker 配置文件</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/docker/daemon.json
-</span></span></code></pre></div><h3 id=2-添加以下内容><strong>(2) 添加以下内容</strong></h3><p>若文件为空或已有配置，确保合并 <code>"runtimes"</code> 字段：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=4-配置-docker-使用-nvidia-运行时><strong>4. 配置 Docker 使用 NVIDIA 运行时</strong></h3><h3 id=1-编辑-docker-配置文件><strong>(1) 编辑 Docker 配置文件</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo nano /etc/docker/daemon.json
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-添加以下内容><strong>(2) 添加以下内容</strong></h3><p>若文件为空或已有配置，确保合并 <code>"runtimes"</code> 字段：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-json data-lang=json><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=nt>&#34;runtimes&#34;</span><span class=p>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>    <span class=nt>&#34;nvidia&#34;</span><span class=p>:</span> <span class=p>{</span>
 </span></span><span class=line><span class=cl>      <span class=nt>&#34;path&#34;</span><span class=p>:</span> <span class=s2>&#34;/usr/bin/nvidia-container-runtime&#34;</span><span class=p>,</span>
@@ -182,9 +361,11 @@
 </span></span><span class=line><span class=cl>  <span class=p>},</span>
 </span></span><span class=line><span class=cl>  <span class=nt>&#34;default-runtime&#34;</span><span class=p>:</span> <span class=s2>&#34;nvidia&#34;</span>  <span class=err>#</span> <span class=err>可选：设为默认运行时</span>
 </span></span><span class=line><span class=cl><span class=p>}</span>
-</span></span></code></pre></div><h3 id=3-保存并退出编辑器><strong>(3) 保存并退出编辑器</strong></h3><p>按 <code>Ctrl+O</code> 保存，<code>Ctrl+X</code> 退出。</p><h3 id=4-重启-docker-服务><strong>(4) 重启 Docker 服务</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart docker
-</span></span></code></pre></div><hr><h3 id=5-验证安装><strong>5. 验证安装</strong></h3><h3 id=1-运行测试容器><strong>(1) 运行测试容器</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run --rm --gpus all nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi
-</span></span></code></pre></div><h3 id=2-预期输出><strong>(2) 预期输出</strong></h3><p>应显示与宿主机相同的 GPU 信息，类似以下内容：</p><pre tabindex=0><code>+-----------------------------------------------------------------------------+
+</span></span></code></pre></td></tr></table></div></div><h3 id=3-保存并退出编辑器><strong>(3) 保存并退出编辑器</strong></h3><p>按 <code>Ctrl+O</code> 保存，<code>Ctrl+X</code> 退出。</p><h3 id=4-重启-docker-服务><strong>(4) 重启 Docker 服务</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl restart docker
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=5-验证安装><strong>5. 验证安装</strong></h3><h3 id=1-运行测试容器><strong>(1) 运行测试容器</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run --rm --gpus all nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-预期输出><strong>(2) 预期输出</strong></h3><p>应显示与宿主机相同的 GPU 信息，类似以下内容：</p><pre tabindex=0><code>+-----------------------------------------------------------------------------+
 | NVIDIA-SMI 535.86.05    Driver Version: 535.86.05    CUDA Version: 12.2     |
 |-------------------------------+----------------------+----------------------+
 | GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
@@ -195,16 +376,38 @@
 | N/A   45C    P8    N/A /  N/A |      0MiB /  8192MiB |      0%      Default |
 |                               |                      |                  N/A |
 +-------------------------------+----------------------+----------------------+
-</code></pre><hr><h3 id=6-常见问题解决><strong>6. 常见问题解决</strong></h3><h3 id=1-报错><strong>(1) 报错 &ldquo;Failed to initialize NVML: Driver/library version mismatch&rdquo;</strong></h3><ul><li><strong>原因</strong>：NVIDIA 驱动版本与容器内 CUDA 版本不兼容。</li><li><strong>解决</strong>：升级宿主机 NVIDIA 驱动或使用匹配的 CUDA 镜像标签。</li></ul><h3 id=2-报错><strong>(2) 报错 &ldquo;nvidia-container-runtime not found&rdquo;</strong></h3><ul><li><p><strong>原因</strong>：<code>nvidia-container-runtime</code> 未正确安装或路径错误。</p></li><li><p><strong>解决</strong>：重新安装并检查路径：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install --reinstall nvidia-container-runtime
+</code></pre><hr><h3 id=6-常见问题解决><strong>6. 常见问题解决</strong></h3><h3 id=1-报错><strong>(1) 报错 &ldquo;Failed to initialize NVML: Driver/library version mismatch&rdquo;</strong></h3><ul><li><strong>原因</strong>：NVIDIA 驱动版本与容器内 CUDA 版本不兼容。</li><li><strong>解决</strong>：升级宿主机 NVIDIA 驱动或使用匹配的 CUDA 镜像标签。</li></ul><h3 id=2-报错><strong>(2) 报错 &ldquo;nvidia-container-runtime not found&rdquo;</strong></h3><ul><li><p><strong>原因</strong>：<code>nvidia-container-runtime</code> 未正确安装或路径错误。</p></li><li><p><strong>解决</strong>：重新安装并检查路径：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install --reinstall nvidia-container-runtime
 </span></span><span class=line><span class=cl>ls -l /usr/bin/nvidia-container-runtime  <span class=c1># 确认文件存在</span>
-</span></span></code></pre></div></li></ul><h3 id=3-docker-服务启动失败><strong>(3) Docker 服务启动失败</strong></h3><ul><li><strong>原因</strong>：<code>/etc/docker/daemon.json</code> 配置语法错误。</li><li><strong>解决</strong>：使用 <code>docker info</code> 检查错误日志，修正 JSON 格式。</li></ul><hr><h3 id=7-扩展配置可选><strong>7. 扩展配置（可选）</strong></h3><h3 id=1-限制容器-gpu-访问><strong>(1) 限制容器 GPU 访问</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 仅允许使用 GPU 0</span>
+</span></span></code></pre></td></tr></table></div></div></li></ul><h3 id=3-docker-服务启动失败><strong>(3) Docker 服务启动失败</strong></h3><ul><li><strong>原因</strong>：<code>/etc/docker/daemon.json</code> 配置语法错误。</li><li><strong>解决</strong>：使用 <code>docker info</code> 检查错误日志，修正 JSON 格式。</li></ul><hr><h3 id=7-扩展配置可选><strong>7. 扩展配置（可选）</strong></h3><h3 id=1-限制容器-gpu-访问><strong>(1) 限制容器 GPU 访问</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 仅允许使用 GPU 0</span>
 </span></span><span class=line><span class=cl>docker run --rm --gpus <span class=s1>&#39;&#34;device=0&#34;&#39;</span> nvidia/cuda:11.8.0-base-ubuntu22.04 nvidia-smi
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 指定计算能力（如 CUDA 12.0+）</span>
 </span></span><span class=line><span class=cl>docker run --rm --gpus all --env <span class=nv>NVIDIA_DRIVER_CAPABILITIES</span><span class=o>=</span>compute,utility nvidia/cuda:12.0.0-base-ubuntu22.04 nvidia-smi
-</span></span></code></pre></div><h3 id=2-安装-nvidia-docker2旧版兼容><strong>(2) 安装 nvidia-docker2（旧版兼容）</strong></h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install -y nvidia-docker2
+</span></span></code></pre></td></tr></table></div></div><h3 id=2-安装-nvidia-docker2旧版兼容><strong>(2) 安装 nvidia-docker2（旧版兼容）</strong></h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo apt-get install -y nvidia-docker2
 </span></span><span class=line><span class=cl>sudo systemctl restart docker
-</span></span></code></pre></div><hr><h3 id=总结><strong>总结</strong></h3><p>通过以上步骤，Ubuntu 22.04 系统已成功配置 <code>nvidia-container-runtime</code>，允许 Docker 容器直接调用宿主机的 NVIDIA GPU 资源。关键点包括：</p><ol><li>正确配置 NVIDIA 仓库源。</li><li>安装 <code>nvidia-container-runtime</code> 包。</li><li>修改 Docker 运行时配置。</li><li>验证容器内 GPU 访问权限。</li></ol><h2 id=faq>FAQ</h2><p><a href=https://blog.csdn.net/weixin_44966641/article/details/123760614 target=_blank rel="noopener noreffer">docker gpu报错Error response from daemon: could not select device driver ““ with capabilities: [[gpu]]-CSDN博客</a></p><p>sudo nvidia-ctk runtime configure &ndash;runtime=docker # 检查</p><h1 id=镜像加速><strong>镜像加速</strong></h1><p><a href=https://www.cnblogs.com/eddyz/p/17168828.html target=_blank rel="noopener noreffer">https://www.cnblogs.com/eddyz/p/17168828.html</a></p><p><a href=https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors target=_blank rel="noopener noreffer">阿里云登录 - 欢迎登录阿里云，安全稳定的云计算服务平台</a></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -v https://registry-1.docker.io/v2/
+</span></span></code></pre></td></tr></table></div></div><hr><h3 id=总结><strong>总结</strong></h3><p>通过以上步骤，Ubuntu 22.04 系统已成功配置 <code>nvidia-container-runtime</code>，允许 Docker 容器直接调用宿主机的 NVIDIA GPU 资源。关键点包括：</p><ol><li>正确配置 NVIDIA 仓库源。</li><li>安装 <code>nvidia-container-runtime</code> 包。</li><li>修改 Docker 运行时配置。</li><li>验证容器内 GPU 访问权限。</li></ol><h2 id=faq>FAQ</h2><p><a href=https://blog.csdn.net/weixin_44966641/article/details/123760614 target=_blank rel="noopener noreffer">docker gpu报错Error response from daemon: could not select device driver ““ with capabilities: [[gpu]]-CSDN博客</a></p><p>sudo nvidia-ctk runtime configure &ndash;runtime=docker # 检查</p><h1 id=镜像加速><strong>镜像加速</strong></h1><p><a href=https://www.cnblogs.com/eddyz/p/17168828.html target=_blank rel="noopener noreffer">https://www.cnblogs.com/eddyz/p/17168828.html</a></p><p><a href=https://cr.console.aliyun.com/cn-hangzhou/instances/mirrors target=_blank rel="noopener noreffer">阿里云登录 - 欢迎登录阿里云，安全稳定的云计算服务平台</a></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>curl -v https://registry-1.docker.io/v2/
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=c1># 可以通过修改daemon配置文件/etc/docker/daemon.json来使用加速器</span>
 </span></span><span class=line><span class=cl>sudo mkdir -p /etc/docker
@@ -217,7 +420,40 @@
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl>sudo systemctl daemon-reload
 </span></span><span class=line><span class=cl>sudo systemctl restart docker
-</span></span></code></pre></div><h3 id=离线安装>离线安装</h3><p><a href=https://www.cnblogs.com/lyjun/p/18393855 target=_blank rel="noopener noreffer">https://www.cnblogs.com/lyjun/p/18393855</a></p><h3 id=配置无效问题>配置无效问题</h3><p><strong>一个不行时可以配置多个！配置多个！配置多个！</strong></p><div class=highlight><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>{</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=离线安装>离线安装</h3><p><a href=https://www.cnblogs.com/lyjun/p/18393855 target=_blank rel="noopener noreffer">https://www.cnblogs.com/lyjun/p/18393855</a></p><h3 id=配置无效问题>配置无效问题</h3><p><strong>一个不行时可以配置多个！配置多个！配置多个！</strong></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-jsx data-lang=jsx><span class=line><span class=cl><span class=p>{</span>
 </span></span><span class=line><span class=cl>  <span class=s2>&#34;registry-mirrors&#34;</span><span class=o>:</span> <span class=p>[</span>
 </span></span><span class=line><span class=cl>    <span class=s2>&#34;https://docker.hpcloud.cloud&#34;</span><span class=p>,</span>
 </span></span><span class=line><span class=cl>    <span class=s2>&#34;https://docker.m.daocloud.io&#34;</span><span class=p>,</span>
@@ -250,13 +486,43 @@
 </span></span><span class=line><span class=cl>  <span class=s2>&#34;https://docker.rainbond.cc&#34;</span>
 </span></span><span class=line><span class=cl>    <span class=p>]</span>
 </span></span><span class=line><span class=cl>  <span class=p>}</span>
-</span></span></code></pre></div><h1 id=多个目录映射>多个目录映射</h1><p>在 Docker 中，你可以通过使用 <code>-v</code> 或 <code>--volume</code> 选项来挂载多个目录到容器中。下面是一些示例：</p><h3 id=使用-v-选项挂载多个目录>使用 <code>v</code> 选项挂载多个目录：</h3><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -d <span class=se>\
+</span></span></code></pre></td></tr></table></div></div><h1 id=多个目录映射>多个目录映射</h1><p>在 Docker 中，你可以通过使用 <code>-v</code> 或 <code>--volume</code> 选项来挂载多个目录到容器中。下面是一些示例：</p><h3 id=使用-v-选项挂载多个目录>使用 <code>v</code> 选项挂载多个目录：</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -d <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  -v /host/path1:/container/path1 <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  -v /host/path2:/container/path2 <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  -v /host/path3:/container/path3 <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  --name my_container <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  my_image
-</span></span></code></pre></div><h1 id=修改容器内apt镜像源>修改容器内apt镜像源</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cp /etc/apt/sources.list /etc/apt/sources.list.bak
+</span></span></code></pre></td></tr></table></div></div><h1 id=修改容器内apt镜像源>修改容器内apt镜像源</h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>cp /etc/apt/sources.list /etc/apt/sources.list.bak
 </span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;&#34;</span> &gt; /etc/apt/sources.list
 </span></span><span class=line><span class=cl>
 </span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;deb http://mirrors.aliyun.com/ubuntu/ jammy main restricted universe multiverse
@@ -280,43 +546,95 @@
 </span></span><span class=line><span class=cl>deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
 </span></span><span class=line><span class=cl>deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
 </span></span><span class=line><span class=cl>deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
-</span></span></code></pre></div><h1 id=容器id>容器id</h1><p>在 Docker 容器内查看容器的 ID，你可以在容器的终端中执行以下命令：</p><p>bash</p><p>cat /proc/self/cgroup | grep &lsquo;docker&rsquo; | sed &rsquo;s/.*///&rsquo; | tail -n1</p><p>这个命令将输出当前容器的 ID。请注意，这个方法假设你的容器运行在 Docker 中，并且容器内有 /proc/self/cgroup 文件。</p><p>如果你是在交互式终端中运行容器，并且知道你正在查看的容器是什么，你也可以使用以下命令来查看当前容器的 ID：</p><p>bash</p><p>hostname</p><p>这会输出容器的主机名，通常是容器的短 ID。请注意，这不是容器的完整 ID，但在交互式终端中，通常足够识别容器。</p><h1 id=迁移导出>迁移导出</h1><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 镜像迁移</span>
+</span></span></code></pre></td></tr></table></div></div><h1 id=容器id>容器id</h1><p>在 Docker 容器内查看容器的 ID，你可以在容器的终端中执行以下命令：</p><p>bash</p><p>cat /proc/self/cgroup | grep &lsquo;docker&rsquo; | sed &rsquo;s/.*///&rsquo; | tail -n1</p><p>这个命令将输出当前容器的 ID。请注意，这个方法假设你的容器运行在 Docker 中，并且容器内有 /proc/self/cgroup 文件。</p><p>如果你是在交互式终端中运行容器，并且知道你正在查看的容器是什么，你也可以使用以下命令来查看当前容器的 ID：</p><p>bash</p><p>hostname</p><p>这会输出容器的主机名，通常是容器的短 ID。请注意，这不是容器的完整 ID，但在交互式终端中，通常足够识别容器。</p><h1 id=迁移导出>迁移导出</h1><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=c1># 镜像迁移</span>
 </span></span><span class=line><span class=cl>docker save 镜像名:标签 &gt; 镜像.tar
 </span></span><span class=line><span class=cl>scp 镜像.tar newserver:/tmp/
 </span></span><span class=line><span class=cl>docker load &lt; /tmp/镜像.tar
-</span></span></code></pre></div><h3 id=容器迁移如果需要保留运行状态挂载>容器迁移（如果需要保留运行状态、挂载）</h3><p>最好把容器数据（volume）也一起迁移。</p><ul><li>保存 volume 目录</li><li>docker-compose 配置文件备份</li><li>也可以用 <code>docker export</code> 和 <code>docker import</code>，但那样会丢失 volume 挂载信息。</li></ul><h1 id=配置代理>配置代理</h1><p>在使用 Docker 时，由于网络限制，有时需要设置代理才能正常拉取镜像、推送镜像等操作。下面将分别介绍在 Linux、Windows 和 macOS 系统中为 Docker 设置代理的方法。</p><h3 id=linux-系统>Linux 系统</h3><h3 id=系统级代理配置>系统级代理配置</h3><p>如果你希望 Docker 服务在系统层面使用代理，可以通过以下步骤进行配置：</p><ol><li><strong>创建或编辑 Docker 服务配置目录</strong><br>在 <code>/etc/systemd/system/docker.service.d</code> 目录下创建或编辑 <code>http-proxy.conf</code> 文件，如果该目录不存在，可以手动创建。</li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mkdir -p /etc/systemd/system/docker.service.d
+</span></span></code></pre></td></tr></table></div></div><h3 id=容器迁移如果需要保留运行状态挂载>容器迁移（如果需要保留运行状态、挂载）</h3><p>最好把容器数据（volume）也一起迁移。</p><ul><li>保存 volume 目录</li><li>docker-compose 配置文件备份</li><li>也可以用 <code>docker export</code> 和 <code>docker import</code>，但那样会丢失 volume 挂载信息。</li></ul><h1 id=配置代理>配置代理</h1><p>在使用 Docker 时，由于网络限制，有时需要设置代理才能正常拉取镜像、推送镜像等操作。下面将分别介绍在 Linux、Windows 和 macOS 系统中为 Docker 设置代理的方法。</p><h3 id=linux-系统>Linux 系统</h3><h3 id=系统级代理配置>系统级代理配置</h3><p>如果你希望 Docker 服务在系统层面使用代理，可以通过以下步骤进行配置：</p><ol><li><strong>创建或编辑 Docker 服务配置目录</strong><br>在 <code>/etc/systemd/system/docker.service.d</code> 目录下创建或编辑 <code>http-proxy.conf</code> 文件，如果该目录不存在，可以手动创建。</li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo mkdir -p /etc/systemd/system/docker.service.d
 </span></span><span class=line><span class=cl>sudo vim /etc/systemd/system/docker.service.d/http-proxy.conf
-</span></span></code></pre></div><ol><li><strong>添加代理配置</strong><br>在 <code>http-proxy.conf</code> 文件中添加以下内容，将 <code>your-proxy-server</code> 和 <code>your-proxy-port</code> 替换为实际的代理服务器地址和端口。</li></ol><pre tabindex=0><code># 注释掉即为删除
+</span></span></code></pre></td></tr></table></div></div><ol><li><strong>添加代理配置</strong><br>在 <code>http-proxy.conf</code> 文件中添加以下内容，将 <code>your-proxy-server</code> 和 <code>your-proxy-port</code> 替换为实际的代理服务器地址和端口。</li></ol><pre tabindex=0><code># 注释掉即为删除
 [Service]
 Environment=&#34;HTTP_PROXY=http://your-proxy-server:your-proxy-port/&#34;
 Environment=&#34;HTTPS_PROXY=http://your-proxy-server:your-proxy-port/&#34;
 Environment=&#34;NO_PROXY=localhost,127.0.0.1,.example.com&#34;
-</code></pre><p>其中，<code>NO_PROXY</code> 用于指定不需要使用代理的地址，可以根据实际情况进行修改。</p><ol><li><strong>重新加载 systemd 管理器配置并重启 Docker 服务</strong></li></ol><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl daemon-reload
+</code></pre><p>其中，<code>NO_PROXY</code> 用于指定不需要使用代理的地址，可以根据实际情况进行修改。</p><ol><li><strong>重新加载 systemd 管理器配置并重启 Docker 服务</strong></li></ol><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo systemctl daemon-reload
 </span></span><span class=line><span class=cl>sudo systemctl restart docker
-</span></span></code></pre></div><h3 id=容器级代理配置>容器级代理配置</h3><p>如果你只想为特定的容器设置代理，可以在运行容器时通过环境变量指定代理。例如：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -e <span class=nv>HTTP_PROXY</span><span class=o>=</span>http://your-proxy-server:your-proxy-port <span class=se>\\</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=容器级代理配置>容器级代理配置</h3><p>如果你只想为特定的容器设置代理，可以在运行容器时通过环境变量指定代理。例如：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -e <span class=nv>HTTP_PROXY</span><span class=o>=</span>http://your-proxy-server:your-proxy-port <span class=se>\\</span>
 </span></span><span class=line><span class=cl>           -e <span class=nv>HTTPS_PROXY</span><span class=o>=</span>http://your-proxy-server:your-proxy-port <span class=se>\\</span>
 </span></span><span class=line><span class=cl>           -e <span class=nv>NO_PROXY</span><span class=o>=</span>localhost,127.0.0.1,.example.com <span class=se>\\</span>
 </span></span><span class=line><span class=cl>           your-image
-</span></span></code></pre></div><h3 id=windows-系统>Windows 系统</h3><h3 id=docker-desktop-配置>Docker Desktop 配置</h3><p>如果你使用的是 Docker Desktop for Windows，可以按照以下步骤设置代理：</p><ol><li><strong>打开 Docker Desktop 设置</strong><br>右键单击系统托盘中的 Docker 图标，选择“Settings”。</li><li><strong>配置代理</strong><br>在左侧菜单中选择“Proxies”，勾选“Manual proxy configuration”，然后分别填写 HTTP 和 HTTPS 代理服务器的地址和端口。如果有不需要使用代理的地址，可以在“Exceptions”字段中填写。</li><li><strong>应用配置</strong><br>点击“Apply & Restart”按钮，使配置生效。</li></ol><h3 id=macos-系统>macOS 系统</h3><h3 id=docker-desktop-配置-1>Docker Desktop 配置</h3><p>与 Windows 系统类似，如果你使用的是 Docker Desktop for Mac，可以按照以下步骤设置代理：</p><ol><li><strong>打开 Docker Desktop 设置</strong><br>点击菜单栏中的 Docker 图标，选择“Preferences”。</li><li><strong>配置代理</strong><br>在左侧菜单中选择“Proxies”，勾选“Manual proxy configuration”，然后分别填写 HTTP 和 HTTPS 代理服务器的地址和端口。如果有不需要使用代理的地址，可以在“Exceptions”字段中填写。</li><li><strong>应用配置</strong><br>点击“Apply & Restart”按钮，使配置生效。</li></ol><p>通过以上方法，你可以在不同的操作系统中为 Docker 设置代理，确保 Docker 能够正常访问网络资源。</p><h1 id=临时提升权限操作文件>临时提升权限操作文件</h1><p>在 Linux 中，如果你拥有 <strong>Docker 的 root 权限</strong>（即你能执行 <code>docker</code> 命令而不加 <code>sudo</code>），你就可以 <strong>通过容器挂载并修改任意宿主机目录的权限和内容</strong>。这是一种强大的功能，但也非常敏感，容易误操作破坏系统安全。</p><hr><h2 id=-实现步骤有-root-权限前提>✅ 实现步骤（有 root 权限前提）</h2><h3 id=-场景目标>🧱 场景目标：</h3><p>将宿主机任意目录（比如 <code>/etc/ssh</code>）挂载到 Docker 容器，并在容器内自由修改权限/内容。</p><hr><h2 id=-前提条件>🔐 前提条件</h2><ul><li><p>你是 docker 组成员（或以 root 身份运行 <code>docker</code> 命令）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>groups <span class=nv>$USER</span> <span class=p>|</span> grep docker
-</span></span></code></pre></div><p>如果没有权限，可用：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo usermod -aG docker <span class=nv>$USER</span> <span class=o>&amp;&amp;</span> newgrp docker
-</span></span></code></pre></div></li></ul><hr><h2 id=-示例挂载宿主机任意目录并修改权限>🧪 示例：挂载宿主机任意目录并修改权限</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -it --rm <span class=se>\
+</span></span></code></pre></td></tr></table></div></div><h3 id=windows-系统>Windows 系统</h3><h3 id=docker-desktop-配置>Docker Desktop 配置</h3><p>如果你使用的是 Docker Desktop for Windows，可以按照以下步骤设置代理：</p><ol><li><strong>打开 Docker Desktop 设置</strong><br>右键单击系统托盘中的 Docker 图标，选择“Settings”。</li><li><strong>配置代理</strong><br>在左侧菜单中选择“Proxies”，勾选“Manual proxy configuration”，然后分别填写 HTTP 和 HTTPS 代理服务器的地址和端口。如果有不需要使用代理的地址，可以在“Exceptions”字段中填写。</li><li><strong>应用配置</strong><br>点击“Apply & Restart”按钮，使配置生效。</li></ol><h3 id=macos-系统>macOS 系统</h3><h3 id=docker-desktop-配置-1>Docker Desktop 配置</h3><p>与 Windows 系统类似，如果你使用的是 Docker Desktop for Mac，可以按照以下步骤设置代理：</p><ol><li><strong>打开 Docker Desktop 设置</strong><br>点击菜单栏中的 Docker 图标，选择“Preferences”。</li><li><strong>配置代理</strong><br>在左侧菜单中选择“Proxies”，勾选“Manual proxy configuration”，然后分别填写 HTTP 和 HTTPS 代理服务器的地址和端口。如果有不需要使用代理的地址，可以在“Exceptions”字段中填写。</li><li><strong>应用配置</strong><br>点击“Apply & Restart”按钮，使配置生效。</li></ol><p>通过以上方法，你可以在不同的操作系统中为 Docker 设置代理，确保 Docker 能够正常访问网络资源。</p><h1 id=临时提升权限操作文件>临时提升权限操作文件</h1><p>在 Linux 中，如果你拥有 <strong>Docker 的 root 权限</strong>（即你能执行 <code>docker</code> 命令而不加 <code>sudo</code>），你就可以 <strong>通过容器挂载并修改任意宿主机目录的权限和内容</strong>。这是一种强大的功能，但也非常敏感，容易误操作破坏系统安全。</p><hr><h2 id=-实现步骤有-root-权限前提>✅ 实现步骤（有 root 权限前提）</h2><h3 id=-场景目标>🧱 场景目标：</h3><p>将宿主机任意目录（比如 <code>/etc/ssh</code>）挂载到 Docker 容器，并在容器内自由修改权限/内容。</p><hr><h2 id=-前提条件>🔐 前提条件</h2><ul><li><p>你是 docker 组成员（或以 root 身份运行 <code>docker</code> 命令）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>groups <span class=nv>$USER</span> <span class=p>|</span> grep docker
+</span></span></code></pre></td></tr></table></div></div><p>如果没有权限，可用：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>sudo usermod -aG docker <span class=nv>$USER</span> <span class=o>&amp;&amp;</span> newgrp docker
+</span></span></code></pre></td></tr></table></div></div></li></ul><hr><h2 id=-示例挂载宿主机任意目录并修改权限>🧪 示例：挂载宿主机任意目录并修改权限</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -it --rm <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  -v /etc/ssh:/mnt/ssh <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  --privileged <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  ubuntu bash
-</span></span></code></pre></div><p>解释：</p><ul><li><code>v /etc/ssh:/mnt/ssh</code>：把宿主机 <code>/etc/ssh</code> 挂载进容器</li><li><code>-privileged</code>：让容器内可以使用全部 Linux 功能（如 <code>chown</code>, <code>chmod</code>, <code>mount</code> 等）</li><li><code>ubuntu bash</code>：使用 Ubuntu 镜像启动 Bash 交互</li></ul><p>然后你可以在容器中执行：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> /mnt/ssh
+</span></span></code></pre></td></tr></table></div></div><p>解释：</p><ul><li><code>v /etc/ssh:/mnt/ssh</code>：把宿主机 <code>/etc/ssh</code> 挂载进容器</li><li><code>-privileged</code>：让容器内可以使用全部 Linux 功能（如 <code>chown</code>, <code>chmod</code>, <code>mount</code> 等）</li><li><code>ubuntu bash</code>：使用 Ubuntu 镜像启动 Bash 交互</li></ul><p>然后你可以在容器中执行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=nb>cd</span> /mnt/ssh
 </span></span><span class=line><span class=cl>chmod <span class=m>777</span> sshd_config
 </span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;# hacked!&#34;</span> &gt;&gt; sshd_config
-</span></span></code></pre></div><p>这些更改会<strong>直接反映在宿主机 <code>/etc/ssh/sshd_config</code></strong> 上。</p><hr><h2 id=-修改任意目录权限的技巧常用>🛠️ 修改任意目录权限的技巧（常用）</h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -it --rm <span class=se>\
+</span></span></code></pre></td></tr></table></div></div><p>这些更改会<strong>直接反映在宿主机 <code>/etc/ssh/sshd_config</code></strong> 上。</p><hr><h2 id=-修改任意目录权限的技巧常用>🛠️ 修改任意目录权限的技巧（常用）</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -it --rm <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  -v /opt/data:/mnt/data <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  --entrypoint bash <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  --user root <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  ubuntu
-</span></span></code></pre></div><p>在容器内执行：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>chmod -R <span class=m>777</span> /mnt/data
+</span></span></code></pre></td></tr></table></div></div><p>在容器内执行：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>chmod -R <span class=m>777</span> /mnt/data
 </span></span><span class=line><span class=cl>chown -R someuser:somegroup /mnt/data
-</span></span></code></pre></div><hr><h2 id=-风险提醒>⚠️ 风险提醒</h2><table><thead><tr><th>项目</th><th>风险说明</th></tr></thead><tbody><tr><td>权限过大</td><td>可以破坏系统配置，例如误删 <code>/etc/passwd</code></td></tr><tr><td>容器提权</td><td><code>--privileged</code> 给予 root 权限，相当于“裸奔”</td></tr><tr><td>安全建议</td><td><strong>生产环境禁止使用</strong> <code>--privileged</code> 和挂载系统目录</td></tr></tbody></table><hr><h2 id=-推荐替代方案安全做法>✅ 推荐替代方案（安全做法）</h2><p>如果只是想<strong>挂载并读写某个数据目录</strong>（如 <code>/data/projects</code>）：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -it --rm <span class=se>\
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=-风险提醒>⚠️ 风险提醒</h2><table><thead><tr><th>项目</th><th>风险说明</th></tr></thead><tbody><tr><td>权限过大</td><td>可以破坏系统配置，例如误删 <code>/etc/passwd</code></td></tr><tr><td>容器提权</td><td><code>--privileged</code> 给予 root 权限，相当于“裸奔”</td></tr><tr><td>安全建议</td><td><strong>生产环境禁止使用</strong> <code>--privileged</code> 和挂载系统目录</td></tr></tbody></table><hr><h2 id=-推荐替代方案安全做法>✅ 推荐替代方案（安全做法）</h2><p>如果只是想<strong>挂载并读写某个数据目录</strong>（如 <code>/data/projects</code>）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>docker run -it --rm <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  -v /data/projects:/mnt/projects <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  ubuntu bash
-</span></span></code></pre></div><p>配合宿主机提前设定好权限即可，不需要 <code>--privileged</code>。</p><hr><h2 id=-总结一句话>🎯 总结一句话：</h2><blockquote><p>有 Docker root 权限，就能用容器挂载任意目录并用 root 权限在其中自由改权限、删文件、加数据 —— 非常强大也要格外小心！</p></blockquote><hr><p>下面是一个简单实用的 <strong>Docker 自动挂载目录并修权限的脚本模板</strong>，适用于你想用容器 <strong>自动修复宿主机某个目录的权限</strong> 的情况。</p><hr><h2 id=-脚本fix-permssh>✅ 脚本：<code>fix-perms.sh</code></h2><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
+</span></span></code></pre></td></tr></table></div></div><p>配合宿主机提前设定好权限即可，不需要 <code>--privileged</code>。</p><hr><h2 id=-总结一句话>🎯 总结一句话：</h2><blockquote><p>有 Docker root 权限，就能用容器挂载任意目录并用 root 权限在其中自由改权限、删文件、加数据 —— 非常强大也要格外小心！</p></blockquote><hr><p>下面是一个简单实用的 <strong>Docker 自动挂载目录并修权限的脚本模板</strong>，适用于你想用容器 <strong>自动修复宿主机某个目录的权限</strong> 的情况。</p><hr><h2 id=-脚本fix-permssh>✅ 脚本：<code>fix-perms.sh</code></h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl><span class=cp>#!/bin/bash
 </span></span></span><span class=line><span class=cl><span class=cp></span>
 </span></span><span class=line><span class=cl><span class=c1># 要挂载并修改权限的宿主机目录</span>
 </span></span><span class=line><span class=cl><span class=nv>HOST_DIR</span><span class=o>=</span><span class=s2>&#34;/data/myproject&#34;</span>
@@ -337,8 +655,10 @@ Environment=&#34;NO_PROXY=localhost,127.0.0.1,.example.com&#34;
 </span></span></span><span class=line><span class=cl><span class=se></span>  --entrypoint bash <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  ubuntu <span class=se>\
 </span></span></span><span class=line><span class=cl><span class=se></span>  -c <span class=s2>&#34;chown -R </span><span class=si>${</span><span class=nv>OWNER</span><span class=si>}</span><span class=s2> </span><span class=si>${</span><span class=nv>CONTAINER_DIR</span><span class=si>}</span><span class=s2> &amp;&amp; chmod -R </span><span class=si>${</span><span class=nv>PERM_MODE</span><span class=si>}</span><span class=s2> </span><span class=si>${</span><span class=nv>CONTAINER_DIR</span><span class=si>}</span><span class=s2>&#34;</span>
-</span></span></code></pre></div><hr><h2 id=-用法>🔧 用法</h2><ol><li><p>复制上述脚本保存为 <code>fix-perms.sh</code></p></li><li><p>赋予执行权限：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>chmod +x fix-perms.sh
-</span></span></code></pre></div></li><li><p>执行脚本：</p><div class=highlight><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./fix-perms.sh
-</span></span></code></pre></div></li></ol><hr><h2 id=-可选增强功能>📌 可选增强功能</h2><ul><li>支持命令行参数：<code>./fix-perms.sh /some/dir 777 user:group</code></li><li>设定默认镜像或切换为 Alpine 以缩小体积</li><li>使用 <code>-privileged</code> 若你修改的目录权限受限制（如 <code>/etc</code>）</li></ul><hr><h2 id=-注意事项>🚨 注意事项</h2><ul><li>脚本对宿主目录有<strong>真实影响</strong>，务必小心操作。</li><li>如果要反复用，可添加日志输出。</li></ul><hr><h1 id=faq-1>FAQ</h1></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2025-03-29</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker data-hashtags=docker><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-hashtag=docker><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/docker/>Docker</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/linux-command/ class=prev rel=prev title="Linux command"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Linux command</a>
+</span></span></code></pre></td></tr></table></div></div><hr><h2 id=-用法>🔧 用法</h2><ol><li><p>复制上述脚本保存为 <code>fix-perms.sh</code></p></li><li><p>赋予执行权限：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>chmod +x fix-perms.sh
+</span></span></code></pre></td></tr></table></div></div></li><li><p>执行脚本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>./fix-perms.sh
+</span></span></code></pre></td></tr></table></div></div></li></ol><hr><h2 id=-可选增强功能>📌 可选增强功能</h2><ul><li>支持命令行参数：<code>./fix-perms.sh /some/dir 777 user:group</code></li><li>设定默认镜像或切换为 Alpine 以缩小体积</li><li>使用 <code>-privileged</code> 若你修改的目录权限受限制（如 <code>/etc</code>）</li></ul><hr><h2 id=-注意事项>🚨 注意事项</h2><ul><li>脚本对宿主目录有<strong>真实影响</strong>，务必小心操作。</li><li>如果要反复用，可添加日志输出。</li></ul><hr><h1 id=faq-1>FAQ</h1></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span>Updated on 2025-03-29</span></div></div><div class=post-info-line><div class=post-info-md></div><div class=post-info-share><span><a href=javascript:void(0); title="Share on Twitter" data-sharer=twitter data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker data-hashtags=docker><i class="fab fa-twitter fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Facebook" data-sharer=facebook data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-hashtag=docker><i class="fab fa-facebook-square fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Hacker News" data-sharer=hackernews data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker><i class="fab fa-hacker-news fa-fw" aria-hidden=true></i></a><a href=javascript:void(0); title="Share on Line" data-sharer=line data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker><i data-svg-src=https://cdn.jsdelivr.net/npm/simple-icons@7.3.0/icons/line.svg aria-hidden=true></i></a><a href=javascript:void(0); title="Share on 微博" data-sharer=weibo data-url=https://fjyu95.github.io/posts/docker-199e4020f06080f09e9cd8f239bcf9e7/ data-title=docker><i class="fab fa-weibo fa-fw" aria-hidden=true></i></a></span></div></div></div><div class=post-info-more><section class=post-tags><i class="fas fa-tags fa-fw" aria-hidden=true></i>&nbsp;<a href=/tags/docker/>Docker</a></section><section><span><a href=javascript:void(0); onclick=window.history.back()>Back</a></span>&nbsp;|&nbsp;<span><a href=/>Home</a></span></section></div><div class=post-nav><a href=/posts/linux-command/ class=prev rel=prev title="Linux command"><i class="fas fa-angle-left fa-fw" aria-hidden=true></i>Linux command</a>
 <a href=/posts/git-bash/ class=next rel=next title=Git>Git<i class="fas fa-angle-right fa-fw" aria-hidden=true></i></a></div></div></article></div></main><footer class=footer><div class=footer-container><div class=footer-line>Powered by <a href=https://gohugo.io/ target=_blank rel="noopener noreffer" title="Hugo 0.145.0">Hugo</a> | Theme - <a href=https://github.com/dillonzq/LoveIt target=_blank rel="noopener noreffer" title="LoveIt 0.3.0"><i class="far fa-kiss-wink-heart fa-fw" aria-hidden=true></i> LoveIt</a></div><div class=footer-line itemscope itemtype=http://schema.org/CreativeWork><i class="far fa-copyright fa-fw" aria-hidden=true></i><span itemprop=copyrightYear>2020 - 2025</span><span class=author itemprop=copyrightHolder>&nbsp;<a href=https://fjyu95.github.io/ target=_blank>fjyu95</a></span></div></div></footer></div><div id=fixed-buttons><a href=# id=back-to-top class=fixed-button title="Back to Top"><i class="fas fa-arrow-up fa-fw" aria-hidden=true></i>
 </a><a href=# id=view-comments class=fixed-button title="View Comments"><i class="fas fa-comment fa-fw" aria-hidden=true></i></a></div><script type=text/javascript src=https://cdn.jsdelivr.net/npm/lazysizes@5.3.2/lazysizes.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js></script><script type=text/javascript src=https://cdn.jsdelivr.net/npm/sharer.js@0.5.1/sharer.min.js></script><script type=text/javascript>window.config={code:{copyTitle:"Copy to clipboard",maxShownLines:50},comment:{}}</script><script type=text/javascript src=/js/theme.min.js></script></body></html>
